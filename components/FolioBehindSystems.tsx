@@ -2,348 +2,464 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  CheckCircle2, 
-  AlertCircle, 
-  AlertTriangle, 
-  ArrowUp, 
-  ArrowDown, 
-  ChevronLeft, 
+import {
+  Terminal,
+  Activity,
+  Cpu,
+  Database,
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+  Dumbbell,
+  CheckCircle2,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  Server,
+  Layers,
+  Network
 } from "lucide-react";
 
-interface RoleCard {
+interface Milestone {
   id: string;
+  index: string;
   period: string;
   role: string;
   company: string;
-  stack: string[];
-  gradientTheme: {
-    stroke: string;
-    fillGradient: string;
-    ambientGlow: string;
-  };
-  metrics: {
-    icon: "check" | "alert" | "warning";
+  statusBadge: string;
+  category: string;
+  architectureNodes: { label: string; desc: string; icon: React.ComponentType<{ className?: string }> }[];
+  pillars: {
+    title: string;
+    detail: string;
+  }[];
+  telemetry: {
     label: string;
     value: string;
-    trend: "up" | "down";
+    subtext: string;
   }[];
+  stack: string[];
 }
 
-const ROLES: RoleCard[] = [
+const MILESTONES: Milestone[] = [
   {
-    id: "suvidha",
-    period: "MAY 2023 — JUN 2023",
-    role: "Web Developer Intern",
-    company: "Suvidha Foundation",
-    stack: ["React.js", "Tailwind", "REST APIs"],
-    gradientTheme: {
-      stroke: "#FF5722",
-      fillGradient: "url(#orange-grad)",
-      ambientGlow: "from-[#FF5722]/20 via-[#E64A19]/5 to-transparent",
-    },
-    metrics: [
+    id: "independent-ai",
+    index: "01",
+    period: "2025 — PRESENT",
+    role: "Independent AI & Product Engineer",
+    company: "Independent Systems & Research",
+    statusBadge: "ACTIVE R&D & PRODUCTION",
+    category: "Autonomous AI, Biological OS & Hybrid-RAG",
+    architectureNodes: [
+      { label: "BIOMETRIC INTAKE", desc: "16-pt Onboarding (<200ms)", icon: Activity },
+      { label: "RELATIONAL SCHEMA", desc: "PostgreSQL Engine", icon: Database },
+      { label: "HYBRID-RAG CORE", desc: "Pinecone + Claude API", icon: Network },
+      { label: "vLLM LoRA ENGINE", desc: "+40% Inference Boost", icon: Cpu },
+      { label: "DETERMINISTIC GUARD", desc: "100% Bound Accuracy", icon: ShieldCheck },
+    ],
+    pillars: [
       {
-        icon: "check",
-        label: "Portal Query Speed",
-        value: "sub-100ms",
-        trend: "down",
+        title: "Offline-First Biological Telemetry OS (HlthOS)",
+        detail:
+          "Engineered an offline-first biological operating system managing 4 core pillars (Nutrition, Training, Recovery, AI Coaching) maintaining a strict 60-FPS rendering lock across real-time telemetry graphs.",
       },
       {
-        icon: "alert",
-        label: "Project Asset Uploads",
-        value: "100% Flow",
-        trend: "up",
+        title: "Zero-Hallucination Hybrid-RAG Architecture",
+        detail:
+          "Architected vector embeddings across thousands of peer-reviewed clinical documents via Claude API, driving clinical hallucinations to 0.0% with sub-200ms diagnostic onboarding latency.",
       },
       {
-        icon: "warning",
-        label: "Responsive Breakpoints",
-        value: "Zero Layout Shift",
-        trend: "down",
+        title: "Domain LLM Fine-Tuning & vLLM Optimization",
+        detail:
+          "Fine-tuned domain models via PyTorch & PEFT LoRA adapters, deploying high-concurrency vLLM serving to boost inference throughput by 40% alongside a parallel mathematical fallback bounding engine.",
       },
+    ],
+    telemetry: [
+      { label: "INTAKE LATENCY", value: "< 200ms", subtext: "Sub-second biometric ingestion" },
+      { label: "HALLUCINATION RATE", value: "0.0% RAG", subtext: "Clinical grounding via Claude" },
+      { label: "vLLM THROUGHPUT", value: "+40% BOOST", subtext: "PEFT / LoRA GPU acceleration" },
+    ],
+    stack: [
+      "Python",
+      "LangChain",
+      "LlamaIndex",
+      "vLLM",
+      "PyTorch",
+      "Pinecone",
+      "React Native",
+      "Node.js",
+      "PostgreSQL",
+      "Docker",
     ],
   },
   {
     id: "tech-mahindra",
+    index: "02",
     period: "OCT 2024 — APR 2025",
     role: "Technical Associate",
     company: "Tech Mahindra",
-    stack: ["Enterprise Systems", "Network Diagnostics", "Hardware Continuity"],
-    gradientTheme: {
-      stroke: "#38BDF8",
-      fillGradient: "url(#blue-grad)",
-      ambientGlow: "from-[#38BDF8]/20 via-[#0284C7]/5 to-transparent",
-    },
-    metrics: [
+    statusBadge: "ENTERPRISE CONTINUITY",
+    category: "High-Availability US Retail Infrastructure",
+    architectureNodes: [
+      { label: "RETAIL STORE NODES", desc: "POS & Dispatch Outlets", icon: Server },
+      { label: "NETWORK SWITCH BUS", desc: "Layer 2/3 Routing", icon: Network },
+      { label: "STRUCTURED DIAGNOSTIC", desc: "Cabling Fault Isolation", icon: Activity },
+      { label: "CROSS-TEAM TRIAGE", desc: "-65% MTTR Escalation", icon: Layers },
+      { label: "CONTINUITY ASSURANCE", desc: "99.98% Store SLA", icon: ShieldCheck },
+    ],
+    pillars: [
       {
-        icon: "check",
-        label: "Mean Time to Resolve",
-        value: "-65% MTTR",
-        trend: "down",
+        title: "Mission-Critical Retail Continuity",
+        detail:
+          "Provided Tier-2/3 technical diagnostics for retail outlets at a tier-one US retail chain, diagnosing network outages, server disconnects, and restoring real-time transaction continuity.",
       },
       {
-        icon: "alert",
-        label: "Store Continuity SLA",
-        value: "99.98%",
-        trend: "up",
+        title: "Structured Cabling & Hardware Fault Isolation",
+        detail:
+          "Resolved physical cabling faults, network packet anomalies, and hardware continuity failures through systematic OSI root-cause analysis and structured telemetry triage.",
       },
       {
-        icon: "warning",
-        label: "Cabling Fault Rectification",
-        value: "100% Resolved",
-        trend: "up",
+        title: "Cross-Functional SLA & MTTR Reduction",
+        detail:
+          "Collaborated with distributed engineering and network operations centers to reduce Mean Time to Resolve (MTTR) by 65% while sustaining an enterprise store continuity SLA of 99.98%.",
       },
+    ],
+    telemetry: [
+      { label: "MEAN TIME TO RESOLVE", value: "-65% MTTR", subtext: "Rapid triage escalation" },
+      { label: "STORE CONTINUITY SLA", value: "99.98%", subtext: "Operational uptime lock" },
+      { label: "CABLING FAULTS", value: "100% RESOLVED", subtext: "Zero unresolved drops" },
+    ],
+    stack: [
+      "Enterprise Systems",
+      "Network Diagnostics",
+      "Hardware Continuity",
+      "OSI Troubleshooting",
+      "ITIL Workflows",
+      "Linux SysAdmin",
     ],
   },
   {
-    id: "independent",
-    period: "2025 — PRESENT",
-    role: "Independent AI & Product Engineer",
-    company: "Independent Systems & Research",
-    stack: ["Python", "LangChain", "vLLM", "React Native"],
-    gradientTheme: {
-      stroke: "#A855F7",
-      fillGradient: "url(#purple-grad)",
-      ambientGlow: "from-[#A855F7]/20 via-[#7E22CE]/5 to-transparent",
-    },
-    metrics: [
+    id: "suvidha",
+    index: "03",
+    period: "MAY 2023 — JUN 2023",
+    role: "Web Developer Intern",
+    company: "Suvidha Foundation",
+    statusBadge: "ACADEMIC WEB PORTAL",
+    category: "Full-Stack Research & Asset Discovery",
+    architectureNodes: [
+      { label: "BROWSER CLIENT", desc: "React.js Dynamic UI", icon: Activity },
+      { label: "STATE ENGINE", desc: "Zero Layout Drift", icon: Layers },
+      { label: "REST DISPATCHER", desc: "sub-100ms Query Latency", icon: Network },
+      { label: "MULTIPART PIPELINE", desc: "Asset & Project Intake", icon: Server },
+      { label: "RESEARCH DATABASE", desc: "Indexed Search Portal", icon: Database },
+    ],
+    pillars: [
       {
-        icon: "check",
-        label: "Clinical Hallucinations",
-        value: "0.0% via RAG",
-        trend: "down",
+        title: "Research-Project Portal Architecture",
+        detail:
+          "Developed a modular React front-end platform enabling multi-domain research project uploads, categorical indexing, and dynamic discovery filters with sub-100ms query latency.",
       },
       {
-        icon: "alert",
-        label: "Diagnostic Intake Latency",
-        value: "<200ms",
-        trend: "up",
+        title: "Zero-Drift Responsive UI/UX Engine",
+        detail:
+          "Engineered dynamic UI components using Tailwind CSS and React hooks, enforcing strict responsive breakpoints and achieving zero Cumulative Layout Shift (CLS) across mobile and desktop.",
       },
       {
-        icon: "warning",
-        label: "vLLM Inference Throughput",
-        value: "+40% Boost",
-        trend: "up",
+        title: "Backend REST API Integration & Data Integrity",
+        detail:
+          "Partnered with backend engineers to integrate structured REST endpoints, validating multipart project asset uploads and enforcing client-side validation guardrails.",
       },
+    ],
+    telemetry: [
+      { label: "PORTAL QUERY SPEED", value: "sub-100ms", subtext: "Frictionless search latency" },
+      { label: "ASSET UPLOAD FLOW", value: "100% FLOW", subtext: "Fault-tolerant multipart sync" },
+      { label: "RESPONSIVE ACCURACY", value: "ZERO CLS", subtext: "Zero layout shift verification" },
+    ],
+    stack: [
+      "React.js",
+      "Tailwind CSS",
+      "JavaScript (ES6+)",
+      "RESTful APIs",
+      "Node.js",
+      "Responsive UI/UX",
     ],
   },
 ];
 
-export default function ExperienceSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export default function FolioBehindSystems() {
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const prev = () => {
-    setCurrentIndex((prevIdx) => (prevIdx === 0 ? ROLES.length - 1 : prevIdx - 1));
-  };
-
-  const next = () => {
-    setCurrentIndex((prevIdx) => (prevIdx === ROLES.length - 1 ? 0 : prevIdx + 1));
-  };
-
-  const activeCard = ROLES[currentIndex];
+  const activeMilestone = MILESTONES[selectedIndex];
 
   return (
-    <section id="experience" className="relative w-full min-h-[900px] py-24 sm:py-36 px-4 sm:px-6 bg-white text-[#121212] flex flex-col items-center justify-center overflow-hidden border-t border-neutral-200 select-none">
-      
-      {/* Subtle Dynamic Ambient Background Glow */}
-      <div 
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-radial ${activeCard.gradientTheme.ambientGlow} opacity-40 blur-[140px] pointer-events-none transition-all duration-700 -z-10`} 
+    <section
+      id="experience"
+      className="relative w-full py-28 sm:py-36 px-4 sm:px-6 lg:px-8 bg-[#040406] text-white overflow-hidden border-t border-white/10 select-none"
+    >
+      {/* Background Architectural Grid Accent */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-20"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), radial-gradient(rgba(255,87,34,0.08) 1px, transparent 1px)",
+          backgroundSize: "40px 40px, 80px 80px",
+          backgroundPosition: "0 0, 20px 20px",
+        }}
       />
+      <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-coral/5 rounded-full blur-[160px] pointer-events-none -z-10" />
 
-      {/* Section 05 Title Header (High-Contrast Clean White Theme) */}
-      <div className="w-full max-w-5xl mx-auto mb-14 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-black/10 pb-8 gap-4">
+      {/* Section Header */}
+      <div className="w-full max-w-7xl mx-auto mb-12 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-8 gap-4">
           <div className="space-y-2">
             <span className="text-coral text-xs sm:text-sm font-sans font-bold tracking-widest uppercase block">
-              SECTION 05 // CAREER TIMELINE
+              Section 05 // Career Timeline &amp; System Flight Recorder
             </span>
-            <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-[#121212] leading-tight">
+            <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
               Experience
             </h2>
           </div>
-          <p className="text-neutral-500 text-sm max-w-md font-sans text-left md:text-right">
-            Engineering tenure across enterprise systems, high-scale web platforms, and autonomous intelligence research.
+          <p className="text-neutral-400 text-sm max-w-md font-sans text-left md:text-right leading-relaxed">
+            Mission-control engineering flight recorder tracking production deployments, enterprise continuity, and autonomous AI research.
           </p>
         </div>
       </div>
 
-      {/* Sub-Header Stage Indicator */}
-      <div className="w-full max-w-[420px] mb-6 flex items-center justify-between text-neutral-500 text-xs font-mono">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-3.5 h-3.5 text-coral" />
-          <span className="text-[11px] tracking-wider uppercase font-semibold text-neutral-700">SYSTEM METRICS &amp; ROLES</span>
+      {/* Widescreen Console Spread */}
+      <div className="w-full max-w-7xl mx-auto rounded-3xl border border-white/10 bg-[#08080C]/85 backdrop-blur-2xl shadow-[0_30px_100px_rgba(0,0,0,0.95)] overflow-hidden relative z-10">
+        
+        {/* Top Console Command Bar */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-3.5 border-b border-white/10 bg-black/60 text-xs font-mono text-neutral-400 gap-2">
+          <div className="flex items-center gap-3">
+            <Terminal className="w-4 h-4 text-coral" />
+            <span className="font-semibold text-white tracking-wider uppercase">
+              ENGINEERING FLIGHT RECORDER // AUDIT LOG
+            </span>
+            <span className="px-2 py-0.5 rounded bg-white/10 text-neutral-300 text-[10px]">
+              ID: REC-2026-MK
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4 text-[11px]">
+            <span className="hidden md:inline text-neutral-500">
+              STATION: HYDERABAD (IST)
+            </span>
+            <span className="flex items-center gap-1.5 text-neutral-300">
+              <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
+              STATUS: TELEMETRY ACTIVE
+            </span>
+          </div>
         </div>
-        <span className="font-semibold text-neutral-600">0{currentIndex + 1} / 0{ROLES.length}</span>
-      </div>
 
-      {/* 3D Depth Card Stage with Layered Decking */}
-      <div className="relative w-full max-w-[420px] h-[580px] flex items-center justify-center">
-        {/* Layered Cards Stacked Behind (Clean Neutral Shadows) */}
-        <div className="absolute inset-0 rounded-[36px] bg-neutral-200/90 border border-black/5 -translate-y-4 scale-[0.94] pointer-events-none -z-10 shadow-md" />
-        <div className="absolute inset-0 rounded-[36px] bg-neutral-300/80 border border-black/5 -translate-y-8 scale-[0.88] pointer-events-none -z-20 shadow-sm" />
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCard.id}
-            initial={{ opacity: 0, scale: 0.94, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.94, y: -16 }}
-            transition={{ type: "spring", stiffness: 280, damping: 24 }}
-            className="w-full h-full rounded-[36px] bg-[#0E1015]/95 border border-black/10 p-8 flex flex-col justify-between shadow-[0_30px_90px_rgba(0,0,0,0.25)] backdrop-blur-2xl relative overflow-hidden text-white"
-          >
-            {/* Top Border Sheen */}
-            <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-
-            {/* Header Block */}
-            <div className="space-y-3">
-              <span className="text-[11px] font-mono tracking-widest text-neutral-400 uppercase">
-                {activeCard.period}
-              </span>
-              <div>
-                <h3 className="text-2xl font-bold tracking-tight text-white">
-                  {activeCard.role}
-                </h3>
-                <p className="text-xs font-mono text-neutral-400 mt-0.5">
-                  {activeCard.company}
-                </p>
+        {/* Main Two-Column Split Console */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
+          
+          {/* Left Rail (Timeline Navigation & Index, 35%) */}
+          <div className="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-white/10 p-6 sm:p-8 flex flex-col justify-between bg-black/40">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between text-[11px] font-mono text-neutral-400 uppercase pb-2 border-b border-white/5">
+                <span>CHRONOLOGICAL INDEX</span>
+                <span>[0{MILESTONES.length} STAGES]</span>
               </div>
 
-              {/* Stack Badges */}
-              <div className="flex flex-wrap gap-2 pt-1">
-                {activeCard.stack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-neutral-300"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
+              {/* Milestones Navigation List */}
+              <div className="space-y-3">
+                {MILESTONES.map((item, idx) => {
+                  const isSelected = selectedIndex === idx;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => setSelectedIndex(idx)}
+                      className={`w-full text-left p-4 rounded-2xl transition-all duration-300 relative cursor-pointer group ${
+                        isSelected
+                          ? "bg-white/[0.08] border border-white/20 shadow-xl"
+                          : "bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/10"
+                      }`}
+                    >
+                      {/* Active Hairline Indicator */}
+                      {isSelected && (
+                        <div className="absolute left-0 top-3 bottom-3 w-1.5 rounded-r bg-coral shadow-[0_0_12px_#FF5722]" />
+                      )}
 
-            {/* Center Waveform SVG */}
-            <div className="relative w-full h-36 my-4 flex flex-col justify-end">
-              <svg className="w-full h-full overflow-visible" viewBox="0 0 360 120">
-                <defs>
-                  <pattern id="dot-matrix" width="16" height="16" patternUnits="userSpaceOnUse">
-                    <circle cx="2" cy="2" r="1" fill="#333" />
-                  </pattern>
+                      <div className="flex items-center justify-between text-[10px] font-mono mb-1.5">
+                        <span className={`font-bold ${isSelected ? "text-coral" : "text-neutral-400"}`}>
+                          [{item.index}] {item.period}
+                        </span>
+                        <span
+                          className={`px-2 py-0.5 rounded text-[9px] font-mono ${
+                            isSelected
+                              ? "bg-coral/20 text-coral border border-coral/30"
+                              : "bg-white/5 text-neutral-400"
+                          }`}
+                        >
+                          {item.statusBadge}
+                        </span>
+                      </div>
 
-                  <linearGradient id="orange-grad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#FF5722" stopOpacity="0.45" />
-                    <stop offset="100%" stopColor="#FF5722" stopOpacity="0.0" />
-                  </linearGradient>
+                      <h3
+                        className={`text-base font-bold tracking-tight transition-colors ${
+                          isSelected ? "text-white" : "text-neutral-300 group-hover:text-white"
+                        }`}
+                      >
+                        {item.role}
+                      </h3>
 
-                  <linearGradient id="blue-grad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.45" />
-                    <stop offset="100%" stopColor="#38BDF8" stopOpacity="0.0" />
-                  </linearGradient>
-
-                  <linearGradient id="purple-grad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#A855F7" stopOpacity="0.45" />
-                    <stop offset="100%" stopColor="#A855F7" stopOpacity="0.0" />
-                  </linearGradient>
-                </defs>
-
-                <rect width="100%" height="100%" fill="url(#dot-matrix)" />
-
-                <path
-                  d="M 0,90 C 60,65 110,50 160,70 C 210,90 260,40 310,45 C 335,48 350,55 360,60 L 360,120 L 0,120 Z"
-                  fill={activeCard.gradientTheme.fillGradient}
-                />
-
-                <path
-                  d="M 0,98 C 50,90 100,95 160,85 C 220,75 270,82 360,78"
-                  fill="none"
-                  stroke={activeCard.gradientTheme.stroke}
-                  strokeWidth="1.5"
-                  strokeOpacity="0.4"
-                />
-
-                <path
-                  d="M 0,90 C 60,65 110,50 160,70 C 210,90 260,40 310,45 C 335,48 350,55 360,60"
-                  fill="none"
-                  stroke={activeCard.gradientTheme.stroke}
-                  strokeWidth="2.5"
-                />
-              </svg>
-
-              <div className="flex justify-between border-t border-white/10 pt-1 text-[9px] font-mono text-neutral-500">
-                <span>Q1</span>
-                <span>Q2</span>
-                <span>Q3</span>
-                <span>Q4</span>
-                <span className="text-white font-semibold">PEAK</span>
+                      <p className="text-xs font-sans text-neutral-400 mt-0.5">
+                        {item.company}
+                      </p>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Bottom Rows */}
-            <div className="divide-y divide-white/10 pt-1">
-              {activeCard.metrics.map((metric, i) => (
-                <div key={i} className="py-2.5 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    {metric.icon === "check" && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
-                    {metric.icon === "alert" && <AlertCircle className="w-4 h-4 text-emerald-400" />}
-                    {metric.icon === "warning" && <AlertTriangle className="w-4 h-4 text-amber-400" />}
-                    <span className="text-xs font-mono text-neutral-300">
-                      {metric.label}
+            {/* Powerlifting Discipline & Operational Stamina Callout */}
+            <div className="mt-8 pt-6 border-t border-white/10 space-y-2.5">
+              <div className="flex items-center gap-2 text-coral text-xs font-mono font-bold tracking-wider uppercase">
+                <Dumbbell className="w-4 h-4 text-coral" />
+                <span>DISCIPLINE &amp; OPERATIONAL STAMINA</span>
+              </div>
+              <p className="text-xs font-sans text-neutral-400 leading-relaxed">
+                Competitive powerlifter &amp; extreme endurance builder. Discipline in heavy barbell training translates into unwavering tenacity under complex debugging, architecture design, and high-pressure production incidents.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Stage (Active Mission Dossier & System Architecture, 65%) */}
+          <div className="lg:col-span-8 p-6 sm:p-10 flex flex-col justify-between bg-[#0B0C10]/95 relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeMilestone.id}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -14 }}
+                transition={{ duration: 0.28, ease: "easeInOut" }}
+                className="space-y-8 h-full flex flex-col justify-between"
+              >
+                {/* Dossier Header Block */}
+                <div className="space-y-3 border-b border-white/10 pb-6">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <span className="text-xs font-mono font-bold text-coral tracking-widest uppercase">
+                      STAGE {activeMilestone.index} // {activeMilestone.category}
+                    </span>
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-white/5 border border-white/10 text-neutral-300">
+                      {activeMilestone.period}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-white">
-                      {metric.value}
-                    </span>
-                    <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                      {metric.trend === "up" ? (
-                        <ArrowUp className="w-3 h-3 stroke-[2.5]" />
-                      ) : (
-                        <ArrowDown className="w-3 h-3 stroke-[2.5]" />
-                      )}
-                    </div>
+                  <div>
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
+                      {activeMilestone.role}
+                    </h3>
+                    <p className="text-sm sm:text-base font-sans font-medium text-neutral-400 mt-1">
+                      {activeMilestone.company}
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
 
-          </motion.div>
-        </AnimatePresence>
-      </div>
+                {/* Embedded Interactive Architecture Node Flow Mesh */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-neutral-400 uppercase">
+                    <div className="flex items-center gap-1.5 text-white">
+                      <Activity className="w-3.5 h-3.5 text-coral" />
+                      <span className="font-semibold">SYSTEM ARCHITECTURE &amp; DATA FLOW MESH</span>
+                    </div>
+                    <span className="text-coral">DETERMINISTIC TELEMETRY</span>
+                  </div>
 
-      {/* Bottom Nav Controls (Matching Production Demos Circular Styling) */}
-      <div className="flex items-center gap-5 mt-10 z-20">
-        <button
-          onClick={prev}
-          aria-label="Previous role"
-          className="w-12 h-12 rounded-full bg-[#161616] text-white flex items-center justify-center hover:bg-black transition-all active:scale-95 shadow-md cursor-pointer"
-        >
-          <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
-        </button>
+                  {/* Horizontal Interactive Node Chain */}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 p-3 rounded-2xl bg-black/60 border border-white/10">
+                    {activeMilestone.architectureNodes.map((node, nIdx) => {
+                      const NodeIcon = node.icon;
+                      return (
+                        <div
+                          key={nIdx}
+                          className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-coral/50 transition-colors flex flex-col justify-between group"
+                        >
+                          <div className="flex items-center justify-between text-neutral-400 mb-2">
+                            <span className="text-[9px] font-mono text-coral font-bold">
+                              0{nIdx + 1}
+                            </span>
+                            <NodeIcon className="w-3.5 h-3.5 text-neutral-300 group-hover:text-coral transition-colors" />
+                          </div>
+                          <div>
+                            <span className="text-[10px] font-mono font-bold text-white block uppercase leading-tight">
+                              {node.label}
+                            </span>
+                            <span className="text-[9px] font-sans text-neutral-400 block mt-0.5 leading-snug">
+                              {node.desc}
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
 
-        <div className="flex items-center gap-2">
-          {ROLES.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentIndex(idx)}
-              aria-label={`Jump to slide ${idx + 1}`}
-              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                currentIndex === idx ? "w-8 bg-[#161616]" : "w-2.5 bg-neutral-300 hover:bg-neutral-400"
-              }`}
-            />
-          ))}
+                {/* Deep Technical Narrative (3 Core Engineering Pillars) */}
+                <div className="space-y-3.5">
+                  <span className="text-[11px] font-mono text-neutral-400 uppercase block font-semibold">
+                    CORE ENGINEERING ACHIEVEMENTS
+                  </span>
+                  <div className="space-y-3">
+                    {activeMilestone.pillars.map((pillar, pIdx) => (
+                      <div
+                        key={pIdx}
+                        className="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/15 transition-colors"
+                      >
+                        <span className="text-xs font-mono font-bold text-coral mt-0.5">
+                          [0{pIdx + 1}]
+                        </span>
+                        <div className="space-y-1">
+                          <h4 className="text-xs sm:text-sm font-bold text-white tracking-wide">
+                            {pillar.title}
+                          </h4>
+                          <p className="text-xs font-sans text-neutral-300 leading-relaxed">
+                            {pillar.detail}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Telemetry Spec Table (3 Unboxed Metric Columns) */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                  {activeMilestone.telemetry.map((metric, mIdx) => (
+                    <div key={mIdx} className="space-y-1">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">
+                        {metric.label}
+                      </span>
+                      <span className="text-xl sm:text-2xl font-mono font-black text-white block">
+                        {metric.value}
+                      </span>
+                      <span className="text-[10px] font-sans text-neutral-500 block">
+                        {metric.subtext}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Tech Ledger: Minimal Inline Monospace Stack */}
+                <div className="flex flex-wrap items-center gap-1.5 pt-4 border-t border-white/10">
+                  <span className="text-[10px] font-mono text-neutral-400 mr-2 uppercase">
+                    STACK:
+                  </span>
+                  {activeMilestone.stack.map((t) => (
+                    <span
+                      key={t}
+                      className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-white/[0.04] text-neutral-300 border border-white/10 hover:border-coral/50 transition-colors"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
-
-        <button
-          onClick={next}
-          aria-label="Next role"
-          className="w-12 h-12 rounded-full bg-[#161616] text-white flex items-center justify-center hover:bg-black transition-all active:scale-95 shadow-md cursor-pointer"
-        >
-          <ChevronRight className="w-5 h-5 stroke-[2.5]" />
-        </button>
       </div>
-
     </section>
   );
 }
