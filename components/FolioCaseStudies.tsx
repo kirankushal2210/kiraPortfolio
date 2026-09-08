@@ -134,8 +134,8 @@ export default function FolioCaseStudies() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/[0.08] pb-8 gap-4">
           <div className="space-y-2">
-            <span className="text-coral text-xs sm:text-sm font-sans font-medium tracking-widest uppercase block">
-              Section 04 // Flagship Case Studies
+            <span className="text-neutral-400 text-xs sm:text-sm font-mono font-medium tracking-widest uppercase block">
+              SECTION 04 // FLAGSHIP CASE STUDIES
             </span>
             <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
               High-Impact Engineering Architectures
@@ -164,8 +164,8 @@ export default function FolioCaseStudies() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#141518] via-[#141518]/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#141518]" />
 
                 {/* Index Pill */}
-                <div className="absolute top-6 left-6 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-xs font-sans font-medium text-white">
-                  <span className="text-coral font-bold">{cs.index}</span>
+                <div className="absolute top-6 left-6 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-xs font-mono font-medium text-white">
+                  <span className="text-white font-bold">{cs.index}</span>
                   <span className="text-white/40">/</span>
                   <span className="text-white/80">{cs.period}</span>
                 </div>
@@ -176,7 +176,7 @@ export default function FolioCaseStudies() {
                 <div className="space-y-4">
                   {/* Category & Tagline */}
                   <div className="space-y-1">
-                    <span className="text-coral text-xs font-sans font-medium tracking-wider uppercase block">
+                    <span className="text-neutral-400 text-xs font-mono font-semibold tracking-widest uppercase block">
                       {cs.category}
                     </span>
                     <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
@@ -191,7 +191,7 @@ export default function FolioCaseStudies() {
                   <ul className="space-y-2.5 pt-2">
                     {cs.highlights.map((h, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#A0A0A0] leading-relaxed">
-                        <span className="w-1.5 h-1.5 rounded-full bg-coral mt-1.5 shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 mt-1.5 shrink-0" />
                         <span>{h}</span>
                       </li>
                     ))}
@@ -204,10 +204,10 @@ export default function FolioCaseStudies() {
                         key={i}
                         className="bg-black/60 border border-white/[0.06] rounded-2xl p-3 flex flex-col justify-center"
                       >
-                        <span className="text-[10px] uppercase font-sans font-medium text-white/40 tracking-wider">
+                        <span className="text-[10px] uppercase font-mono text-white/40 tracking-wider">
                           {m.label}
                         </span>
-                        <span className="text-sm sm:text-base font-bold text-white mt-0.5">
+                        <span className="text-sm sm:text-base font-bold font-mono text-white mt-0.5">
                           {m.value}
                         </span>
                       </div>
@@ -221,14 +221,14 @@ export default function FolioCaseStudies() {
                     {cs.stack.map((t) => (
                       <span
                         key={t}
-                        className="px-2.5 py-1 rounded-full bg-white/[0.05] border border-white/[0.08] text-[11px] sm:text-xs text-white/90 font-sans font-medium"
+                        className="px-2.5 py-1 rounded-full bg-white/[0.05] border border-white/[0.08] text-[11px] sm:text-xs text-white/90 font-mono"
                       >
                         {t}
                       </span>
                     ))}
                   </div>
 
-                  {/* High-End Glassy Liquid Metal / Coral Action Buttons */}
+                  {/* High-End Glassy Liquid Metal Action Buttons */}
                   <div className="flex items-center gap-3">
                     {cs.repoUrl && (
                       <a
@@ -238,7 +238,7 @@ export default function FolioCaseStudies() {
                         className="btn-liquid-glass px-4 py-1.5 text-xs flex items-center gap-2 no-underline text-white cursor-pointer"
                         title="Inspect Source Code"
                       >
-                        <GithubIcon className="w-3.5 h-3.5 text-coral" />
+                        <GithubIcon className="w-3.5 h-3.5 text-neutral-300" />
                         <span>Source Code</span>
                       </a>
                     )}
@@ -247,11 +247,11 @@ export default function FolioCaseStudies() {
                         href={cs.demoUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="btn-liquid-glass-coral px-4 py-1.5 text-xs flex items-center gap-2 cursor-pointer font-medium"
+                        className="btn-liquid-glass px-4 py-1.5 text-xs flex items-center gap-2 cursor-pointer font-medium text-white shadow-md hover:scale-105 transition-all"
                         title="Launch Live Demo"
                       >
                         <span>Live Demo</span>
-                        <ArrowUpRight className="w-3.5 h-3.5" />
+                        <ArrowUpRight className="w-3.5 h-3.5 text-neutral-300" />
                       </a>
                     )}
                   </div>
