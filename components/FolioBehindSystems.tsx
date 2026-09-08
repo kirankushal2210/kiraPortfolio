@@ -145,44 +145,44 @@ export default function ExperienceSection() {
   const activeCard = ROLES[currentIndex];
 
   return (
-    <section id="experience" className="relative w-full min-h-[900px] py-24 sm:py-36 px-4 sm:px-6 bg-[#030305] text-white flex flex-col items-center justify-center overflow-hidden border-t border-neutral-900 select-none">
+    <section id="experience" className="relative w-full min-h-[900px] py-24 sm:py-36 px-4 sm:px-6 bg-white text-[#121212] flex flex-col items-center justify-center overflow-hidden border-t border-neutral-200 select-none">
       
-      {/* Dynamic Ambient Background Glow */}
+      {/* Subtle Dynamic Ambient Background Glow */}
       <div 
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-radial ${activeCard.gradientTheme.ambientGlow} blur-[140px] pointer-events-none transition-all duration-700 -z-10`} 
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-radial ${activeCard.gradientTheme.ambientGlow} opacity-40 blur-[140px] pointer-events-none transition-all duration-700 -z-10`} 
       />
 
-      {/* Section 05 Title Header */}
+      {/* Section 05 Title Header (High-Contrast Clean White Theme) */}
       <div className="w-full max-w-5xl mx-auto mb-14 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/[0.08] pb-8 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-black/10 pb-8 gap-4">
           <div className="space-y-2">
-            <span className="text-coral text-xs sm:text-sm font-sans font-medium tracking-widest uppercase block">
-              Section 05 // Career Timeline
+            <span className="text-coral text-xs sm:text-sm font-sans font-bold tracking-widest uppercase block">
+              SECTION 05 // CAREER TIMELINE
             </span>
-            <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
+            <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-[#121212] leading-tight">
               Experience
             </h2>
           </div>
-          <p className="text-[#A0A0A0] text-sm max-w-md font-sans text-left md:text-right">
+          <p className="text-neutral-500 text-sm max-w-md font-sans text-left md:text-right">
             Engineering tenure across enterprise systems, high-scale web platforms, and autonomous intelligence research.
           </p>
         </div>
       </div>
 
       {/* Sub-Header Stage Indicator */}
-      <div className="w-full max-w-[420px] mb-6 flex items-center justify-between text-neutral-400 text-xs font-mono">
+      <div className="w-full max-w-[420px] mb-6 flex items-center justify-between text-neutral-500 text-xs font-mono">
         <div className="flex items-center gap-2">
           <Sparkles className="w-3.5 h-3.5 text-coral" />
-          <span className="text-[11px] tracking-wider uppercase">SYSTEM METRICS &amp; ROLES</span>
+          <span className="text-[11px] tracking-wider uppercase font-semibold text-neutral-700">SYSTEM METRICS &amp; ROLES</span>
         </div>
-        <span>0{currentIndex + 1} / 0{ROLES.length}</span>
+        <span className="font-semibold text-neutral-600">0{currentIndex + 1} / 0{ROLES.length}</span>
       </div>
 
       {/* 3D Depth Card Stage with Layered Decking */}
       <div className="relative w-full max-w-[420px] h-[580px] flex items-center justify-center">
-        {/* Layered Cards Stacked Behind */}
-        <div className="absolute inset-0 rounded-[36px] bg-[#0E1015]/60 border border-white/10 -translate-y-4 scale-[0.94] pointer-events-none -z-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)]" />
-        <div className="absolute inset-0 rounded-[36px] bg-[#0E1015]/30 border border-white/5 -translate-y-8 scale-[0.88] pointer-events-none -z-20" />
+        {/* Layered Cards Stacked Behind (Clean Neutral Shadows) */}
+        <div className="absolute inset-0 rounded-[36px] bg-neutral-200/90 border border-black/5 -translate-y-4 scale-[0.94] pointer-events-none -z-10 shadow-md" />
+        <div className="absolute inset-0 rounded-[36px] bg-neutral-300/80 border border-black/5 -translate-y-8 scale-[0.88] pointer-events-none -z-20 shadow-sm" />
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -191,7 +191,7 @@ export default function ExperienceSection() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: -16 }}
             transition={{ type: "spring", stiffness: 280, damping: 24 }}
-            className="w-full h-full rounded-[36px] bg-[#0E1015]/95 border border-white/15 p-8 flex flex-col justify-between shadow-[0_30px_90px_rgba(0,0,0,0.8)] backdrop-blur-2xl relative overflow-hidden"
+            className="w-full h-full rounded-[36px] bg-[#0E1015]/95 border border-black/10 p-8 flex flex-col justify-between shadow-[0_30px_90px_rgba(0,0,0,0.25)] backdrop-blur-2xl relative overflow-hidden text-white"
           >
             {/* Top Border Sheen */}
             <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
@@ -312,14 +312,14 @@ export default function ExperienceSection() {
         </AnimatePresence>
       </div>
 
-      {/* Nav Controls */}
+      {/* Bottom Nav Controls (Matching Production Demos Circular Styling) */}
       <div className="flex items-center gap-5 mt-10 z-20">
         <button
           onClick={prev}
           aria-label="Previous role"
-          className="w-12 h-12 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/30 text-white flex items-center justify-center transition-all active:scale-95"
+          className="w-12 h-12 rounded-full bg-[#161616] text-white flex items-center justify-center hover:bg-black transition-all active:scale-95 shadow-md cursor-pointer"
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
         </button>
 
         <div className="flex items-center gap-2">
@@ -328,8 +328,8 @@ export default function ExperienceSection() {
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               aria-label={`Jump to slide ${idx + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                currentIndex === idx ? "w-6 bg-white" : "w-1.5 bg-neutral-700"
+              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                currentIndex === idx ? "w-8 bg-[#161616]" : "w-2.5 bg-neutral-300 hover:bg-neutral-400"
               }`}
             />
           ))}
@@ -338,9 +338,9 @@ export default function ExperienceSection() {
         <button
           onClick={next}
           aria-label="Next role"
-          className="w-12 h-12 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/30 text-white flex items-center justify-center transition-all active:scale-95"
+          className="w-12 h-12 rounded-full bg-[#161616] text-white flex items-center justify-center hover:bg-black transition-all active:scale-95 shadow-md cursor-pointer"
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className="w-5 h-5 stroke-[2.5]" />
         </button>
       </div>
 
