@@ -249,17 +249,7 @@ export default function FolioCaseStudies() {
                         <span>Source Code</span>
                       </a>
                     )}
-                    {cs.demoUrl && (
-                      <a
-                        href={cs.demoUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-coral hover:bg-coral-hover text-white text-xs font-sans font-medium font-semibold transition shadow-md shadow-coral/30"
-                      >
-                        <span>Live Demo</span>
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </a>
-                    )}
+
                   </div>
                 </div>
               </div>
