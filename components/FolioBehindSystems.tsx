@@ -10,12 +10,10 @@ import {
   Dumbbell, 
   ShieldCheck, 
   Cpu, 
-  Server, 
-  Layers, 
   CheckCircle2 
 } from "lucide-react";
 
-interface ExperienceCard {
+interface ExperienceMilestone {
   id: string;
   index: string;
   role: string;
@@ -23,35 +21,31 @@ interface ExperienceCard {
   period: string;
   tag: string;
   summary: string;
-  quoteTitle: string;
-  quoteText: string;
-  metrics: { label: string; value: string }[];
+  highlightTitle: string;
+  highlightText: string;
+  metrics: { label: string; value: string; subtext: string }[];
   stack: string[];
-  bgGradient: string;
-  image: string;
 }
 
-const EXPERIENCES: ExperienceCard[] = [
+const EXPERIENCES: ExperienceMilestone[] = [
   {
     id: "independent-ai",
     index: "01",
     role: "Independent AI & Product Engineer",
     company: "Applied Systems Research",
     period: "2025 — PRESENT",
-    tag: "AUTONOMOUS MULTI-AGENT SYSTEMS",
+    tag: "AUTONOMOUS AGENTS // ACTIVE",
     summary:
-      "Architecting end-to-end multi-agent consensus pipelines, offline-first biological OS (HlthOS) rendering at strict 60 FPS, and domain LLM inference via vLLM and PEFT.",
-    quoteTitle: "Zero Hallucination Architecture",
-    quoteText:
-      "Deterministic computational guardrails enforcing 100% precision over clinical recommendations and real-time biometrics.",
+      "Engineering end-to-end multi-agent consensus pipelines, offline-first health operating systems (HlthOS) rendering at strict 60 FPS, and domain LLM inference via vLLM and PEFT.",
+    highlightTitle: "Deterministic Fallback Engine",
+    highlightText:
+      "Engineered parallel mathematical fallback systems enforcing 100% computational guardrails on dynamic nutrition and biometric protocols.",
     metrics: [
-      { label: "INGESTION LATENCY", value: "< 200ms" },
-      { label: "GROUNDING ACCURACY", value: "0.0% RAG" },
-      { label: "vLLM THROUGHPUT", value: "+40% BOOST" },
+      { label: "INGESTION", value: "< 200ms", subtext: "16-pt intake" },
+      { label: "ACCURACY", value: "0.0% RAG", subtext: "Clinical grounding" },
+      { label: "vLLM GAIN", value: "+40%", subtext: "PEFT / LoRA boost" },
     ],
     stack: ["Python", "vLLM", "LangChain", "Claude API", "PostgreSQL", "React Native"],
-    bgGradient: "from-[#080914] via-[#0E1126] to-[#05060A]",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "tech-mahindra",
@@ -62,17 +56,15 @@ const EXPERIENCES: ExperienceCard[] = [
     tag: "ENTERPRISE INFRASTRUCTURE",
     summary:
       "Restored mission-critical operational continuity for US retail chains, diagnosing hardware, POS networks, and physical cabling bottlenecks under rigorous enterprise SLAs.",
-    quoteTitle: "Operational Continuity",
-    quoteText:
+    highlightTitle: "Structured Fault Isolation",
+    highlightText:
       "Standardized structured fault-isolation trees to accelerate issue triage and eliminate repeated hardware disconnects.",
     metrics: [
-      { label: "STORE UPTIME SLA", value: "99.98%" },
-      { label: "RESOLUTION VELOCITY", value: "-65% MTTR" },
-      { label: "CABLING FAULTS", value: "100% Resolved" },
+      { label: "STORE SLA", value: "99.98%", subtext: "Uptime guarantee" },
+      { label: "VELOCITY", value: "-65% MTTR", subtext: "Triage trees" },
+      { label: "RECTIFIED", value: "100%", subtext: "Zero cabling drops" },
     ],
-    stack: ["Enterprise Diagnostics", "Network Continuity", "Hardware Cabling", "Linux"],
-    bgGradient: "from-[#0B1015] via-[#101A24] to-[#05080C]",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+    stack: ["Enterprise Systems", "Network Continuity", "Hardware Cabling", "Linux"],
   },
   {
     id: "suvidha",
@@ -83,17 +75,15 @@ const EXPERIENCES: ExperienceCard[] = [
     tag: "FRONTEND ARCHITECTURE",
     summary:
       "Engineered dynamic React frontend workflows for an academic PhD research repository with search integration and multipart upload pipelines.",
-    quoteTitle: "Zero Layout Drift",
-    quoteText:
-      "Constructed modular component libraries achieving zero cumulative layout shift and sub-100ms UI interaction budgets.",
+    highlightTitle: "Zero Layout Shift UI",
+    highlightText:
+      "Constructed modular component libraries using Tailwind CSS, achieving zero cumulative layout shift and sub-100ms interaction latency.",
     metrics: [
-      { label: "PORTAL QUERY TIME", value: "sub-100ms" },
-      { label: "LAYOUT SHIFT", value: "0.00 CLS" },
-      { label: "UPLOAD INTEGRITY", value: "100% Flow" },
+      { label: "QUERY SPEED", value: "sub-100ms", subtext: "Search caching" },
+      { label: "LAYOUT SHIFT", value: "0.00 CLS", subtext: "Tailwind engine" },
+      { label: "PIPELINE", value: "100%", subtext: "Multipart intake" },
     ],
-    stack: ["React.js", "Tailwind CSS", "TypeScript", "RESTful Data Integration"],
-    bgGradient: "from-[#090C16] via-[#12192F] to-[#060810]",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+    stack: ["React.js", "Tailwind CSS", "TypeScript", "RESTful APIs"],
   },
   {
     id: "athletics",
@@ -104,38 +94,42 @@ const EXPERIENCES: ExperienceCard[] = [
     tag: "SYSTEM PHILOSOPHY",
     summary:
       "Applying the principles of progressive overload in powerlifting to distributed software engineering: continuous stress-testing, deterministic guardrails, zero margin for sloppy execution.",
-    quoteTitle: "Progressive Overload",
-    quoteText:
+    highlightTitle: "Progressive Overload Applied",
+    highlightText:
       "Tenacity under heavy barbell training directly translates into unwavering stamina during deep debugging and mission-critical production incidents.",
     metrics: [
-      { label: "METHODOLOGY", value: "Progressive Overload" },
-      { label: "GUARDRAILS", value: "Deterministic" },
-      { label: "EXECUTION ERROR", value: "Zero Tolerance" },
+      { label: "METHODOLOGY", value: "Overload", subtext: "Progressive load" },
+      { label: "GUARDRAILS", value: "100%", subtext: "Deterministic" },
+      { label: "TOLERANCE", value: "0.00", subtext: "Zero margin error" },
     ],
     stack: ["Progressive Overload", "Stress-Testing", "Deterministic Systems"],
-    bgGradient: "from-[#140C0A] via-[#24130F] to-[#0A0605]",
-    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80",
   },
 ];
 
 export default function FolioBehindSystems() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const total = EXPERIENCES.length;
 
   const prev = () => {
-    setActiveIndex((curr) => (curr === 0 ? EXPERIENCES.length - 1 : curr - 1));
+    setActiveIndex((curr) => (curr === 0 ? total - 1 : curr - 1));
   };
 
   const next = () => {
-    setActiveIndex((curr) => (curr === EXPERIENCES.length - 1 ? 0 : curr + 1));
+    setActiveIndex((curr) => (curr === total - 1 ? 0 : curr + 1));
   };
+
+  // Indices for Left, Center, and Right cards
+  const leftIndex = (activeIndex - 1 + total) % total;
+  const centerIndex = activeIndex;
+  const rightIndex = (activeIndex + 1) % total;
 
   return (
     <section 
       id="experience" 
-      className="w-full py-24 sm:py-32 px-6 md:px-16 flex flex-col items-center justify-center bg-white text-[#121212] select-none border-t border-neutral-200 overflow-hidden"
+      className="w-full py-24 sm:py-32 px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center bg-white text-[#121212] select-none border-t border-neutral-200 overflow-hidden"
     >
-      {/* Top Section Header (Identical Black & White Style to Live Production Demos) */}
-      <div className="w-full max-w-5xl mb-14 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-black/10 pb-6">
+      {/* Top Section Header (Clean Minimalist Editorial) */}
+      <div className="w-full max-w-6xl mb-14 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-black/10 pb-6">
         <div>
           <span className="text-[11px] font-sans font-bold tracking-widest text-coral uppercase block">
             SECTION 05 // CAREER &amp; OPERATIONAL HISTORY
@@ -145,175 +139,212 @@ export default function FolioBehindSystems() {
           </h2>
         </div>
         <p className="text-xs font-sans font-medium text-neutral-500 max-w-xs tracking-wide">
-          Select or scrub any node in the kinetic 3D deck below to inspect production architecture and verified milestones.
+          Select or scrub any card below to inspect production architecture and verified engineering milestones.
         </p>
       </div>
 
-      {/* Kinetic 3D Fanning Deck Stage (Pixel-Matched to Reference Picture 1) */}
-      <div className="w-full max-w-5xl relative min-h-[580px] flex items-center justify-center [perspective:1400px]">
-        <div className="relative w-full h-[520px] flex items-center justify-center">
-          {EXPERIENCES.map((card, index) => {
-            const count = EXPERIENCES.length;
-            // Calculate circular offset relative to activeIndex
-            let diff = index - activeIndex;
-            if (diff > count / 2) diff -= count;
-            if (diff < -count / 2) diff += count;
+      {/* 3 White Floating Cards Row (Pixel-Matched to User Image Reference) */}
+      <div className="w-full max-w-6xl relative py-8 px-2 flex items-center justify-center overflow-visible">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-center w-full">
+          
+          {/* ================= LEFT CARD ================= */}
+          <motion.div
+            key={`left-${leftIndex}`}
+            onClick={prev}
+            whileHover={{ scale: 1.02, y: -4 }}
+            transition={{ type: "spring", stiffness: 300, damping: 24 }}
+            className="hidden md:flex flex-col justify-between p-7 lg:p-8 rounded-[32px] bg-white border border-black/[0.08] shadow-[0_20px_45px_-10px_rgba(0,0,0,0.07)] hover:shadow-[0_25px_50px_-10px_rgba(0,0,0,0.12)] cursor-pointer h-[500px] transition-all relative overflow-hidden group opacity-85 hover:opacity-100"
+          >
+            {/* Top Indicator */}
+            <div className="flex items-center justify-between border-b border-black/[0.06] pb-3 text-xs font-mono">
+              <span className="text-neutral-400 font-bold uppercase text-[10px]">
+                [{EXPERIENCES[leftIndex].index}] {EXPERIENCES[leftIndex].period}
+              </span>
+              <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500">
+                PREVIOUS
+              </span>
+            </div>
 
-            const isCenter = diff === 0;
-            const isLeft = diff === -1 || (diff === count - 1 && count > 2);
-            const isRight = diff === 1 || (diff === -(count - 1) && count > 2);
-            const isHidden = !isCenter && !isLeft && !isRight;
+            {/* Content */}
+            <div className="space-y-3 my-auto">
+              <h3 className="text-xl lg:text-2xl font-bold tracking-tight text-[#141414] group-hover:text-coral transition-colors">
+                {EXPERIENCES[leftIndex].role}
+              </h3>
+              <p className="text-xs font-medium text-neutral-500">
+                {EXPERIENCES[leftIndex].company}
+              </p>
+              <p className="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
+                {EXPERIENCES[leftIndex].summary}
+              </p>
 
-            // 3D Arc Physics
-            let xPos = 0;
-            let rotateY = 0;
-            let rotateZ = 0;
-            let scale = 0.9;
-            let zIndex = 10;
-            let opacity = 0.6;
+              {/* Mini metric preview */}
+              <div className="pt-2 border-t border-black/[0.06] flex items-center gap-3">
+                <span className="text-sm font-bold font-mono text-[#141414]">
+                  {EXPERIENCES[leftIndex].metrics[0].value}
+                </span>
+                <span className="text-[10px] font-sans text-neutral-400 truncate">
+                  {EXPERIENCES[leftIndex].metrics[0].label}
+                </span>
+              </div>
+            </div>
 
-            if (isCenter) {
-              xPos = 0;
-              rotateY = 0;
-              rotateZ = 0;
-              scale = 1.02;
-              zIndex = 30;
-              opacity = 1;
-            } else if (isLeft) {
-              xPos = -320;
-              rotateY = 12;
-              rotateZ = -4;
-              scale = 0.88;
-              zIndex = 20;
-              opacity = 0.75;
-            } else if (isRight) {
-              xPos = 320;
-              rotateY = -12;
-              rotateZ = 4;
-              scale = 0.88;
-              zIndex = 20;
-              opacity = 0.75;
-            } else {
-              xPos = diff * 400;
-              scale = 0.7;
-              opacity = 0;
-              zIndex = 5;
-            }
+            {/* Footer Stack */}
+            <div className="pt-3 border-t border-black/[0.06] flex flex-wrap gap-1">
+              {EXPERIENCES[leftIndex].stack.slice(0, 3).map((s) => (
+                <span key={s} className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-600 border border-neutral-200/60">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </motion.div>
 
-            return (
-              <motion.div
-                key={card.id}
-                onClick={() => setActiveIndex(index)}
-                animate={{
-                  x: xPos,
-                  rotateY: rotateY,
-                  rotateZ: rotateZ,
-                  scale: scale,
-                  opacity: isHidden ? 0 : opacity,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 280,
-                  damping: 26,
-                }}
-                style={{
-                  zIndex,
-                  pointerEvents: isHidden ? "none" : "auto",
-                  transformStyle: "preserve-3d",
-                }}
-                className={`absolute w-[300px] sm:w-[350px] md:w-[380px] h-[500px] sm:h-[520px] rounded-[36px] p-7 sm:p-8 flex flex-col justify-between overflow-hidden cursor-pointer shadow-2xl transition-all duration-300 bg-gradient-to-b ${card.bgGradient} text-white border ${
-                  isCenter
-                    ? "border-white/25 shadow-[0_30px_70px_rgba(0,0,0,0.35)] ring-1 ring-white/20"
-                    : "border-white/10 hover:border-white/20 shadow-lg"
-                }`}
-              >
-                {/* Background Specular Flare & Texture Overlay */}
-                <div 
-                  className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay bg-cover bg-center"
-                  style={{ backgroundImage: `url(${card.image})` }}
-                />
-                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+          {/* ================= CENTER FOCAL CARD (Active Luminous Rim) ================= */}
+          <motion.div
+            key={`center-${centerIndex}`}
+            initial={{ scale: 0.98, opacity: 0.9 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 320, damping: 24 }}
+            className="relative flex flex-col justify-between p-7 sm:p-9 rounded-[32px] bg-white border border-black/[0.08] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.14),0_0_35px_rgba(244,114,182,0.22)] h-[540px] z-20 overflow-hidden"
+          >
+            {/* Subtle Iridescent Top-Right Rim Glow matching User's Middle Card Reference */}
+            <div className="absolute -top-16 -right-16 w-48 h-48 bg-gradient-to-bl from-pink-400/25 via-purple-300/15 to-transparent rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-pink-300/60 to-transparent" />
+            <div className="absolute inset-y-0 right-0 w-[1.5px] bg-gradient-to-b from-pink-400/60 via-purple-300/40 to-transparent" />
 
-                {/* Top Meta Line */}
-                <div className="relative z-10 flex items-center justify-between border-b border-white/10 pb-3 text-xs font-mono">
-                  <span className="text-coral font-bold tracking-wider uppercase text-[10px]">
-                    {card.tag}
-                  </span>
-                  <span className="text-neutral-400 text-[11px]">
-                    {card.period}
-                  </span>
-                </div>
+            {/* Top Meta Line */}
+            <div className="relative z-10 flex items-center justify-between border-b border-black/[0.08] pb-3.5 text-xs font-mono">
+              <span className="text-coral font-bold tracking-wider uppercase text-[10px] flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-coral animate-pulse" />
+                [{EXPERIENCES[centerIndex].index}] {EXPERIENCES[centerIndex].tag}
+              </span>
+              <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-700 font-semibold border border-neutral-200">
+                {EXPERIENCES[centerIndex].period}
+              </span>
+            </div>
 
-                {/* Main Card Body */}
-                <div className="relative z-10 space-y-4 my-auto">
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white leading-tight">
-                      {card.role}
-                    </h3>
-                    <p className="text-xs sm:text-sm font-sans font-medium text-neutral-400 mt-1">
-                      {card.company}
-                    </p>
-                  </div>
+            {/* Center Card Body */}
+            <div className="relative z-10 space-y-4 my-auto">
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#121212] leading-snug">
+                  {EXPERIENCES[centerIndex].role}
+                </h3>
+                <p className="text-sm font-sans font-medium text-neutral-500 mt-1">
+                  {EXPERIENCES[centerIndex].company}
+                </p>
+              </div>
 
-                  {/* Highlight Quote Block (Similar to "The greatest trick" in reference) */}
-                  <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/5 space-y-1 backdrop-blur-md">
-                    <h4 className="text-xs sm:text-sm font-bold text-white tracking-tight">
-                      {card.quoteTitle}
-                    </h4>
-                    <p className="text-xs font-sans text-neutral-300 leading-relaxed font-normal">
-                      {card.quoteText}
-                    </p>
-                  </div>
+              {/* Highlight Quote Box */}
+              <div className="p-4 rounded-2xl bg-neutral-50/90 border border-neutral-200/80 space-y-1">
+                <h4 className="text-xs sm:text-sm font-bold text-[#141414] tracking-tight">
+                  {EXPERIENCES[centerIndex].highlightTitle}
+                </h4>
+                <p className="text-xs font-sans text-neutral-600 leading-relaxed">
+                  {EXPERIENCES[centerIndex].highlightText}
+                </p>
+              </div>
 
-                  {/* Telemetry Metrics Row */}
-                  <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/10">
-                    {card.metrics.map((m, mIdx) => (
-                      <div key={mIdx} className="text-left">
-                        <span className="text-[9px] font-mono text-neutral-400 block uppercase tracking-wider truncate">
-                          {m.label}
-                        </span>
-                        <span className="text-xs sm:text-sm font-mono font-bold text-white block mt-0.5">
-                          {m.value}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Tech Stack Footer */}
-                <div className="relative z-10 pt-3 border-t border-white/10 flex flex-wrap gap-1.5">
-                  {card.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-neutral-300"
-                    >
-                      {tech}
+              {/* 3 Concrete Telemetry Columns */}
+              <div className="grid grid-cols-3 gap-2 pt-2 border-t border-black/[0.08]">
+                {EXPERIENCES[centerIndex].metrics.map((m, mIdx) => (
+                  <div key={mIdx} className="space-y-0.5">
+                    <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-wider block truncate">
+                      {m.label}
                     </span>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
+                    <span className="text-base sm:text-lg font-mono font-bold text-[#121212] block">
+                      {m.value}
+                    </span>
+                    <span className="text-[9px] font-sans text-neutral-500 block truncate">
+                      {m.subtext}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Tech Stack Pills */}
+            <div className="relative z-10 pt-3.5 border-t border-black/[0.08] flex flex-wrap gap-1.5">
+              {EXPERIENCES[centerIndex].stack.map((t) => (
+                <span
+                  key={t}
+                  className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-800 border border-neutral-200/80 font-medium"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* ================= RIGHT CARD ================= */}
+          <motion.div
+            key={`right-${rightIndex}`}
+            onClick={next}
+            whileHover={{ scale: 1.02, y: -4 }}
+            transition={{ type: "spring", stiffness: 300, damping: 24 }}
+            className="hidden md:flex flex-col justify-between p-7 lg:p-8 rounded-[32px] bg-white border border-black/[0.08] shadow-[0_20px_45px_-10px_rgba(0,0,0,0.07)] hover:shadow-[0_25px_50px_-10px_rgba(0,0,0,0.12)] cursor-pointer h-[500px] transition-all relative overflow-hidden group opacity-85 hover:opacity-100"
+          >
+            {/* Top Indicator */}
+            <div className="flex items-center justify-between border-b border-black/[0.06] pb-3 text-xs font-mono">
+              <span className="text-neutral-400 font-bold uppercase text-[10px]">
+                [{EXPERIENCES[rightIndex].index}] {EXPERIENCES[rightIndex].period}
+              </span>
+              <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500">
+                NEXT
+              </span>
+            </div>
+
+            {/* Content */}
+            <div className="space-y-3 my-auto">
+              <h3 className="text-xl lg:text-2xl font-bold tracking-tight text-[#141414] group-hover:text-coral transition-colors">
+                {EXPERIENCES[rightIndex].role}
+              </h3>
+              <p className="text-xs font-medium text-neutral-500">
+                {EXPERIENCES[rightIndex].company}
+              </p>
+              <p className="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
+                {EXPERIENCES[rightIndex].summary}
+              </p>
+
+              {/* Mini metric preview */}
+              <div className="pt-2 border-t border-black/[0.06] flex items-center gap-3">
+                <span className="text-sm font-bold font-mono text-[#141414]">
+                  {EXPERIENCES[rightIndex].metrics[0].value}
+                </span>
+                <span className="text-[10px] font-sans text-neutral-400 truncate">
+                  {EXPERIENCES[rightIndex].metrics[0].label}
+                </span>
+              </div>
+            </div>
+
+            {/* Footer Stack */}
+            <div className="pt-3 border-t border-black/[0.06] flex flex-wrap gap-1">
+              {EXPERIENCES[rightIndex].stack.slice(0, 3).map((s) => (
+                <span key={s} className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-600 border border-neutral-200/60">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
         </div>
       </div>
 
-      {/* Bottom Controls: Glassy Liquid Chevrons & Pill Pagination */}
-      <div className="flex items-center gap-6 mt-10">
+      {/* Bottom Tactical Controls: Glassy Chevrons & Indicators */}
+      <div className="flex items-center gap-6 mt-8">
         <button
           onClick={prev}
-          aria-label="Previous milestone"
+          aria-label="Previous role"
           className="btn-liquid-glass w-11 h-11 rounded-full flex items-center justify-center cursor-pointer shadow-md hover:scale-105 active:scale-95 transition-all text-white"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
 
-        {/* Dynamic Indicator Dots */}
+        {/* Dynamic Capsule Indicators */}
         <div className="flex items-center gap-2">
           {EXPERIENCES.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setActiveIndex(idx)}
-              aria-label={`Jump to milestone ${idx + 1}`}
+              aria-label={`Jump to role ${idx + 1}`}
               className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                 activeIndex === idx 
                   ? "w-7 bg-[#121212]" 
@@ -325,14 +356,14 @@ export default function FolioBehindSystems() {
 
         <button
           onClick={next}
-          aria-label="Next milestone"
+          aria-label="Next role"
           className="btn-liquid-glass w-11 h-11 rounded-full flex items-center justify-center cursor-pointer shadow-md hover:scale-105 active:scale-95 transition-all text-white"
         >
           <ChevronRight className="w-4 h-4" />
         </button>
 
-        <span className="text-xs font-mono font-semibold text-neutral-500 ml-4">
-          0{activeIndex + 1} / 0{EXPERIENCES.length}
+        <span className="text-xs font-mono font-semibold text-neutral-500 ml-3">
+          0{activeIndex + 1} / 0{total}
         </span>
       </div>
 
