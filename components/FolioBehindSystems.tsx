@@ -226,7 +226,7 @@ export default function FolioBehindSystems() {
 
       {/* Widescreen Console Spread */}
       <div className="w-full max-w-7xl mx-auto rounded-3xl border border-white/10 bg-[#08080C]/85 backdrop-blur-2xl shadow-[0_30px_100px_rgba(0,0,0,0.95)] overflow-hidden relative z-10">
-        
+
         {/* Top Console Command Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-3.5 border-b border-white/10 bg-black/60 text-xs font-mono text-neutral-400 gap-2">
           <div className="flex items-center gap-3">
@@ -252,7 +252,7 @@ export default function FolioBehindSystems() {
 
         {/* Main Two-Column Split Console */}
         <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
-          
+
           {/* Left Rail (Timeline Navigation & Index, 35%) */}
           <div className="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-white/10 p-6 sm:p-8 flex flex-col justify-between bg-black/40">
             <div className="space-y-4">
@@ -269,11 +269,10 @@ export default function FolioBehindSystems() {
                     <button
                       key={item.id}
                       onClick={() => setSelectedIndex(idx)}
-                      className={`w-full text-left p-4 rounded-2xl transition-all duration-300 relative cursor-pointer group ${
-                        isSelected
+                      className={`w-full text-left p-4 rounded-2xl transition-all duration-300 relative cursor-pointer group ${isSelected
                           ? "bg-white/[0.08] border border-white/20 shadow-xl"
                           : "bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/10"
-                      }`}
+                        }`}
                     >
                       {/* Active Hairline Indicator */}
                       {isSelected && (
@@ -285,20 +284,18 @@ export default function FolioBehindSystems() {
                           [{item.index}] {item.period}
                         </span>
                         <span
-                          className={`px-2 py-0.5 rounded text-[9px] font-mono ${
-                            isSelected
+                          className={`px-2 py-0.5 rounded text-[9px] font-mono ${isSelected
                               ? "bg-coral/20 text-coral border border-coral/30"
                               : "bg-white/5 text-neutral-400"
-                          }`}
+                            }`}
                         >
                           {item.statusBadge}
                         </span>
                       </div>
 
                       <h3
-                        className={`text-base font-bold tracking-tight transition-colors ${
-                          isSelected ? "text-white" : "text-neutral-300 group-hover:text-white"
-                        }`}
+                        className={`text-base font-bold tracking-tight transition-colors ${isSelected ? "text-white" : "text-neutral-300 group-hover:text-white"
+                          }`}
                       >
                         {item.role}
                       </h3>
