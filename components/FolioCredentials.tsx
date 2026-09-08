@@ -251,19 +251,19 @@ export default function TactileFolderSection() {
   ];
 
   return (
-    <section id="about" className="w-full py-32 px-6 md:px-12 bg-[#050505] text-white flex flex-col items-center overflow-hidden border-t border-neutral-900 select-none">
+    <section id="about" className="w-full py-28 sm:py-36 px-6 md:px-12 lg:px-16 bg-white text-[#121212] flex flex-col items-center overflow-hidden border-t border-neutral-200 select-none">
       {/* Section Header */}
-      <div className="w-full max-w-5xl mb-24 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
+      <div className="w-full max-w-5xl mb-24 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-black/10 pb-6">
         <div>
-          <span className="text-[11px] font-sans font-medium tracking-widest text-neutral-400 uppercase">
+          <span className="text-[11px] font-sans font-bold tracking-widest text-coral uppercase block">
             SECTION 07 // PHYSICAL ARCHIVES
           </span>
-          <h2 className="text-4xl md:text-5xl font-light tracking-tight mt-1 text-white">
-            Education &amp; Honors
+          <h2 className="text-3xl md:text-5xl font-black tracking-tight mt-1 text-[#121212]">
+            Education &amp; Honors.
           </h2>
         </div>
-        <p className="text-xs font-sans font-medium text-neutral-400 max-w-xs tracking-wide">
-          Hover or tap any folder to fan out files. <span className="text-coral font-medium">Click any document to inspect full credentials.</span>
+        <p className="text-xs font-sans font-medium text-neutral-500 max-w-xs tracking-wide">
+          Hover or tap any folder to fan out files. <span className="text-coral font-semibold">Click any document to inspect full credentials.</span>
         </p>
       </div>
 
