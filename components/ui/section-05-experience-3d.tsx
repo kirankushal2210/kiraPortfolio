@@ -1,394 +1,361 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { 
   ArrowLeft, 
   ArrowRight, 
   Activity, 
-  Cpu, 
-  Server, 
-  ShieldCheck, 
-  Layers, 
-  Network, 
-  Sparkles,
-  Zap
+  Sparkles 
 } from "lucide-react";
 
-interface MilestoneData {
+interface TelemetryPoint {
+  label: string;
+  value: string;
+  detail: string;
+}
+
+interface ExperienceRecord {
   id: string;
-  number: string;
+  category: string;
   role: string;
   company: string;
   period: string;
-  domain: string;
-  summary: string;
-  primaryMetric: { value: string; label: string };
-  specs: { label: string; value: string; detail: string }[];
+  description: string;
+  mediaImage: string;
   stack: string[];
-  blueprintNodes: { name: string; type: string }[];
-  accentColor: string;
+  blueprintTitle: string;
+  nodes: string[];
+  telemetry: TelemetryPoint[];
 }
 
-const MILESTONES: MilestoneData[] = [
+const EXPERIENCES: ExperienceRecord[] = [
   {
     id: "independent-ai",
-    number: "01",
-    role: "Independent AI & Product Engineer",
-    company: "Applied Systems & Research",
+    category: "AUTONOMOUS AI & PRODUCT ARCHITECTURE",
+    role: "Independent AI & Web Developer",
+    company: "Independent Systems & Applied Research",
     period: "2025 — PRESENT",
-    domain: "AUTONOMOUS MULTI-AGENT ORCHESTRATION & OFFLINE-FIRST TELEMETRY",
-    summary:
-      "Architecting end-to-end multi-agent consensus pipelines, offline-first health operating systems (HlthOS) rendering at strict 60-FPS, domain LLM fine-tuning, and deterministic local inference via vLLM.",
-    primaryMetric: { value: "< 200ms", label: "INGESTION LATENCY" },
-    specs: [
-      { label: "DIAGNOSTIC INTAKE", value: "< 200ms", detail: "Deterministic Relational Schema" },
-      { label: "BIOLOGICAL TELEMETRY", value: "Strict 60-FPS", detail: "Zero Jitter Across 4 Metabolic Pillars" },
-      { label: "THROUGHPUT BOOST", value: "+40%", detail: "via PEFT/LoRA & vLLM Serving" },
-      { label: "HALLUCINATION BOUND", value: "0.0%", detail: "Hybrid-RAG Clinical Document Grounding" },
+    description:
+      "Engineering an offline-first biological telemetry OS (HlthOS) managing 4 core metabolic pillars at strict 60-FPS rendering, while deploying multi-agent consensus pipelines with zero hallucinations.",
+    mediaImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80",
+    blueprintTitle: "HlthOS AI Engine & Telemetry Pipeline",
+    nodes: ["Client Ingestion", "16-Pt Diagnostic", "Hybrid-RAG Core", "vLLM Worker", "PostgreSQL Sink"],
+    telemetry: [
+      { label: "DIAGNOSTIC LATENCY", value: "< 200ms", detail: "Sub-200ms biometric schema intake" },
+      { label: "TELEMETRY ENGINE", value: "Strict 60-FPS", detail: "Deterministic 4-pillar rendering" },
+      { label: "INFERENCE GAIN", value: "+40%", detail: "vLLM serving with PEFT/LoRA" },
     ],
-    stack: ["Python", "vLLM", "LangChain", "Claude API", "React Native", "PostgreSQL"],
-    blueprintNodes: [
-      { name: "Client Ingest", type: "Mobile OS" },
-      { name: "LangChain Agent", type: "Consensus" },
-      { name: "Claude API", type: "Grounding" },
-      { name: "vLLM Fast Worker", type: "Inference" },
-      { name: "PostgreSQL Sink", type: "Relational" },
-    ],
-    accentColor: "#FF3B00",
+    stack: ["Python", "vLLM", "LangChain", "Claude API", "PostgreSQL", "React Native"],
   },
   {
     id: "tech-mahindra",
-    number: "02",
+    category: "ENTERPRISE SYSTEMS & INFRASTRUCTURE",
     role: "Technical Associate",
     company: "Tech Mahindra",
     period: "OCT 2024 — APR 2025",
-    domain: "ENTERPRISE INFRASTRUCTURE & SYSTEMS CONTINUITY",
-    summary:
-      "Provided high-stakes enterprise operational continuity for US retail chains, standardizing structured fault-isolation trees across POS hardware, cabling, and systems under strict SLAs.",
-    primaryMetric: { value: "99.98%", label: "STORE CONTINUITY SLA" },
-    specs: [
-      { label: "STORE CONTINUITY SLA", value: "99.98%", detail: "High-Volume US Retail Enterprise Nodes" },
-      { label: "TRIAGE VELOCITY", value: "-65% MTTR", detail: "Standardized Structured Fault Trees" },
-      { label: "HARDWARE INTEGRITY", value: "100%", detail: "Physical Cabling Continuity Resolved" },
-      { label: "ESCALATION ACCURACY", value: "Zero Delay", detail: "Cross-Squad Tier-3 Triage" },
+    description:
+      "Restored mission-critical systems continuity for US retail chains, executing structured fault isolation across hardware, POS terminals, and physical network cabling bottlenecks.",
+    mediaImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80",
+    blueprintTitle: "Enterprise Triage Topology",
+    nodes: ["Store Terminal", "Physical Cabling", "Diagnostic Tree", "SLA Verification", "Restoration"],
+    telemetry: [
+      { label: "STORE UPTIME SLA", value: "99.98%", detail: "Mission-critical retail nodes" },
+      { label: "RESOLUTION VELOCITY", value: "-65% MTTR", detail: "Structured diagnostic fault trees" },
+      { label: "CABLING CONTINUITY", value: "100%", detail: "Hardware & cabling continuity" },
     ],
-    stack: ["Enterprise Systems", "Hardware Cabling", "Network Diagnostics", "Systems SLA"],
-    blueprintNodes: [
-      { name: "Retail Store POS", type: "Endpoint" },
-      { name: "Layer 2/3 Switch", type: "Network" },
-      { name: "Structured Triage", type: "Diagnosis" },
-      { name: "Operations Center", type: "Escalation" },
-      { name: "Uptime Lock", type: "Continuity" },
-    ],
-    accentColor: "#FF3B00",
+    stack: ["Enterprise Systems", "Network Diagnostics", "Hardware Continuity", "Systems SLA"],
   },
   {
-    id: "suvidha",
-    number: "03",
+    id: "suvidha-foundation",
+    category: "FRONTEND ARCHITECTURE & DATA INTEGRATION",
     role: "Web Developer Intern",
     company: "Suvidha Foundation",
     period: "MAY 2023 — JUN 2023",
-    domain: "FRONTEND ARCHITECTURE & DYNAMIC DATA WORKFLOWS",
-    summary:
-      "Engineered dynamic React frontend workflows for an academic PhD research repository, optimizing portal listing, responsive component systems, and resilient multipart data integration.",
-    primaryMetric: { value: "sub-100ms", label: "SEARCH LATENCY" },
-    specs: [
-      { label: "SEARCH LATENCY", value: "sub-100ms", detail: "Optimized Dynamic Client State" },
-      { label: "LAYOUT STABILITY", value: "0.00 CLS", detail: "Deterministic Tailwind UI Engine" },
-      { label: "UPLOAD PIPELINE", value: "100% Flow", detail: "Multi-Part File Integration" },
-      { label: "BREAKPOINT ACCURACY", value: "Responsive", detail: "Zero Layout Shift" },
+    description:
+      "Engineered responsive dynamic web workflows in React.js and Tailwind CSS for an academic PhD research asset platform with live search and multi-part upload pipelines.",
+    mediaImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
+    blueprintTitle: "Reactive State & Upload Pipeline",
+    nodes: ["Search Query", "React Hydration", "Tailwind Viewport", "REST Endpoint", "Asset Storage"],
+    telemetry: [
+      { label: "QUERY LATENCY", value: "sub-100ms", detail: "Optimized client state caching" },
+      { label: "LAYOUT STABILITY", value: "0.00 CLS", detail: "Deterministic responsive layout" },
+      { label: "DATA ACCURACY", value: "100% Flow", detail: "Multi-part upload pipeline" },
     ],
-    stack: ["React.js", "Tailwind CSS", "RESTful Data Flows", "TypeScript"],
-    blueprintNodes: [
-      { name: "Research Input", type: "Client UI" },
-      { name: "React State Cache", type: "Context" },
-      { name: "Tailwind Viewport", type: "0.00 CLS" },
-      { name: "REST Endpoint", type: "Async Sink" },
-      { name: "Asset Portal", type: "Archival" },
-    ],
-    accentColor: "#FF3B00",
+    stack: ["React.js", "Tailwind CSS", "RESTful Data Integration", "TypeScript"],
   },
 ];
 
 export default function Section05Experience3D() {
-  const [activeIdx, setActiveIdx] = useState(0);
-  const activeItem = MILESTONES[activeIdx];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHoveringCard, setIsHoveringCard] = useState(false);
 
-  // 3D Spatial Cursor Tracking
   const cardRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // High-fidelity spring calibration: stiffness: 340, damping: 22, mass: 0.8
-  const springConfig = { stiffness: 340, damping: 22, mass: 0.8 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [14, -14]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-14, 14]), springConfig);
+  // Smooth gyroscopic spring physics for 3D card tilt
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [14, -14]), { stiffness: 320, damping: 24 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-14, 14]), { stiffness: 320, damping: 24 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseFromCenterX = (e.clientX - rect.left - width / 2) / width;
-    const mouseFromCenterY = (e.clientY - rect.top - height / 2) / height;
-    mouseX.set(mouseFromCenterX);
-    mouseY.set(mouseFromCenterY);
+    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(xPct);
+    mouseY.set(yPct);
   };
 
   const handleMouseLeave = () => {
     mouseX.set(0);
     mouseY.set(0);
+    setIsHoveringCard(false);
   };
 
   const prev = () => {
-    setActiveIdx((curr) => (curr === 0 ? MILESTONES.length - 1 : curr - 1));
+    setCurrentIndex((prevIdx) => (prevIdx === 0 ? EXPERIENCES.length - 1 : prevIdx - 1));
   };
 
   const next = () => {
-    setActiveIdx((curr) => (curr === MILESTONES.length - 1 ? 0 : curr + 1));
+    setCurrentIndex((prevIdx) => (prevIdx === EXPERIENCES.length - 1 ? 0 : prevIdx + 1));
   };
+
+  const active = EXPERIENCES[currentIndex];
 
   return (
     <section 
       id="experience" 
-      className="w-full min-h-[720px] py-24 sm:py-32 px-6 md:px-12 lg:px-16 flex flex-col items-center justify-center bg-white text-[#0A0A0A] select-none border-t border-neutral-200 overflow-hidden"
+      className="w-full min-h-[760px] py-28 px-6 md:px-16 lg:px-24 bg-white text-[#0A0A0A] flex flex-col justify-center border-t border-neutral-200 select-none"
     >
-      {/* Top Section Header */}
-      <div className="w-full max-w-6xl mb-14 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-black/10 pb-6">
+      
+      {/* Header */}
+      <div className="w-full max-w-6xl mx-auto mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-200 pb-6">
         <div>
-          <span className="text-[11px] font-mono font-bold tracking-widest text-[#FF3B00] uppercase block">
-            SECTION 05 // WORK EXPERIENCE &amp; OPERATIONAL RECORD
+          <span className="text-[11px] font-mono tracking-widest text-[#FF3B00] uppercase font-semibold block">
+            SECTION 05 // SYSTEM ROLES &amp; OPERATIONAL RECORD
           </span>
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight mt-1 text-[#0A0A0A]">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#0A0A0A] mt-1">
             Work Experience.
           </h2>
         </div>
-        <p className="text-xs font-sans font-medium text-neutral-500 max-w-xs tracking-wide">
-          Hover over the blueprint deck to project 3D spatial telemetry, live benchmarks, and system topology.
+        <p className="text-xs font-mono text-neutral-500 max-w-xs tracking-wide text-left md:text-right">
+          Hover over the card stage to project real-time 3D telemetry blueprints and verified metrics.
         </p>
       </div>
 
-      {/* Main Two-Column Stage Spread (Matching Section 04.5 Layout Architecture) */}
-      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-center">
+      {/* Main Dual-Column Showcase */}
+      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-20 items-center">
         
-        {/* Left Column: Stacked Depth 3D Projection Deck (md:col-span-6) */}
-        <div className="md:col-span-6 relative flex items-center justify-center isolate [perspective:1200px]">
+        {/* Left Column: 3D Perspective Pop-Out Deck */}
+        <div className="md:col-span-5 relative flex items-center justify-center [perspective:1200px]">
           
-          {/* Depth Layer 2 (Furthest Back Offset Card) */}
-          <div className="absolute w-72 sm:w-80 md:w-[370px] lg:w-[410px] aspect-[4/3] rounded-[36px] bg-neutral-200/90 rotate-6 translate-x-5 -translate-y-2 scale-90 -z-20 shadow-sm border border-black/5" />
+          {/* Depth Card 2 (Background Offset) */}
+          <div className="absolute w-[290px] sm:w-[350px] aspect-square rounded-[36px] bg-neutral-200 -rotate-6 -translate-x-5 -translate-y-2 scale-95 -z-20 shadow-sm transition-transform" />
 
-          {/* Depth Layer 1 (Middle Offset Physical Backdrop) */}
-          <div className="absolute w-72 sm:w-80 md:w-[370px] lg:w-[410px] aspect-[4/3] rounded-[36px] bg-neutral-300/80 -rotate-6 -translate-x-5 -translate-y-1 scale-95 -z-10 shadow-md border border-black/5" />
+          {/* Depth Card 1 (Mid Layer Offset) */}
+          <div className="absolute w-[290px] sm:w-[350px] aspect-square rounded-[36px] bg-neutral-300/80 rotate-6 translate-x-4 -translate-y-1 scale-98 -z-10 shadow-md transition-transform" />
 
-          {/* Active 3D Hover-Extruded Spatial Deck (Layer +1 to +3) */}
+          {/* Front Interactive 3D Card Stage */}
           <motion.div
             ref={cardRef}
             onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHoveringCard(true)}
             onMouseLeave={handleMouseLeave}
             style={{
               rotateX,
               rotateY,
               transformStyle: "preserve-3d",
             }}
-            whileHover={{ scale: 1.03 }}
-            className="relative w-72 sm:w-80 md:w-[370px] lg:w-[410px] aspect-[4/3] rounded-[36px] bg-[#0A0A0E] text-white p-7 sm:p-8 shadow-[0_30px_70px_rgba(0,0,0,0.35)] border border-white/15 cursor-pointer z-10 overflow-hidden flex flex-col justify-between"
+            className="relative w-[290px] sm:w-[350px] aspect-square rounded-[36px] bg-black shadow-2xl z-10 border border-neutral-200 cursor-pointer overflow-hidden group"
           >
-            {/* Background Texture & Ambient Top Lighting */}
-            <div className="absolute inset-0 bg-radial-at-t from-white/[0.08] via-transparent to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+            {/* Background Master Image */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active.id}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.02 }}
+                transition={{ duration: 0.35 }}
+                className="w-full h-full relative"
+              >
+                <img
+                  src={active.mediaImage}
+                  alt={active.role}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              </motion.div>
+            </AnimatePresence>
 
-            {/* ------------------------------------------------------------- */}
-            {/* Z-DEPTH 20px: Schematic Linework, Waves & Grid Topology       */}
-            {/* ------------------------------------------------------------- */}
+            {/* Static Top-Left Pill Tag */}
             <div 
-              className="relative z-10 w-full flex items-center justify-between border-b border-white/10 pb-3"
-              style={{ transform: "translateZ(20px)" }}
+              style={{ transform: "translateZ(24px)" }}
+              className="absolute top-4 left-4 z-20"
             >
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#FF3B00] animate-pulse" />
-                <span className="text-[10px] font-mono tracking-widest text-[#FF3B00] uppercase font-bold">
-                  STAGE {activeItem.number} // 3D BLUEPRINT
-                </span>
-              </div>
-              <span className="text-[10px] font-mono text-neutral-400">
-                {activeItem.period}
+              <span className="text-[10px] font-mono tracking-wider font-semibold uppercase px-3 py-1.5 rounded-full bg-black/70 text-white backdrop-blur-md border border-white/15">
+                {active.period}
               </span>
             </div>
 
-            {/* Mid-Layer Animated Node Topology Wireframe */}
-            <div 
-              className="relative z-10 my-auto py-2 space-y-3"
-              style={{ transform: "translateZ(25px)" }}
-            >
-              <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-widest block">
-                SYSTEM TOPOLOGY PIPELINE:
-              </span>
-              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
-                {activeItem.blueprintNodes.map((node, nIdx) => (
-                  <React.Fragment key={nIdx}>
-                    <div className="p-2 rounded-xl bg-white/[0.04] border border-white/10 text-center shrink-0 min-w-[70px]">
-                      <span className="text-[10px] font-mono text-white block font-semibold truncate">
-                        {node.name}
+            {/* 3D POP-UP BLUEPRINT OVERLAY (Triggered on Hover) */}
+            <AnimatePresence>
+              {isHoveringCard && (
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 16 }}
+                  transition={{ type: "spring", stiffness: 320, damping: 24 }}
+                  style={{ transform: "translateZ(48px)" }}
+                  className="absolute inset-4 rounded-[26px] bg-black/90 backdrop-blur-xl border border-white/20 p-5 flex flex-col justify-between z-30 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+                >
+                  {/* Blueprint Top Header */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-[#FF3B00]">
+                      <span className="flex items-center gap-1.5 uppercase font-semibold">
+                        <Activity className="w-3 h-3 animate-pulse" />
+                        SYSTEM BLUEPRINT
                       </span>
-                      <span className="text-[8px] font-mono text-neutral-400 block uppercase">
-                        {node.type}
-                      </span>
+                      <span className="text-white/40">3D TELEMETRY</span>
                     </div>
-                    {nIdx < activeItem.blueprintNodes.length - 1 && (
-                      <span className="text-neutral-500 font-mono text-xs select-none">→</span>
-                    )}
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
+                    <h4 className="text-sm font-semibold text-white tracking-tight">
+                      {active.blueprintTitle}
+                    </h4>
+                  </div>
 
-            {/* ------------------------------------------------------------- */}
-            {/* Z-DEPTH 45px: High-Contrast Benchmark Pills                   */}
-            {/* ------------------------------------------------------------- */}
-            <div 
-              className="relative z-20 grid grid-cols-2 gap-2.5 pt-2 border-t border-white/10"
-              style={{ transform: "translateZ(45px)" }}
-            >
-              {activeItem.specs.slice(0, 2).map((s, idx) => (
-                <div key={idx} className="p-2.5 rounded-xl bg-white/[0.05] border border-white/10">
-                  <span className="text-[9px] font-mono uppercase text-neutral-400 block truncate">
-                    {s.label}
-                  </span>
-                  <span className="text-sm font-mono font-bold text-white block mt-0.5">
-                    {s.value}
-                  </span>
-                </div>
-              ))}
-            </div>
+                  {/* Architecture Sequence Flow */}
+                  <div className="space-y-1">
+                    <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest block">
+                      TOPOLOGY NODES
+                    </span>
+                    <div className="flex flex-wrap gap-1">
+                      {active.nodes.map((node, nIdx) => (
+                        <span
+                          key={nIdx}
+                          className="text-[9px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/10"
+                        >
+                          {node}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
 
-            {/* ------------------------------------------------------------- */}
-            {/* Z-DEPTH 70px (Apex): Floating Glass/Acrylic HUD Lens           */}
-            {/* ------------------------------------------------------------- */}
-            <div 
-              className="absolute -bottom-3 -right-3 bg-black/85 backdrop-blur-xl border border-white/20 px-4 py-2.5 rounded-2xl shadow-[0_15px_35px_rgba(0,0,0,0.7)] flex items-center gap-3 z-30"
-              style={{ transform: "translateZ(70px)" }}
-            >
-              <div className="w-8 h-8 rounded-full bg-[#FF3B00]/15 border border-[#FF3B00]/40 flex items-center justify-center">
-                <Zap className="w-4 h-4 text-[#FF3B00]" />
-              </div>
-              <div>
-                <span className="text-[8px] font-mono uppercase text-neutral-400 tracking-wider block">
-                  {activeItem.primaryMetric.label}
+                  {/* Verified Spec Points */}
+                  <div className="grid grid-cols-3 gap-2 border-t border-white/10 pt-2.5">
+                    {active.telemetry.map((t, idx) => (
+                      <div key={idx} className="space-y-0.5">
+                        <span className="text-[8px] font-mono text-white/50 uppercase block truncate">
+                          {t.label}
+                        </span>
+                        <span className="text-xs font-mono font-bold text-white block">
+                          {t.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Subtle Baseline Cue when not hovered */}
+            {!isHoveringCard && (
+              <div 
+                style={{ transform: "translateZ(20px)" }}
+                className="absolute bottom-4 inset-x-4 z-20 flex items-center justify-between text-[11px] font-mono text-white/70"
+              >
+                <span>{active.company}</span>
+                <span className="flex items-center gap-1 text-[10px] text-[#FF3B00] bg-black/50 px-2 py-0.5 rounded-full border border-white/10">
+                  <Sparkles className="w-3 h-3" />
+                  HOVER TO INSPECT
                 </span>
-                <span className="text-base font-mono font-black text-white tracking-tight block">
-                  {activeItem.primaryMetric.value}
-                </span>
               </div>
-            </div>
-
+            )}
           </motion.div>
         </div>
 
-        {/* Right Column: Clean Editorial Narrative & Triggers (md:col-span-6) */}
-        <div className="md:col-span-6 flex flex-col justify-between space-y-6">
+        {/* Right Column: Editorial Copy & Interactive Triggers */}
+        <div className="md:col-span-7 flex flex-col justify-between space-y-6">
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeItem.id}
+              key={active.id}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.28 }}
               className="space-y-4"
             >
-              {/* Domain & Title */}
               <div>
-                <span className="text-xs font-mono font-bold text-[#FF3B00] uppercase tracking-wider block">
-                  {activeItem.company} · {activeItem.period}
+                <span className="text-xs font-mono font-semibold text-[#FF3B00] uppercase tracking-wider block">
+                  {active.category}
                 </span>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-[#0A0A0A] mt-1 leading-tight">
-                  {activeItem.role}
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0A0A0A] mt-1 leading-[1.1]">
+                  {active.role}
                 </h3>
-                <span className="text-[11px] font-mono text-neutral-500 uppercase tracking-wider block mt-1">
-                  DOMAIN // {activeItem.domain}
-                </span>
+                <p className="text-sm sm:text-base font-medium text-neutral-500 mt-1">
+                  {active.company}
+                </p>
               </div>
 
-              {/* Narrative */}
-              <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-normal pt-1">
-                {activeItem.summary}
+              <p className="text-base sm:text-lg text-neutral-700 leading-relaxed font-normal pt-1">
+                {active.description}
               </p>
 
-              {/* 4 Live Spec Readout Grid */}
-              <div className="grid grid-cols-2 gap-3 pt-2">
-                {activeItem.specs.map((spec, sIdx) => (
-                  <div 
-                    key={sIdx}
-                    className="p-3 rounded-2xl border border-neutral-200 bg-neutral-50/70 hover:border-neutral-300 transition-colors"
-                  >
-                    <span className="text-[9px] font-mono uppercase text-neutral-500 block truncate">
-                      {spec.label}
-                    </span>
-                    <span className="text-sm sm:text-base font-mono font-bold text-[#0A0A0A] block mt-0.5">
-                      {spec.value}
-                    </span>
-                    <span className="text-[10px] font-sans text-neutral-500 block truncate mt-0.5">
-                      {spec.detail}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Minimal Tech Stack Arsenal */}
-              <div className="flex flex-wrap gap-1.5 pt-2">
-                {activeItem.stack.map((tool) => (
+              {/* Stack Badges Matching Section 04.5 */}
+              <div className="flex flex-wrap gap-2 pt-3">
+                {active.stack.map((tech) => (
                   <span
-                    key={tool}
-                    className="text-xs font-mono px-3 py-1 rounded-lg border border-neutral-200 text-neutral-800 bg-white hover:border-[#FF3B00] transition-colors"
+                    key={tech}
+                    className="text-xs font-mono px-3 py-1.5 rounded-xl bg-neutral-100 text-neutral-700 border border-neutral-200"
                   >
-                    {tool}
+                    {tech}
                   </span>
                 ))}
               </div>
             </motion.div>
           </AnimatePresence>
 
-          {/* Bottom Dual Circular Navigation Controls (Matching Section 04.5) */}
-          <div className="flex items-center gap-4 pt-4 border-t border-black/10">
-            <button
-              onClick={prev}
-              aria-label="Previous milestone"
-              className="w-12 h-12 rounded-full bg-[#121212] text-white flex items-center justify-center hover:bg-black transition-all active:scale-95 shadow-md cursor-pointer"
-            >
-              <ArrowLeft className="w-5 h-5 stroke-[2.5]" />
-            </button>
-            <button
-              onClick={next}
-              aria-label="Next milestone"
-              className="w-12 h-12 rounded-full bg-[#121212] text-white flex items-center justify-center hover:bg-black transition-all active:scale-95 shadow-md cursor-pointer"
-            >
-              <ArrowRight className="w-5 h-5 stroke-[2.5]" />
-            </button>
+          {/* Navigation Controls: Circular Black Buttons + Capsule Indicator */}
+          <div className="flex items-center gap-6 pt-6 border-t border-neutral-100">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={prev}
+                aria-label="Previous experience"
+                className="w-12 h-12 rounded-full bg-[#121212] hover:bg-black text-white flex items-center justify-center transition-all active:scale-95 shadow-md cursor-pointer"
+              >
+                <ArrowLeft className="w-5 h-5 stroke-[2.5]" />
+              </button>
+              <button
+                onClick={next}
+                aria-label="Next experience"
+                className="w-12 h-12 rounded-full bg-[#121212] hover:bg-black text-white flex items-center justify-center transition-all active:scale-95 shadow-md cursor-pointer"
+              >
+                <ArrowRight className="w-5 h-5 stroke-[2.5]" />
+              </button>
+            </div>
 
-            {/* Pagination Capsules */}
-            <div className="flex items-center gap-2 ml-2">
-              {MILESTONES.map((_, idx) => (
+            {/* Pill Capsule Pagination Bar */}
+            <div className="flex items-center gap-2">
+              {EXPERIENCES.map((_, i) => (
                 <button
-                  key={idx}
-                  onClick={() => setActiveIdx(idx)}
-                  aria-label={`Jump to milestone ${idx + 1}`}
-                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    activeIdx === idx 
-                      ? "w-8 bg-[#121212]" 
-                      : "w-2.5 bg-neutral-300 hover:bg-neutral-400"
+                  key={i}
+                  onClick={() => setCurrentIndex(i)}
+                  aria-label={`Jump to role ${i + 1}`}
+                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                    currentIndex === i ? "w-7 bg-[#121212]" : "w-2 bg-neutral-300 hover:bg-neutral-400"
                   }`}
                 />
               ))}
             </div>
 
-            <span className="text-xs font-mono font-medium text-neutral-500 ml-auto">
-              0{activeIdx + 1} / 0{MILESTONES.length}
+            <span className="text-xs font-mono text-neutral-400 ml-auto">
+              0{currentIndex + 1} / 0{EXPERIENCES.length}
             </span>
           </div>
 
         </div>
 
       </div>
+
     </section>
   );
 }
