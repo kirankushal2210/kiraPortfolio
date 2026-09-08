@@ -121,7 +121,7 @@ export default function FolioBehindSystems() {
                 <span className="text-neutral-500 font-bold uppercase text-[10px]">
                   [{exp.index}] {exp.period}
                 </span>
-                <span className="text-[9px] font-mono px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-700 font-semibold border border-neutral-200">
+                <span className="text-[9px] font-mono px-2 py-0.5 rounded-full border border-neutral-200 text-neutral-600 font-medium">
                   {exp.tag}
                 </span>
               </div>
@@ -132,7 +132,7 @@ export default function FolioBehindSystems() {
                   <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[#121212] group-hover:text-coral transition-colors">
                     {exp.role}
                   </h3>
-                  <p className="text-xs sm:text-sm font-sans font-medium text-neutral-500 mt-1">
+                  <p className="text-xs sm:text-sm font-medium text-neutral-500 mt-1">
                     {exp.company}
                   </p>
                 </div>
@@ -141,18 +141,18 @@ export default function FolioBehindSystems() {
                   {exp.summary}
                 </p>
 
-                {/* Highlight Callout Box */}
-                <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-100 space-y-1">
-                  <h4 className="text-xs font-bold text-[#141414] tracking-tight">
+                {/* Unboxed Engineering Highlight (Clean Hairline Accent, No Grey Box) */}
+                <div className="border-l-2 border-neutral-300 pl-3.5 space-y-1">
+                  <h4 className="text-xs font-bold text-[#121212] tracking-tight">
                     {exp.highlightTitle}
                   </h4>
-                  <p className="text-xs font-sans text-neutral-600 leading-relaxed">
+                  <p className="text-xs text-neutral-600 leading-relaxed">
                     {exp.highlightText}
                   </p>
                 </div>
 
                 {/* 3 Telemetry Metric Columns */}
-                <div className="grid grid-cols-3 gap-2 pt-2 border-t border-black/[0.06]">
+                <div className="grid grid-cols-3 gap-2 pt-3 border-t border-black/[0.06]">
                   {exp.metrics.map((m, mIdx) => (
                     <div key={mIdx} className="space-y-0.5">
                       <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-wider block truncate">
@@ -169,12 +169,12 @@ export default function FolioBehindSystems() {
                 </div>
               </div>
 
-              {/* Tech Stack Pills */}
+              {/* Tech Stack - Clean Minimalist Transparent Tags */}
               <div className="pt-3.5 border-t border-black/[0.06] flex flex-wrap gap-1.5">
                 {exp.stack.map((t) => (
                   <span
                     key={t}
-                    className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-200/80 font-medium"
+                    className="text-[10px] font-mono px-2 py-0.5 rounded-md border border-neutral-200 text-neutral-600 font-medium"
                   >
                     {t}
                   </span>
