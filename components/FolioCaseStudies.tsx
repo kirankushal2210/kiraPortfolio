@@ -84,7 +84,7 @@ export default function FolioCaseStudies() {
       period: "2025 – Present",
       category: "Full-Stack Web Architecture & Ecosystem Taxonomy",
       tagline: "Categorical Filtering & Real-Time Discovery",
-      image: "/images/project_creme.jpg",
+      image: "/images/ai_tools_discovery_ui.jpg",
       stack: ["React.js", "Tailwind CSS", "JavaScript (ES6+)", "Context API", "Responsive UI/UX"],
       highlights: [
         "Built a curated directory platform aggregating AI tools with dynamic categorical filtering (Generative Video, Voice, Coding, Marketing).",
