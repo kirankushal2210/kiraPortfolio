@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { ArrowUpRight, CheckCircle2, Cpu, Database, Layers, ShieldCheck, Zap, ExternalLink } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/Icons";
 import GenerativeArchitectureMesh from "@/components/GenerativeArchitectureMesh";
 
@@ -78,32 +78,24 @@ export default function FolioCaseStudies() {
       demoUrl: "https://portfolio-kiran-one.vercel.app",
     },
     {
-      id: "ai-tools-discovery",
+      id: "ai-tools",
       index: "03",
-      title: "AI Tools Discovery Platform",
-      period: "2025",
-      category: "Full-Stack Web Architecture",
-      tagline: "Directory, Curation & Editorial Search Engine",
-      image: "/images/project_serum.jpg",
-      stack: [
-        "Next.js",
-        "React",
-        "Tailwind CSS",
-        "Context API",
-        "Docker",
-        "GitHub Actions",
-      ],
+      title: "Curated AI Ecosystem Discovery Platform",
+      period: "2025 – Present",
+      category: "Full-Stack Web Architecture & Ecosystem Taxonomy",
+      tagline: "Categorical Filtering & Real-Time Discovery",
+      image: "/images/project_creme.jpg",
+      stack: ["React.js", "Tailwind CSS", "JavaScript (ES6+)", "Context API", "Responsive UI/UX"],
       highlights: [
-        "Built a web application that helps users discover and explore AI tools categorised by domain, functionality, and pricing model (free or paid).",
-        "Designed a search and filter system that allows users to quickly find tools relevant to their work or industry.",
+        "Built a curated directory platform aggregating AI tools with dynamic categorical filtering (Generative Video, Voice, Coding, Marketing).",
         "Developed an intuitive UI inspired by Medium, emphasising readability and user engagement.",
         "Implemented Context API for efficient state management across components and responsive layouts using Tailwind CSS.",
       ],
       metrics: [
-        { label: "Tool Taxonomy", value: "Multi-domain / Free & Paid" },
+        { label: "Tool Taxonomy", value: "Multi-domain" },
         { label: "State Engine", value: "Context API" },
-        { label: "CI/CD", value: "Docker & GitHub Actions" },
-        { label: "UX Inspiration", value: "Medium-Style Editorial" },
+        { label: "CI/CD", value: "Docker & GitHub" },
+        { label: "UX Inspiration", value: "Medium Editorial" },
       ],
       repoUrl: "https://github.com/kirankushal22/ai-tools-discovery",
       demoUrl: "https://portfolio-kiran-one.vercel.app",
@@ -223,7 +215,7 @@ export default function FolioCaseStudies() {
                   </div>
                 </div>
 
-                {/* Core Stack Pills & Action Buttons */}
+                {/* Core Stack Pills & Glassy Action Buttons */}
                 <div className="pt-4 border-t border-white/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div className="flex flex-wrap gap-1.5">
                     {cs.stack.map((t) => (
@@ -236,20 +228,32 @@ export default function FolioCaseStudies() {
                     ))}
                   </div>
 
-                  {/* Links */}
+                  {/* High-End Glassy Liquid Metal / Coral Action Buttons */}
                   <div className="flex items-center gap-3">
                     {cs.repoUrl && (
                       <a
                         href={cs.repoUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.05] hover:bg-white/10 border border-white/10 text-xs font-sans font-medium text-white transition"
+                        className="btn-liquid-glass px-4 py-1.5 text-xs flex items-center gap-2 no-underline text-white cursor-pointer"
+                        title="Inspect Source Code"
                       >
                         <GithubIcon className="w-3.5 h-3.5 text-coral" />
                         <span>Source Code</span>
                       </a>
                     )}
-
+                    {cs.demoUrl && (
+                      <a
+                        href={cs.demoUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn-liquid-glass-coral px-4 py-1.5 text-xs flex items-center gap-2 cursor-pointer font-medium"
+                        title="Launch Live Demo"
+                      >
+                        <span>Live Demo</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
