@@ -273,7 +273,7 @@ export default function ProjectDemosShowcase() {
                   e.stopPropagation();
                   setIsFullTheatreOpen(true);
                 }}
-                className="w-8 h-8 rounded-full bg-black/75 hover:bg-coral text-white flex items-center justify-center border border-white/20 shadow-lg transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full bg-black/75 hover:bg-[#DC2626] text-white flex items-center justify-center border border-white/20 shadow-lg transition-colors cursor-pointer"
                 title="Watch full size"
               >
                 <Maximize2 className="w-3.5 h-3.5" />

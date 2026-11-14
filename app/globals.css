@@ -114,15 +114,15 @@
     color: #ffffff !important;
   }
 
-  /* Accent: flat coral, dark text (white on #FF5722 fails contrast at 3:1) */
+  /* Accent: flat red, white text (4.8:1 contrast; hover darkens to 6.5:1) */
   .btn-liquid-metal-coral,
   .btn-liquid-glass-coral {
-    background: #ff5722;
-    color: #0a0a0a !important;
+    background: #dc2626;
+    color: #ffffff !important;
     font-weight: 600;
   }
   .btn-liquid-metal-coral:hover,
-  .btn-liquid-glass-coral:hover { background: #ff7043; }
+  .btn-liquid-glass-coral:hover { background: #b91c1c; }
 
   .btn-solid:focus-visible,
   .btn-liquid-metal:focus-visible,
