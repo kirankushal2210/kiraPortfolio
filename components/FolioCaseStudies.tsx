@@ -45,7 +45,7 @@ export default function FolioCaseStudies() {
         { label: "Retrieval", value: "Pinecone" },
         { label: "Serving", value: "vLLM" },
       ],
-      repoUrl: "https://github.com/kirankushal22",
+      repoUrl: "https://github.com/kirankushal2210",
     },
     {
       id: "ai-news",
@@ -78,7 +78,7 @@ export default function FolioCaseStudies() {
         { label: "Storage", value: "PostgreSQL" },
         { label: "Summaries", value: "GPT-4o" },
       ],
-      repoUrl: "https://github.com/kirankushal22",
+      repoUrl: "https://github.com/kirankushal2210/ai-news-app",
     },
     {
       id: "ai-tools",
@@ -102,7 +102,7 @@ export default function FolioCaseStudies() {
         { label: "CI", value: "GitHub Actions" },
         { label: "UI", value: "Medium-inspired" },
       ],
-      repoUrl: "https://github.com/kirankushal22",
+      repoUrl: "https://github.com/kirankushal2210",
     },
     {
       id: "topicpilot",
@@ -126,7 +126,7 @@ export default function FolioCaseStudies() {
         { label: "Vector store", value: "ChromaDB" },
         { label: "Front end", value: "Next.js" },
       ],
-      repoUrl: "https://github.com/kirankushal22",
+      repoUrl: "https://github.com/kirankushal2210/Multi-agent-research-system",
     },
   ];
 
@@ -242,7 +242,7 @@ export default function FolioCaseStudies() {
                         target="_blank"
                         rel="noreferrer"
                         className="btn-liquid-glass px-4 py-1.5 text-xs flex items-center gap-2 no-underline text-white cursor-pointer"
-                        title="GitHub profile"
+                        title={cs.repoUrl.split("/").length > 4 ? "Source code on GitHub" : "GitHub profile"}
                       >
                         <GithubIcon className="w-3.5 h-3.5 text-neutral-300" />
                         <span>GitHub</span>

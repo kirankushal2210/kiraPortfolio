@@ -48,9 +48,9 @@ export const RESUME_DATA = {
     location: "Hyderabad, Telangana 500078",
     portfolioUrl: "portfolio-kiran-one.vercel.app",
     linkedin: "https://linkedin.com/in/MunigondaKiran",
-    github: "https://github.com/kirankushal22",
+    github: "https://github.com/kirankushal2210",
     socials: {
-      github: "https://github.com/kirankushal22",
+      github: "https://github.com/kirankushal2210",
       linkedin: "https://linkedin.com/in/MunigondaKiran",
     },
     summary:
@@ -93,7 +93,7 @@ export const RESUME_DATA = {
         "A FastAPI backend streams each agent's steps to the Next.js front end over Server-Sent Events.",
       ],
       metrics: [],
-      repoUrl: "https://github.com/kirankushal22/topicpilot-agentic-rag",
+      repoUrl: "https://github.com/kirankushal2210/Multi-agent-research-system",
     },
     {
       id: "ai-news",
@@ -112,7 +112,7 @@ export const RESUME_DATA = {
         "Runs in Docker, with dependencies pinned by UV.",
       ],
       metrics: [],
-      repoUrl: "https://github.com/kirankushal22/ai-news4u",
+      repoUrl: "https://github.com/kirankushal2210/ai-news-app",
     },
     {
       id: "healthos",
@@ -149,7 +149,7 @@ export const RESUME_DATA = {
         "Docker images and a GitHub Actions pipeline for builds.",
       ],
       metrics: [],
-      repoUrl: "https://github.com/kirankushal22/ai-tools-discovery",
+      repoUrl: "https://github.com/kirankushal2210",
     },
     {
       id: "garbage-logistics",
@@ -168,7 +168,7 @@ export const RESUME_DATA = {
         "My B.Tech capstone project, graded O (Outstanding).",
       ],
       metrics: [],
-      repoUrl: "https://github.com/kirankushal22/garbage-logistics-qr",
+      repoUrl: "https://github.com/kirankushal2210",
     },
     {
       id: "phd-portal",

@@ -89,7 +89,7 @@ export default function FolioResumeProjects() {
         "Experiments fine-tuning a smaller model with PyTorch and PEFT for regional food analysis, served with vLLM.",
         "A deterministic calculator that runs beside the AI and keeps calorie and macro targets inside safe bounds, whatever the model says.",
       ],
-      repoUrl: "https://github.com/kirankushal22",
+      repoUrl: "https://github.com/kirankushal2210",
     },
     {
       id: "agentic-news",
@@ -120,7 +120,7 @@ export default function FolioResumeProjects() {
         "Summarise and rank: a LangChain workflow with GPT-4o writes a short summary per item, and each item is scored against a user profile to sort the feed.",
         "The whole thing runs in Docker, with dependencies pinned by UV so a run is the same on any machine.",
       ],
-      repoUrl: "https://github.com/kirankushal22",
+      repoUrl: "https://github.com/kirankushal2210/ai-news-app",
     },
     {
       id: "municipal-qr",
@@ -142,7 +142,7 @@ export default function FolioResumeProjects() {
         "An offline-first scanning app in Java and QML with a local SQLite store, plus the audit log and the API it syncs to.",
         "B.Tech capstone project, graded O (Outstanding).",
       ],
-      repoUrl: "https://github.com/kirankushal22",
+      repoUrl: "https://github.com/kirankushal2210",
     },
     {
       id: "phd-portal",
@@ -163,7 +163,7 @@ export default function FolioResumeProjects() {
         "The React front end with Tailwind styling.",
         "Faceted filters and multi-part file uploads, wired to the backend team's API.",
       ],
-      repoUrl: "https://github.com/kirankushal22",
+      repoUrl: "https://github.com/kirankushal2210",
     },
   ];
 

@@ -163,12 +163,12 @@ export default function ArchitecturalFooter() {
                     <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </a>
                   <a
-                    href="https://github.com/kirankushal22"
+                    href="https://github.com/kirankushal2210"
                     target="_blank"
                     rel="noreferrer"
                     className="text-neutral-300 hover:text-white flex items-center gap-1.5 transition-colors group"
                   >
-                    <span>github.com/kirankushal22</span>
+                    <span>github.com/kirankushal2210</span>
                     <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </a>
                 </div>
