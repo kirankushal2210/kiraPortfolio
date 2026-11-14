@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useModalDismiss } from "@/lib/useModalDismiss";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowLeft, 
@@ -34,105 +35,105 @@ interface DemoItem {
 const DEMO_ITEMS: DemoItem[] = [
   {
     id: "healthos",
-    title: "HealthOS Mobile Application",
-    client: "Healthcare & Clinical Client",
-    category: "React Native + Expo Mobile App",
+    title: "HealthOS",
+    client: "Personal project",
+    category: "React Native + Expo prototype",
     description:
-      "Engineered an offline-first biological telemetry OS with real-time biometric intake, sub-200ms diagnostic latency, and 60-FPS rendering across complex diagnostic charts.",
+      "An offline-first health app prototype covering nutrition, training, recovery and an AI coach that answers from research papers.",
     videoSrc: "/videos/healthos.mp4",
-    posterSrc: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80",
-    tech: ["React Native", "Expo", "TypeScript", "Mobile UI/UX", "REST APIs"],
+    posterSrc: "/images/posters/healthos.jpg",
+    tech: ["React Native", "Expo", "Node.js", "PostgreSQL", "LangChain", "Pinecone"],
     deliverables: [
-      "Offline SQLite WASM database sync with 0 dropped packets",
-      "Dynamic biometric charting running at 60 FPS on mobile chips",
-      "Full HIPAA-compliant encrypted client profile storage"
+      "A 16-question onboarding that sets each person's daily targets",
+      "Hybrid retrieval over research papers for the coach's answers",
+      "A rules-based calculator that keeps calorie and macro targets in safe bounds"
     ],
-    clientOutcome: "Validated with 200+ clinical intake records with sub-200ms roundtrip response."
+    clientOutcome: "Built the prototype end to end; its rules-first AI approach carried into Arcwell."
   },
   {
     id: "topicpilot",
-    title: "TopicPilot Autonomous Research",
-    client: "Enterprise Advisory Client",
-    category: "Applied AI & Agentic RAG",
+    title: "TopicPilot",
+    client: "Personal project",
+    category: "Multi-agent research assistant",
     description:
-      "Built a multi-agent consensus system querying thousands of clinical papers via Hybrid-RAG, reducing neuromuscular AI hallucinations to zero via Claude API.",
+      "A multi-agent research assistant that plans, searches, checks its sources and writes a cited brief, streaming each agent's steps as it works.",
     videoSrc: "/videos/multi-agent-research.mp4",
-    posterSrc: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80",
+    posterSrc: "/images/posters/multi-agent-research.jpg",
     tech: ["FastAPI", "Python", "LangChain", "OpenAI", "Next.js", "ChromaDB"],
     deliverables: [
-      "Multi-agent consensus pipeline (Planner, Critic, Synthesizer)",
-      "Hybrid-RAG engine scanning 10,000+ indexed PubMed dissertations",
-      "Deterministic AST validation layer preventing clinical hallucinations"
+      "Four agents in turn: Planner → Searcher → Critic → Writer",
+      "Search results stored in a temporary ChromaDB index",
+      "Agent steps streamed to the Next.js front end over Server-Sent Events"
     ],
-    clientOutcome: "Sustained a verified 0.0% hallucination drift across benchmarked advisory trials."
+    clientOutcome: "Built the FastAPI backend, the agent workflow and the streaming front end."
   },
   {
     id: "ai-news",
-    title: "AI News & Intelligence Aggregator",
-    client: "Tech Media Client",
-    category: "Real-Time AI Ingestion",
+    title: "AI news aggregator",
+    client: "Personal project",
+    category: "Scraping + summarisation pipeline",
     description:
-      "Automated end-to-end data pipeline scraping 100+ sources via Webshare proxies and Docling, aggregating 5,000+ weekly technical data points into high-density summaries.",
+      "A pipeline that scrapes AI news from blogs, RSS feeds and YouTube transcripts and turns it into ranked daily summaries.",
     videoSrc: "/videos/ai-news-aggregator.mp4",
-    posterSrc: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80",
-    tech: ["React.js", "Tailwind CSS", "Next.js", "RESTful APIs", "Node.js"],
+    posterSrc: "/images/posters/ai-news-aggregator.jpg",
+    tech: ["Python", "Docker", "PostgreSQL", "LangChain", "GPT-4o", "Docling"],
     deliverables: [
-      "Distributed scraping engine bypassing rate limits with rotating residential proxies",
-      "Automated markdown summarization pipeline with semantic deduplication",
-      "High-density responsive feed rendering sub-100ms on desktop and mobile"
+      "Scrapers for blogs, RSS feeds and YouTube transcripts, through Webshare proxies",
+      "Docling parsing and a GPT-4o summary for each item",
+      "Items scored against a reader profile and sorted into a daily feed"
     ],
-    clientOutcome: "Aggregates over 5,000 weekly intelligence reports automatically with zero manual triage."
+    clientOutcome: "Built the pipeline in Docker with PostgreSQL storage and a ranked feed."
   },
   {
     id: "real-estate",
-    title: "Narsimha Luxury Real Estate",
-    client: "Commercial Real Estate Client",
-    category: "Interactive Property Discovery",
+    title: "Real estate site",
+    client: "Client website",
+    category: "Property listings site",
     description:
-      "Engineered an aerial drone tour platform and interactive boundary mapping suite with frictionless listing filters and responsive property portfolios.",
+      "Property listings with drone-tour video, plot boundary maps, filters and a WhatsApp lead form.",
     videoSrc: "/videos/real-estate.mp4",
-    posterSrc: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
-    tech: ["React.js", "Tailwind CSS", "TypeScript", "Next.js", "REST APIs"],
+    posterSrc: "/images/posters/real-estate.jpg",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS"],
     deliverables: [
-      "Smooth 4K video background streaming with smart lazy-load buffering",
-      "Interactive boundary coordinates mapping with dynamic parcel overlays",
-      "Custom lead generation form integrated with direct WhatsApp & CRM webhooks"
+      "Drone-tour video for each property",
+      "Plot boundary maps and listing filters",
+      "A lead form that opens a WhatsApp chat"
     ],
-    clientOutcome: "Boosted high-net-worth investor engagement by 3.4x during initial property launch."
+    clientOutcome: "Delivered the site with listings, drone-tour video and a WhatsApp lead form."
   },
   {
     id: "ngo-platform",
-    title: "Community Outreach & NGO Platform",
-    client: "Faith Organization & NGO Client",
-    category: "Non-Profit Community Platform",
+    title: "Church and NGO platform",
+    client: "Client website",
+    category: "Community website",
     description:
-      "Developed high-traffic React workflows for project indexing, research asset downloads, and responsive donor storytelling with smooth API integration.",
+      "A community site with news, events, a media gallery and donation flows.",
     videoSrc: "/videos/church-and-ngo.mp4",
-    posterSrc: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80",
-    tech: ["React.js", "Next.js", "Tailwind CSS", "TypeScript", "HTML5 Video"],
+    posterSrc: "/images/posters/church-and-ngo.jpg",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS"],
     deliverables: [
-      "Zero cumulative layout shift (CLS) dynamic media gallery",
-      "Seamless multi-part contribution workflows with instant receipt generation",
-      "Full mobile-responsive community news and event calendar"
+      "News and events pages",
+      "A media gallery",
+      "Donation flows"
     ],
-    clientOutcome: "Supported over 12,000 monthly active community visitors with 99.9% uptime."
+    clientOutcome: "Delivered the site with news, events, a media gallery and donation pages."
   },
   {
     id: "creative-studio",
-    title: "Creative Studio & Brand Asset Showcase",
-    client: "Creative Agency Client",
-    category: "High-End Portfolio Showcase",
+    title: "Graphic design studio portfolio",
+    client: "Client website",
+    category: "Studio portfolio",
     description:
-      "Interactive studio portfolio emphasizing editorial typographic rhythm, custom video players, and smooth physics-driven transition states.",
+      "An editorial portfolio for a graphic design studio, with custom video players and page transitions.",
     videoSrc: "/videos/graphic-design-portfolio.mp4",
-    posterSrc: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1000&q=80",
-    tech: ["React.js", "Tailwind CSS", "CSS Grid", "HTML5 Video", "TypeScript"],
+    posterSrc: "/images/posters/graphic-design-portfolio.jpg",
+    tech: ["React", "TypeScript", "Framer Motion"],
     deliverables: [
-      "Custom HTML5 video engine with fluid hover scrubbing",
-      "Kinetic layout animations powered by Framer Motion",
-      "Ultra-crisp dark editorial aesthetic tailored for luxury visual showcases"
+      "Custom video players for the studio's work",
+      "Page transitions built with Framer Motion",
+      "An editorial layout for the studio's projects"
     ],
-    clientOutcome: "Secured tier-one brand design contracts for the creative agency within 30 days."
+    clientOutcome: "Delivered the portfolio with custom video players and page transitions."
   },
 ];
 
@@ -144,21 +145,29 @@ export default function ProjectDemosShowcase() {
   const [progress, setProgress] = useState(0);
   const [isFullTheatreOpen, setIsFullTheatreOpen] = useState(false);
 
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  // Tracked in state so the play/pause effect re-runs once AnimatePresence (mode="wait")
+  // has actually mounted the new demo's <video>, instead of acting on the old one.
+  const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null);
+  const setVideoRef = useCallback((el: HTMLVideoElement | null) => {
+    videoRef.current = el;
+    setVideoEl(el);
+  }, []);
   const activeDemo = DEMO_ITEMS[currentIndex];
 
-  // Auto-play video on hover in mini-theatre mode
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+  useModalDismiss(isFullTheatreOpen, () => setIsFullTheatreOpen(false));
 
-    if (isHovered) {
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
+  // Auto-play video on hover in mini-theatre mode (paused while the full theatre is open)
+  useEffect(() => {
+    if (!videoEl) return;
+
+    if (isHovered && !isFullTheatreOpen) {
+      videoEl.play().then(() => setIsPlaying(true)).catch(() => {});
     } else {
-      video.pause();
+      videoEl.pause();
       setIsPlaying(false);
     }
-  }, [isHovered, currentIndex]);
+  }, [isHovered, isFullTheatreOpen, videoEl]);
 
   // Track playback progress
   const handleTimeUpdate = () => {
@@ -176,8 +185,7 @@ export default function ProjectDemosShowcase() {
       videoRef.current.pause();
       setIsPlaying(false);
     } else {
-      videoRef.current.play();
-      setIsPlaying(true);
+      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
     }
   };
 
@@ -207,14 +215,14 @@ export default function ProjectDemosShowcase() {
       <div className="w-full max-w-5xl mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-black/10 pb-6">
         <div>
           <span className="text-[11px] font-sans font-bold tracking-widest text-coral uppercase block">
-            SECTION 04.5 // CLIENT COMMISSIONS &amp; DEPLOYMENTS
+            Section 04 · Client websites and demos
           </span>
           <h2 className="text-3xl md:text-5xl font-black tracking-tight mt-1 text-[#121212]">
-            Live Production Demos.
+            Project demos.
           </h2>
         </div>
         <p className="text-xs font-sans font-medium text-neutral-500 max-w-xs tracking-wide">
-          Hover over the screen to activate <span className="font-semibold text-[#121212]">Mini-Theatre Mode</span>. Stream verified client builds in high definition.
+          Hover over the screen to <span className="font-semibold text-[#121212]">play the demo</span>. Click to watch it full size.
         </p>
       </div>
 
@@ -255,9 +263,9 @@ export default function ProjectDemosShowcase() {
 
             {/* Top Bar: Mini Theatre Status Pill & Fullscreen Trigger */}
             <div className="absolute top-4 inset-x-4 z-30 flex items-center justify-between pointer-events-auto">
-              <span className="text-[10px] font-mono font-bold tracking-wider uppercase px-3 py-1.5 rounded-full bg-black/80 text-coral backdrop-blur-md border border-white/15 shadow-lg flex items-center gap-1.5">
-                <span className={`w-1.5 h-1.5 rounded-full bg-coral ${isHovered ? "animate-ping" : ""}`} />
-                {isHovered ? "MINI-THEATRE ACTIVE" : activeDemo.category}
+              <span className="text-[10px] font-mono font-bold tracking-wider uppercase px-3 py-1.5 rounded-full bg-black/80 text-coral border border-white/15 shadow-lg flex items-center gap-1.5">
+                <span className={`w-1.5 h-1.5 rounded-full bg-coral ${isHovered ? "" : ""}`} />
+                {isHovered ? "Now playing" : activeDemo.category}
               </span>
 
               <button
@@ -265,8 +273,8 @@ export default function ProjectDemosShowcase() {
                   e.stopPropagation();
                   setIsFullTheatreOpen(true);
                 }}
-                className="w-8 h-8 rounded-full bg-black/75 hover:bg-coral text-white flex items-center justify-center backdrop-blur-md border border-white/20 shadow-lg transition-colors cursor-pointer"
-                title="Open Full Cinema Mode"
+                className="w-8 h-8 rounded-full bg-black/75 hover:bg-coral text-white flex items-center justify-center border border-white/20 shadow-lg transition-colors cursor-pointer"
+                title="Watch full size"
               >
                 <Maximize2 className="w-3.5 h-3.5" />
               </button>
@@ -284,8 +292,9 @@ export default function ProjectDemosShowcase() {
               >
                 {activeDemo.videoSrc ? (
                   <video
-                    ref={videoRef}
+                    ref={setVideoRef}
                     src={activeDemo.videoSrc}
+                    preload="metadata"
                     poster={activeDemo.posterSrc}
                     playsInline
                     muted={isMuted}
@@ -331,12 +340,12 @@ export default function ProjectDemosShowcase() {
                     {isMuted ? <VolumeX className="w-3.5 h-3.5 text-neutral-400" /> : <Volume2 className="w-3.5 h-3.5 text-coral" />}
                   </button>
                   <span className="text-[10px] font-mono text-neutral-300">
-                    1080P PROD
+                    Demo video
                   </span>
                 </div>
 
                 <span className="text-[10px] font-mono text-coral hover:underline flex items-center gap-1">
-                  FULL THEATRE <Maximize2 className="w-2.5 h-2.5" />
+                  Full size <Maximize2 className="w-2.5 h-2.5" />
                 </span>
               </div>
             </div>
@@ -345,8 +354,8 @@ export default function ProjectDemosShowcase() {
             <div className={`absolute bottom-4 inset-x-4 z-20 flex items-center justify-center transition-opacity duration-300 ${
               isHovered ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}>
-              <span className="text-[10px] font-mono tracking-wider px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-neutral-300 border border-white/10 shadow flex items-center gap-1.5">
-                <Film className="w-3 h-3 text-coral" /> HOVER TO STREAM MINI-THEATRE
+              <span className="text-[10px] font-mono tracking-wider px-3 py-1 rounded-full bg-black/60 text-neutral-300 border border-white/10 shadow flex items-center gap-1.5">
+                <Film className="w-3 h-3 text-coral" /> Hover to play
               </span>
             </div>
           </motion.div>
@@ -441,7 +450,7 @@ export default function ProjectDemosShowcase() {
               className="ml-auto btn-liquid-glass px-4 py-2 text-xs flex items-center gap-1.5 text-neutral-900 border border-neutral-300 hover:border-black font-semibold cursor-pointer"
             >
               <Tv className="w-3.5 h-3.5 text-coral" />
-              <span>Full Theatre</span>
+              <span>Watch full size</span>
             </button>
           </div>
         </div>
@@ -452,14 +461,17 @@ export default function ProjectDemosShowcase() {
       <div className="w-full max-w-5xl mt-12 pt-8 border-t border-black/[0.08]">
         <div className="flex items-center justify-between mb-4">
           <span className="text-[11px] font-mono uppercase tracking-wider text-neutral-400">
-            AVAILABLE CLIENT BUILDS (SELECT TO PREVIEW)
+            All demos (select to preview)
           </span>
           <span className="text-[11px] font-mono text-neutral-400">
             0{currentIndex + 1} OF 0{DEMO_ITEMS.length}
           </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3"
+          onMouseLeave={() => setIsHovered(false)}
+        >
           {DEMO_ITEMS.map((item, idx) => (
             <button
               key={item.id}
@@ -480,7 +492,7 @@ export default function ProjectDemosShowcase() {
               <span className={`text-[9px] font-mono block uppercase truncate ${
                 currentIndex === idx ? "text-coral" : "text-neutral-400"
               }`}>
-                0{idx + 1} // {item.client.split(" ")[0]}
+                0{idx + 1} · {item.client.split(" ")[0]}
               </span>
               <p className="text-xs font-bold truncate mt-0.5">
                 {item.title}
@@ -497,7 +509,10 @@ export default function ProjectDemosShowcase() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-xl select-none"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 select-none"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${activeDemo.title} demo video`}
             onClick={() => setIsFullTheatreOpen(false)}
           >
             <motion.div
@@ -519,7 +534,7 @@ export default function ProjectDemosShowcase() {
                       {activeDemo.title}
                     </h3>
                     <span className="text-[10px] font-mono text-neutral-400 block">
-                      CINEMA THEATRE • {activeDemo.category}
+                      {activeDemo.client} · {activeDemo.category}
                     </span>
                   </div>
                 </div>
@@ -529,6 +544,7 @@ export default function ProjectDemosShowcase() {
                   <div className="hidden sm:flex items-center gap-1.5">
                     <button
                       onClick={prev}
+                      aria-label="Previous demo"
                       className="p-1.5 rounded-full bg-white/5 hover:bg-white/15 text-white transition-colors"
                     >
                       <ArrowLeft className="w-4 h-4" />
@@ -538,6 +554,7 @@ export default function ProjectDemosShowcase() {
                     </span>
                     <button
                       onClick={next}
+                      aria-label="Next demo"
                       className="p-1.5 rounded-full bg-white/5 hover:bg-white/15 text-white transition-colors"
                     >
                       <ArrowRight className="w-4 h-4" />
@@ -546,6 +563,7 @@ export default function ProjectDemosShowcase() {
 
                   <button
                     onClick={() => setIsFullTheatreOpen(false)}
+                    aria-label="Close theatre"
                     className="p-2 rounded-full bg-white/5 hover:bg-white/15 text-neutral-400 hover:text-white transition-colors ml-2"
                   >
                     <X className="w-5 h-5" />
@@ -557,6 +575,7 @@ export default function ProjectDemosShowcase() {
               <div className="relative w-full aspect-video bg-black flex items-center justify-center overflow-hidden">
                 {activeDemo.videoSrc ? (
                   <video
+                    key={activeDemo.id}
                     src={activeDemo.videoSrc}
                     poster={activeDemo.posterSrc}
                     controls
@@ -578,7 +597,7 @@ export default function ProjectDemosShowcase() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
                     <span className="text-[10px] font-mono text-coral uppercase tracking-wider block">
-                      CLIENT OUTCOME
+                      What I delivered
                     </span>
                     <p className="text-sm font-semibold text-white mt-0.5">
                       {activeDemo.clientOutcome}

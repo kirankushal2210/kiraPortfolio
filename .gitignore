@@ -31,3 +31,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# review screenshots
+/review/
+.claude/settings.local.json
+/docs/
+/.claude/

@@ -16,35 +16,35 @@ interface StackCard {
 const STACKS: StackCard[] = [
   {
     id: "ai-ml",
-    tag: "STACK_01 // INTELLIGENCE",
-    title: "AI & Machine Learning Systems",
-    subtitle: "Autonomous multi-agent orchestration, clinical Hybrid-RAG, and vLLM inference.",
+    tag: "AI",
+    title: "AI and machine learning",
+    subtitle: "Multi-agent workflows, retrieval over documents, and some fine-tuning with PEFT.",
     gradient: "from-[#020B14] via-[#06243A] to-[#00F0FF]/40",
-    skills: ["Python (UV)", "PyTorch", "LangChain", "LlamaIndex", "Hugging Face", "vLLM", "Pinecone", "Claude API", "OpenAI GPT-4o"],
+    skills: ["Claude API", "OpenAI", "Groq", "LangChain", "LlamaIndex", "ChromaDB", "Pinecone", "PyTorch", "PEFT", "vLLM"],
   },
   {
     id: "frontend",
-    tag: "STACK_02 // INTERFACE",
-    title: "Frontend & Mobile Architecture",
-    subtitle: "Strict 60-FPS reactive interfaces, dynamic telemetry, and cross-platform UX.",
+    tag: "Front end",
+    title: "Web and mobile front end",
+    subtitle: "Web apps in Next.js and Android apps in React Native with Expo.",
     gradient: "from-[#140207] via-[#3B0719] to-[#FF3B69]/50",
-    skills: ["React Native", "React.js", "Next.js", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Framer Motion"],
+    skills: ["TypeScript", "React", "Next.js", "React Native", "Expo", "Tailwind CSS", "Framer Motion"],
   },
   {
     id: "backend",
-    tag: "STACK_03 // DISTRIBUTED",
-    title: "Backend & Database Engineering",
-    subtitle: "High-throughput asynchronous APIs, relational schemas, and sub-200ms latency.",
+    tag: "Back end",
+    title: "Back end and databases",
+    subtitle: "APIs, Postgres schemas, row-level security and the tests that prove it.",
     gradient: "from-[#020514] via-[#0A1647] to-[#2B6CB0]/40",
-    skills: ["Node.js", "Express.js", "FastAPI", "PostgreSQL", "SQLite", "SSE", "RESTful Architecture"],
+    skills: ["Node.js", "Python", "FastAPI", "PostgreSQL", "Supabase", "SQLite", "MongoDB"],
   },
   {
     id: "devops",
-    tag: "STACK_04 // INFRASTRUCTURE",
-    title: "DevOps & Automation",
-    subtitle: "Containerized deployment pipelines, proxy rotation, and headless document parsing.",
+    tag: "Infra",
+    title: "Infrastructure and tooling",
+    subtitle: "Docker, CI builds and deploys, plus Claude Code and Codex for day-to-day building.",
     gradient: "from-[#080B10] via-[#102229] to-[#20B2AA]/40",
-    skills: ["Docker", "GitHub Actions", "Git", "Linux", "Webshare Proxies", "Docling", "Vercel"],
+    skills: ["Docker", "GitHub Actions", "AWS", "Vercel", "Linux", "Claude Code", "Codex"],
   },
 ];
 
@@ -60,14 +60,14 @@ export default function TechnicalArsenalCoverflow() {
       <div className="w-full max-w-6xl px-6 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-neutral-800/80 pb-6">
         <div>
           <span className="text-[11px] font-sans font-medium tracking-widest text-neutral-400 uppercase">
-            SECTION 06 // TECHNICAL ARSENAL
+            06 · Stack
           </span>
           <h2 className="text-4xl md:text-5xl font-light tracking-tight mt-1 text-white">
-            Categorized Engineering Stacks
+            What I build with
           </h2>
         </div>
         <p className="text-xs font-sans font-medium text-neutral-400 max-w-sm tracking-wide">
-          Zero bloat. Precision-selected tools and frameworks for enterprise AI agents, mobile performance, and distributed systems.
+          The tools I use in my own projects, grouped by where they sit.
         </p>
       </div>
 
@@ -98,7 +98,7 @@ export default function TechnicalArsenalCoverflow() {
               }}
               transition={{ type: "spring", stiffness: 260, damping: 28 }}
               style={{ transformStyle: "preserve-3d" }}
-              className="absolute w-[86vw] max-w-[540px] aspect-[16/10] rounded-2xl md:rounded-3xl cursor-pointer p-8 flex flex-col justify-between border border-white/10 shadow-2xl backdrop-blur-md overflow-hidden select-none"
+              className="absolute w-[86vw] max-w-[540px] aspect-[16/10] rounded-2xl md:rounded-3xl cursor-pointer p-8 flex flex-col justify-between border border-white/10 shadow-2xl overflow-hidden select-none"
             >
               {/* Mesh Layer */}
               <div className={`absolute inset-0 bg-gradient-to-tr ${stack.gradient} opacity-90`} />

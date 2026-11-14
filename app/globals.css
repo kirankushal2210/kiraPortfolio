@@ -55,140 +55,16 @@
 }
 
 /* ========================================================================= */
-/* LIQUID METAL DESIGN SYSTEM (Chromatic Mercury / Polished Chrome Rim)     */
+/* BUTTONS — plain pills: 1px border, no chrome rims, no glow, no zoom.      */
+/* The old class names are kept so every component picks this up.           */
 /* ========================================================================= */
 
 @layer components {
-  /* Primary Liquid Metal: Liquid Chrome Rim + Domed Obsidian Core (Pixel-matched to reference) */
+  .btn-solid,
   .btn-liquid-metal,
-  .btn-liquid-glass {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    background: 
-      radial-gradient(130% 105% at 50% 0%, #1A1A22 0%, #0A0A0D 62%, #050507 100%) padding-box,
-      linear-gradient(
-        135deg,
-        #FFFFFF 0%,
-        #94A3B8 14%,
-        #FFFFFF 26%,
-        #1E232F 42%,
-        #F5D0A9 56%, /* chromatic liquid gold specular flare */
-        #FFFFFF 70%,
-        #475569 84%,
-        #E2E8F0 100%
-      ) border-box;
-    border: 2px solid transparent;
-    color: #E4E4E7 !important;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    box-shadow: 
-      0 16px 36px -8px rgba(0, 0, 0, 0.85),
-      0 6px 14px -3px rgba(0, 0, 0, 0.6),
-      inset 0 1px 1px rgba(255, 255, 255, 0.3),
-      inset 0 -2px 3px rgba(0, 0, 0, 0.7);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .btn-liquid-metal:hover,
-  .btn-liquid-glass:hover {
-    background: 
-      radial-gradient(130% 105% at 50% 0%, #24242F 0%, #0E0E14 62%, #07070A 100%) padding-box,
-      linear-gradient(
-        135deg,
-        #FFFFFF 0%,
-        #CBD5E1 14%,
-        #FFFFFF 28%,
-        #334155 44%,
-        #FDE68A 58%, /* intensified molten gold reflection */
-        #FFFFFF 72%,
-        #64748B 86%,
-        #FFFFFF 100%
-      ) border-box;
-    color: #FFFFFF !important;
-    box-shadow: 
-      0 22px 48px -8px rgba(0, 0, 0, 0.95),
-      0 8px 18px -4px rgba(0, 0, 0, 0.7),
-      0 0 24px -2px rgba(255, 255, 255, 0.16),
-      inset 0 1.5px 1.5px rgba(255, 255, 255, 0.45),
-      inset 0 -2px 3px rgba(0, 0, 0, 0.7);
-    transform: translateY(-1.5px) scale(1.02);
-  }
-
-  .btn-liquid-metal:active,
-  .btn-liquid-glass:active {
-    transform: translateY(1px) scale(0.98);
-    box-shadow: 
-      0 6px 16px -4px rgba(0, 0, 0, 0.8),
-      inset 0 1.5px 2px rgba(0, 0, 0, 0.8);
-  }
-
-  /* Dark Liquid Metal: Slate Chrome Rim for Secondary Controls */
+  .btn-liquid-glass,
   .btn-liquid-metal-dark,
-  .btn-liquid-glass-dark {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    background: 
-      radial-gradient(130% 100% at 50% 0%, #16161D 0%, #08080B 65%, #030304 100%) padding-box,
-      linear-gradient(
-        135deg,
-        #94A3B8 0%,
-        #334155 25%,
-        #CBD5E1 48%,
-        #0F172A 68%,
-        #64748B 85%,
-        #94A3B8 100%
-      ) border-box;
-    border: 1.5px solid transparent;
-    color: #A1A1AA !important;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    box-shadow: 
-      0 12px 28px -6px rgba(0, 0, 0, 0.8),
-      inset 0 1px 1px rgba(255, 255, 255, 0.15),
-      inset 0 -1.5px 2px rgba(0, 0, 0, 0.7);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .btn-liquid-metal-dark:hover,
-  .btn-liquid-glass-dark:hover {
-    background: 
-      radial-gradient(130% 100% at 50% 0%, #1F1F28 0%, #0C0C10 65%, #050507 100%) padding-box,
-      linear-gradient(
-        135deg,
-        #CBD5E1 0%,
-        #475569 25%,
-        #FFFFFF 48%,
-        #1E293B 68%,
-        #94A3B8 85%,
-        #CBD5E1 100%
-      ) border-box;
-    color: #FFFFFF !important;
-    box-shadow: 
-      0 16px 36px -6px rgba(0, 0, 0, 0.9),
-      0 0 18px rgba(255, 255, 255, 0.1),
-      inset 0 1.5px 1.5px rgba(255, 255, 255, 0.25);
-    transform: translateY(-1.5px) scale(1.02);
-  }
-
-  .btn-liquid-metal-dark:active,
-  .btn-liquid-glass-dark:active {
-    transform: translateY(1px) scale(0.98);
-    box-shadow: 
-      0 4px 12px -2px rgba(0, 0, 0, 0.8),
-      inset 0 1px 2px rgba(0, 0, 0, 0.8);
-  }
-
-  /* Coral Liquid Metal: Molten Copper & Liquid Chrome Fusion */
+  .btn-liquid-glass-dark,
   .btn-liquid-metal-coral,
   .btn-liquid-glass-coral {
     position: relative;
@@ -196,60 +72,66 @@
     align-items: center;
     justify-content: center;
     border-radius: 9999px;
-    background: 
-      radial-gradient(130% 105% at 50% 0%, #2A0E06 0%, #130602 62%, #080201 100%) padding-box,
-      linear-gradient(
-        135deg,
-        #FFFFFF 0%,
-        #FF8A65 16%,
-        #FFFFFF 30%,
-        #3E1B10 46%,
-        #FFD54F 60%, /* Molten gold-coral reflection */
-        #FFFFFF 74%,
-        #E64A19 88%,
-        #FFFFFF 100%
-      ) border-box;
-    border: 2px solid transparent;
-    color: #FFFFFF !important;
-    font-weight: 600;
+    border: 1px solid transparent;
+    font-weight: 500;
     letter-spacing: -0.01em;
-    box-shadow: 
-      0 16px 36px -6px rgba(255, 87, 34, 0.35),
-      0 6px 14px -3px rgba(0, 0, 0, 0.6),
-      inset 0 1px 1.5px rgba(255, 255, 255, 0.4),
-      inset 0 -2px 3px rgba(0, 0, 0, 0.7);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
     user-select: none;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
   }
 
+  /* Primary: the one solid button (hero "Download resume") */
+  .btn-solid {
+    background: #f4f4f5;
+    color: #0a0a0a !important;
+  }
+  .btn-solid:hover { background: #ffffff; }
+
+  /* Default: dark pill with a hairline border (works on dark and white sections) */
+  .btn-liquid-metal,
+  .btn-liquid-glass {
+    background: #141416;
+    border-color: rgba(255, 255, 255, 0.14);
+    color: #e4e4e7 !important;
+  }
+  .btn-liquid-metal:hover,
+  .btn-liquid-glass:hover {
+    background: #1c1c1f;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff !important;
+  }
+
+  /* Secondary: outline only */
+  .btn-liquid-metal-dark,
+  .btn-liquid-glass-dark {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #a1a1aa !important;
+  }
+  .btn-liquid-metal-dark:hover,
+  .btn-liquid-glass-dark:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #ffffff !important;
+  }
+
+  /* Accent: flat coral, dark text (white on #FF5722 fails contrast at 3:1) */
+  .btn-liquid-metal-coral,
+  .btn-liquid-glass-coral {
+    background: #ff5722;
+    color: #0a0a0a !important;
+    font-weight: 600;
+  }
   .btn-liquid-metal-coral:hover,
-  .btn-liquid-glass-coral:hover {
-    background: 
-      radial-gradient(130% 105% at 50% 0%, #3A1308 0%, #1B0803 62%, #0C0301 100%) padding-box,
-      linear-gradient(
-        135deg,
-        #FFFFFF 0%,
-        #FFA270 16%,
-        #FFFFFF 30%,
-        #4E2114 46%,
-        #FFE082 60%,
-        #FFFFFF 74%,
-        #FF5722 88%,
-        #FFFFFF 100%
-      ) border-box;
-    box-shadow: 
-      0 22px 48px -6px rgba(255, 87, 34, 0.5),
-      0 0 25px rgba(255, 87, 34, 0.25),
-      inset 0 1.5px 2px rgba(255, 255, 255, 0.55);
-    transform: translateY(-1.5px) scale(1.02);
-  }
+  .btn-liquid-glass-coral:hover { background: #ff7043; }
 
-  .btn-liquid-metal-coral:active,
-  .btn-liquid-glass-coral:active {
-    transform: translateY(1px) scale(0.98);
-    box-shadow: 
-      0 6px 16px -2px rgba(255, 87, 34, 0.3),
-      inset 0 1.5px 2px rgba(0, 0, 0, 0.8);
+  .btn-solid:focus-visible,
+  .btn-liquid-metal:focus-visible,
+  .btn-liquid-glass:focus-visible,
+  .btn-liquid-metal-dark:focus-visible,
+  .btn-liquid-glass-dark:focus-visible,
+  .btn-liquid-metal-coral:focus-visible,
+  .btn-liquid-glass-coral:focus-visible {
+    outline: 2px solid #ff5722;
+    outline-offset: 2px;
   }
 }

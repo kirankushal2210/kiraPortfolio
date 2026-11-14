@@ -40,10 +40,10 @@ export default function FolioResumeModal({ isOpen, onClose }: FolioResumeModalPr
             </div>
             <div>
               <h3 className="text-xs sm:text-sm font-semibold tracking-wide text-white">
-                Munigonda Kiran — Official ATS Resume
+                Munigonda Kiran — Resume
               </h3>
               <span className="text-[10px] font-mono text-neutral-400 block">
-                Verified 2-Page Technical Master • Full-Stack &amp; AI Systems
+                PDF • Full-stack and AI engineering
               </span>
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function FolioResumeModal({ isOpen, onClose }: FolioResumeModalPr
           <iframe
             src="/Munigonda_Kiran_Resume.pdf#toolbar=1"
             className="w-full h-full border-none"
-            title="Munigonda Kiran Official Resume"
+            title="Munigonda Kiran resume"
           />
         </div>
       </div>

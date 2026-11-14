@@ -18,7 +18,7 @@ export default function FolioClients() {
       <div className="w-[92%] max-w-[1400px] mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8">
         {/* Label (Left): Ecosystems & Tech I Work With */}
         <div className="font-sans font-medium text-[12px] tracking-widest text-[#A0A0A0] uppercase whitespace-nowrap">
-          Ecosystems &amp; Tech I Work With
+          Tools I work with
         </div>
 
         {/* Ticker/Logos (Right): Clean horizontal white-monochrome icon strip */}

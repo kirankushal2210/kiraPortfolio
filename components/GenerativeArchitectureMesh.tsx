@@ -19,7 +19,7 @@ export default function GenerativeArchitectureMesh() {
     let lastMouseTime = 0;
 
     const setupCanvas = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = 1;
       const rect = canvas.getBoundingClientRect();
       width = rect.width || canvas.clientWidth || (section ? section.clientWidth : window.innerWidth);
       height = rect.height || canvas.clientHeight || (section ? section.clientHeight : window.innerHeight);
@@ -35,6 +35,10 @@ export default function GenerativeArchitectureMesh() {
       ctx.scale(dpr, dpr);
     };
 
+    let running = false;
+    let isOnScreen = false;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     setupCanvas();
 
     // Resize observer to ensure canvas always matches the full height of section 4
@@ -42,12 +46,14 @@ export default function GenerativeArchitectureMesh() {
     if (typeof ResizeObserver !== "undefined") {
       resizeObserver = new ResizeObserver(() => {
         setupCanvas();
+        if (!running) render(); // keep a static frame when not animating
       });
       if (section) resizeObserver.observe(section);
     }
 
     const handleWindowResize = () => {
       setupCanvas();
+      if (!running) render();
     };
     window.addEventListener("resize", handleWindowResize);
 
@@ -85,25 +91,60 @@ export default function GenerativeArchitectureMesh() {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     let time = 0;
-    const lineCount = 56;
+    const lineCount = 40;
 
-    const render = () => {
-      time += 0.012;
+    const start = () => {
+      if (running || reducedMotion) return;
+      running = true;
+      animationFrameId = requestAnimationFrame(render);
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(animationFrameId);
+    };
+    const syncRunning = () => {
+      if (isOnScreen && !document.hidden) start();
+      else stop();
+    };
+
+    // Only animate while the section is visible and the tab is in the foreground
+    const io = new IntersectionObserver(([entry]) => {
+      isOnScreen = entry.isIntersecting;
+      syncRunning();
+    });
+    io.observe(canvas);
+    document.addEventListener("visibilitychange", syncRunning);
+
+    let lastFrame = 0;
+    const render = (now: number = performance.now()) => {
+      if (running && now - lastFrame < 33) {
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
+      lastFrame = now;
+      time += 0.024;
 
       // Smooth lerp node toward target coordinates
-      nodeX += (targetX - nodeX) * 0.08;
-      nodeY += (targetY - nodeY) * 0.08;
+      nodeX += (targetX - nodeX) * 0.15;
+      nodeY += (targetY - nodeY) * 0.15;
 
       ctx.clearRect(0, 0, width, height);
 
       if (width <= 0 || height <= 0) {
-        animationFrameId = requestAnimationFrame(render);
+        if (running) animationFrameId = requestAnimationFrame(render);
         return;
       }
 
       const spacing = width / (lineCount - 1);
-      const segments = Math.max(80, Math.floor(height / 20));
+      const segments = Math.max(60, Math.floor(height / 32));
       const segmentHeight = height / segments;
+
+      // Only compute/stroke the segments inside the viewport (+ a small margin)
+      const rect = canvas.getBoundingClientRect();
+      const visTop = reducedMotion ? 0 : Math.max(0, -rect.top - 100);
+      const visBottom = reducedMotion ? height : Math.min(height, window.innerHeight - rect.top + 100);
+      const jStart = Math.max(0, Math.floor(visTop / segmentHeight));
+      const jEnd = Math.min(segments, Math.ceil(visBottom / segmentHeight));
 
       for (let i = 0; i < lineCount; i++) {
         const baseX = i * spacing;
@@ -115,7 +156,7 @@ export default function GenerativeArchitectureMesh() {
         const alpha = Math.max(0.09, (1 - distFromCenter * 0.65) * 0.42);
         ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
 
-        for (let j = 0; j <= segments; j++) {
+        for (let j = jStart; j <= jEnd; j++) {
           const y = j * segmentHeight;
 
           // Continuous harmonic wave from top to bottom of section 4
@@ -142,7 +183,7 @@ export default function GenerativeArchitectureMesh() {
 
           const currentX = baseX + wave1 + wave2 + gravityOffset;
 
-          if (j === 0) {
+          if (j === jStart) {
             ctx.moveTo(currentX, y);
           } else {
             ctx.lineTo(currentX, y);
@@ -153,25 +194,25 @@ export default function GenerativeArchitectureMesh() {
 
       // Draw the central white focal node
       ctx.save();
-      ctx.shadowColor = "#FFFFFF";
-      ctx.shadowBlur = 18;
       ctx.fillStyle = "#FFFFFF";
       ctx.beginPath();
       ctx.arc(nodeX, nodeY, 4.5, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
 
-      animationFrameId = requestAnimationFrame(render);
+      if (running) animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    render(); // one static frame (all that reduced-motion users get)
 
     return () => {
       window.removeEventListener("resize", handleWindowResize);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", handleScroll);
       if (resizeObserver) resizeObserver.disconnect();
-      cancelAnimationFrame(animationFrameId);
+      io.disconnect();
+      document.removeEventListener("visibilitychange", syncRunning);
+      stop();
     };
   }, []);
 

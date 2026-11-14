@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useModalDismiss } from "@/lib/useModalDismiss";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   GraduationCap, 
@@ -42,80 +43,67 @@ export default function TactileFolderSection() {
   const [hoveredFolder, setHoveredFolder] = useState<"edu" | "cert" | null>(null);
   const [selectedRecord, setSelectedRecord] = useState<DossierRecord | null>(null);
 
-  // Close modal on ESC key
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setSelectedRecord(null);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  // Close modal on ESC key + lock background scroll while open
+  useModalDismiss(selectedRecord !== null, () => setSelectedRecord(null));
 
   // Education Records
   const educationData: DossierRecord[] = [
     {
       id: "btech",
       type: "academic",
-      dossierCode: "ARCHIVE // EDU-01",
-      title: "B.Tech in Computer Science & Engineering",
+      dossierCode: "Education · 01",
+      title: "B.Tech in Computer Science and Engineering",
       issuer: "Malla Reddy University",
       score: "8.06 / 10",
-      scoreLabel: "Cumulative CGPA",
+      scoreLabel: "CGPA",
       year: "2020 — 2024",
       loc: "Hyderabad, Telangana, India",
-      badge: "Degree Conferred",
+      badge: "Degree",
       summary:
-        "Rigorous 4-year undergraduate specialization focused on Distributed Systems, Advanced Algorithm Engineering, Operating Systems, Machine Learning Architectures, and Full-Stack Engineering.",
+        "Four-year undergraduate degree in computer science and engineering.",
       highlights: [
-        "Major Capstone: Real-time Multi-Agent AI diagnostic & synthesis framework.",
-        "Core Coursework: Operating Systems, Database Management (PostgreSQL/NoSQL), Compilers, Distributed Networks.",
-        "Graduated with Distinction: 8.06 / 10 CGPA across 8 rigorous technical semesters.",
+        "Capstone: a QR garbage-collection tracking app with geo-fenced checkpoints and an audit log, graded O (Outstanding).",
+        "Final CGPA 8.06 / 10.",
       ],
-      skills: ["Distributed Systems", "Algorithms", "PostgreSQL", "Next.js", "AI Pipelines", "System Design"],
+      skills: ["Java", "QML", "SQLite", "REST APIs"],
       icon: <GraduationCap className="w-5 h-5 text-coral" />,
     },
     {
       id: "inter",
       type: "academic",
-      dossierCode: "ARCHIVE // EDU-02",
-      title: "Intermediate Education (MPC Stream)",
+      dossierCode: "Education · 02",
+      title: "Intermediate (MPC)",
       issuer: "Narayana Junior College",
       score: "873 / 1000",
-      scoreLabel: "Board Examination Score",
+      scoreLabel: "Board exam score",
       year: "2018 — 2020",
       loc: "Secunderabad, Telangana, India",
-      badge: "High Honors",
+      badge: "Intermediate",
       summary:
-        "Intensive senior secondary specialization in Higher Mathematics, Classical Mechanics & Physics, and Organic & Inorganic Chemistry under the Telangana State Board of Intermediate Education.",
+        "Senior secondary education in Mathematics, Physics and Chemistry (MPC).",
       highlights: [
-        "Advanced Calculus, Differential Equations, and Matrix Theory.",
-        "Electromagnetism, Optics, Thermodynamics, and Atomic Physics.",
-        "Scored 87.3% overall with top-bracket marks in pure mathematics.",
+        "Scored 873 / 1000 in the board examinations.",
       ],
-      skills: ["Higher Mathematics", "Calculus & Linear Algebra", "Classical Physics", "Analytical Logic"],
+      skills: ["Mathematics", "Physics", "Chemistry"],
       icon: <BookOpen className="w-5 h-5 text-amber-400" />,
     },
     {
       id: "ssc",
       type: "academic",
-      dossierCode: "ARCHIVE // EDU-03",
+      dossierCode: "Education · 03",
       title: "Secondary School Certificate (SSC)",
-      issuer: "Narayana e-Techno School",
+      issuer: "Narayana e-techno School",
       score: "9.3 / 10",
-      scoreLabel: "Cumulative CGPA",
+      scoreLabel: "CGPA",
       year: "2015 — 2018",
       loc: "Hyderabad, Telangana, India",
-      badge: "Top 5% Merit",
+      badge: "SSC",
       summary:
-        "Foundational STEM schooling with an emphasis on analytical reasoning, algorithmic problem solving, Olympiad mathematics, and foundational science laboratories.",
+        "Secondary schooling, completed with the Secondary School Certificate.",
       highlights: [
-        "Consistent Academic Honor Roll recipient across all assessment quarters.",
-        "Active participant in regional science exhibitions and mathematics quizzes.",
-        "Completed Board examinations with a prestigious 9.3 / 10 CGPA.",
+        "Final CGPA 9.3 / 10.",
       ],
-      skills: ["Foundational STEM", "Mathematical Reasoning", "Scientific Logic", "Technical Communication"],
+      skills: ["Mathematics", "Science"],
       icon: <Award className="w-5 h-5 text-emerald-400" />,
     },
   ];
@@ -125,127 +113,115 @@ export default function TactileFolderSection() {
     {
       id: "100xdevs",
       type: "certification",
-      dossierCode: "ACCRED // 100X-01",
-      title: "100xDevs Full Stack & Web3 Cohort",
-      issuer: "100xDevs (Mentored by Harkirat Singh)",
-      score: "Full Stack Mastery",
-      scoreLabel: "Cohort Certification",
-      year: "2023 — 2024",
-      loc: "Remote // Bengaluru, IN",
-      badge: "Full Stack & Web3",
+      dossierCode: "Certification · 01",
+      title: "MERN stack cohort",
+      issuer: "100xDevs",
+      score: "Completed",
+      scoreLabel: "Status",
+      year: "2024",
+      loc: "Online",
+      badge: "Cohort",
       summary:
-        "Intensive engineering cohort covering end-to-end production architecture: Next.js, TurboRepo, Docker, Redis queues, WebSockets, PostgreSQL with Prisma ORM, and decentralized smart contract integrations.",
+        "A full-stack web development cohort covering the MERN stack.",
       highlights: [
-        "Built production distributed systems with low-latency pub/sub pipelines.",
-        "Deployed microservices with Docker containerization and CI/CD pipelines.",
-        "Engineered real-time collaboration engines and asynchronous messaging backends.",
+        "Completed the cohort in 2024.",
       ],
-      skills: ["Next.js", "Docker", "PostgreSQL", "Prisma", "Redis Pub/Sub", "WebSockets", "DevOps"],
+      skills: ["MongoDB", "Express", "React", "Node.js"],
       icon: <Cpu className="w-5 h-5 text-amber-400" />,
     },
     {
       id: "aws",
       type: "certification",
-      dossierCode: "ACCRED // AWS-02",
+      dossierCode: "Certification · 02",
       title: "AWS Certified Cloud Practitioner",
-      issuer: "Amazon Web Services (AWS)",
-      score: "Cloud Certified",
-      scoreLabel: "Official Certification",
-      year: "2023",
-      loc: "Amazon Web Services Training",
-      badge: "AWS Certified",
+      issuer: "Amazon Web Services",
+      score: "Certified",
+      scoreLabel: "Status",
+      year: "2024",
+      loc: "Online",
+      badge: "Certification",
       summary:
-        "Validated fundamental cloud literacy and operational excellence across the AWS Cloud ecosystem, including compute, networking, security policies, and fault-tolerant architecture.",
+        "The entry-level AWS certification, covering core AWS services, security and billing.",
       highlights: [
-        "Demonstrated architectural mastery of EC2, S3, RDS, DynamoDB, and VPC networking.",
-        "Implemented secure identity governance via IAM policies, KMS encryption, and CloudWatch telemetry.",
-        "Designed cost-optimized, highly available multi-zone cloud topologies.",
+        "Passed the AWS Certified Cloud Practitioner exam in 2024.",
       ],
-      skills: ["AWS Cloud", "EC2 & S3", "IAM Security", "VPC Networking", "Lambda Serverless", "CloudWatch"],
+      skills: ["AWS"],
       icon: <Cloud className="w-5 h-5 text-sky-400" />,
     },
     {
       id: "genai",
       type: "certification",
-      dossierCode: "ACCRED // FCC-03",
-      title: "Generative AI Essentials Certification",
-      issuer: "FreeCodeCamp & DeepLearning Foundations",
-      score: "GenAI Certified",
-      scoreLabel: "Professional Certification",
+      dossierCode: "Certification · 03",
+      title: "Generative AI Essentials",
+      issuer: "freeCodeCamp",
+      score: "Completed",
+      scoreLabel: "Status",
       year: "2024",
-      loc: "Global Remote",
-      badge: "AI & Transformers",
+      loc: "Online",
+      badge: "Certification",
       summary:
-        "Deep technical certification on Large Language Model mechanics, fine-tuning methodologies, Retrieval-Augmented Generation (RAG) orchestration, and vector embedding indexing.",
+        "An introductory course on generative AI and large language models.",
       highlights: [
-        "Engineered LangChain and LangGraph autonomous workflows with tool-calling capabilities.",
-        "Configured Pinecone and pgvector indexing pipelines for real-time document query synthesis.",
-        "Evaluated model hallucinations and optimized prompt latency across production endpoints.",
+        "Completed in 2024.",
       ],
-      skills: ["LLM Architectures", "RAG Pipelines", "Vector Databases", "Prompt Engineering", "Autonomous Agents"],
+      skills: ["Generative AI", "LLMs"],
       icon: <Award className="w-5 h-5 text-emerald-400" />,
     },
     {
       id: "pitching",
       type: "honor",
-      dossierCode: "HONOR // UDB-04",
-      title: "1st Place Pitching Champion",
-      issuer: "UDBAVA Club ('Your Start Up Story')",
-      score: "1st Place (Gold)",
-      scoreLabel: "Statewide Pitch Victory",
+      dossierCode: "Award · 04",
+      title: "1st place, “Your Start Up Story” pitch competition",
+      issuer: "UDBAVA Club",
+      score: "1st place",
+      scoreLabel: "Result",
       year: "2023",
       loc: "Hyderabad, India",
-      badge: "1st Place Champion",
+      badge: "1st place",
       summary:
-        "Secured 1st Place overall against 25+ university venture teams by pitching an AI-native workflow automation architecture to a panel of venture capitalists and industry founders.",
+        "Won first place in a university startup pitch competition.",
       highlights: [
-        "Presented comprehensive financial model, GTM strategy, and technical viability blueprint.",
-        "Built and live-demoed a functional AI interactive MVP in front of the judge panel.",
-        "Awarded First Prize trophy and accelerator incubation mentorship.",
+        "Placed 1st in the “Your Start Up Story” competition run by UDBAVA Club.",
       ],
-      skills: ["Product Strategy", "Technical Pitching", "Business Modeling", "AI MVP Prototyping"],
+      skills: ["Pitching"],
       icon: <Trophy className="w-5 h-5 text-amber-300" />,
     },
     {
       id: "hackathon",
       type: "honor",
-      dossierCode: "HONOR // HVC-05",
-      title: "UI Hackathon Runner-Up",
-      issuer: "Havoc PC Build Website Competition",
-      score: "2nd Place (Silver)",
-      scoreLabel: "Hackathon Finalist",
+      dossierCode: "Award · 05",
+      title: "2nd place, UI hackathon (Havoc PC website)",
+      issuer: "UI Hackathon Society",
+      score: "2nd place",
+      scoreLabel: "Result",
       year: "2023",
-      loc: "National Hackathon",
-      badge: "2nd Place Award",
+      loc: "Hyderabad, India",
+      badge: "2nd place",
       summary:
-        "Designed and implemented a high-performance 3D interactive hardware configurator allowing custom PC enthusiasts to assemble, test thermal clearances, and budget components dynamically.",
+        "Placed second in a UI hackathon by designing and building a website for Havoc PC.",
       highlights: [
-        "Engineered smooth 60fps micro-animations and component compatibility verification algorithms.",
-        "Selected as 2nd Place Winner out of 40+ competitor submissions for visual and interactive fidelity.",
-        "Recognized by judges for exceptional component hierarchy and typography.",
+        "Placed 2nd for the Havoc PC website.",
       ],
-      skills: ["UI/UX Architecture", "Tailwind CSS", "Framer Motion", "Real-time State Systems"],
+      skills: ["UI design", "Front end"],
       icon: <Layout className="w-5 h-5 text-indigo-400" />,
     },
     {
       id: "esports",
       type: "honor",
-      dossierCode: "HONOR // ESP-06",
-      title: "Lead Esports Organizer & Director",
-      issuer: "University Championship League",
-      score: "100+ Attendees",
-      scoreLabel: "Tournament Leadership",
-      year: "2022 — 2023",
+      dossierCode: "Award · 06",
+      title: "Organised a university gaming tournament",
+      issuer: "University event society",
+      score: "About 100 players",
+      scoreLabel: "Turnout",
+      year: "2023",
       loc: "Hyderabad, India",
-      badge: "Event Leadership",
+      badge: "Organiser",
       summary:
-        "Orchestrated large-scale collegiate gaming championships, coordinating double-elimination brackets, live broadcasting feeds, shoutcaster synchronization, and sponsorship arrangements.",
+        "Organised a competitive gaming tournament at my university.",
       highlights: [
-        "Managed on-site network operations, low-latency LAN configurations, and team communications.",
-        "Directed a cross-functional crew of 15 members across stage tech, streaming, and referee duties.",
-        "Achieved 100% on-time match starts and zero technical outages over a 3-day competition.",
+        "About 100 players took part.",
       ],
-      skills: ["Team Leadership", "Live Broadcasting", "Event Production", "Crisis Management"],
+      skills: ["Event organising"],
       icon: <Gamepad2 className="w-5 h-5 text-rose-400" />,
     },
   ];
@@ -256,14 +232,14 @@ export default function TactileFolderSection() {
       <div className="w-full max-w-5xl mb-24 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-black/10 pb-6">
         <div>
           <span className="text-[11px] font-sans font-bold tracking-widest text-coral uppercase block">
-            SECTION 07 // PHYSICAL ARCHIVES
+            07 · Education
           </span>
           <h2 className="text-3xl md:text-5xl font-black tracking-tight mt-1 text-[#121212]">
-            Education &amp; Honors.
+            Education and awards.
           </h2>
         </div>
         <p className="text-xs font-sans font-medium text-neutral-500 max-w-xs tracking-wide">
-          Hover or tap any folder to fan out files. <span className="text-coral font-semibold">Click any document to inspect full credentials.</span>
+          Hover or tap a folder to open it. <span className="text-coral font-semibold">Click a card for details.</span>
         </p>
       </div>
 
@@ -282,7 +258,7 @@ export default function TactileFolderSection() {
             {/* Top Tab Cutout */}
             <div className="absolute -top-4 left-6 w-36 h-6 bg-gradient-to-b from-[#5c3a23] to-[#452917] rounded-t-xl border-t border-x border-[#8f5831]/70 flex items-center justify-center shadow-md">
               <span className="text-[10px] font-sans font-medium text-amber-200/90 uppercase tracking-widest font-medium">
-                DOSSIER-01 // EDU
+                Education
               </span>
             </div>
             {/* Brass eyelet accent */}
@@ -324,7 +300,7 @@ export default function TactileFolderSection() {
                     e.stopPropagation();
                     setSelectedRecord(item);
                   }}
-                  className="absolute left-0 right-0 p-4 rounded-xl bg-neutral-900/95 border border-white/20 shadow-2xl backdrop-blur-md space-y-2 cursor-pointer group/card transition-colors hover:bg-neutral-800/95"
+                  className="absolute left-0 right-0 p-4 rounded-xl bg-neutral-900/95 border border-white/20 shadow-2xl space-y-2 cursor-pointer group/card transition-colors hover:bg-neutral-800/95"
                 >
                   <div className="flex justify-between items-center text-[10px] font-sans font-medium text-neutral-400">
                     <span>
@@ -347,7 +323,7 @@ export default function TactileFolderSection() {
                       <span>{item.loc.split(",")[0]}</span>
                     </div>
                     <span className="text-[10px] font-sans font-medium text-coral font-medium underline opacity-0 group-hover/card:opacity-100 transition-opacity">
-                      Click to inspect dossier ↗
+                      View details ↗
                     </span>
                   </div>
                 </motion.div>
@@ -359,18 +335,18 @@ export default function TactileFolderSection() {
           <div className="absolute bottom-0 w-[340px] sm:w-[410px] lg:w-[440px] h-44 sm:h-48 bg-gradient-to-t from-[#201108] via-[#351e11] to-[#4a2b18] rounded-b-2xl rounded-t-xl border-b border-x border-[#734425]/70 border-t border-[#a16439]/50 shadow-[0_-6px_22px_rgba(0,0,0,0.65),inset_0_1px_1px_rgba(255,210,170,0.2)] flex flex-col justify-between p-6 z-30">
             <div className="flex justify-between items-center">
               <span className="text-[10px] font-sans font-medium tracking-widest text-amber-300/80 uppercase font-semibold">
-                ACADEMIC FOUNDATION
+                Education
               </span>
               <span className="text-[10px] font-sans font-medium px-2.5 py-0.5 rounded-full bg-[#1b0d06]/80 border border-amber-600/30 text-amber-200">
-                3 Verified Records
+                {educationData.length} records
               </span>
             </div>
             <div className="space-y-1">
               <h3 className="text-lg font-medium text-amber-50 tracking-tight">
-                Academic Degrees &amp; Grades
+                Degrees and grades
               </h3>
               <p className="text-xs font-sans font-medium text-amber-200/70 flex items-center gap-1.5">
-                <span>Click any record to inspect full dossier</span>
+                <span>Click a card for details</span>
                 <span className="text-coral">→</span>
               </p>
             </div>
@@ -389,7 +365,7 @@ export default function TactileFolderSection() {
             {/* Top Tab Cutout */}
             <div className="absolute -top-4 left-6 w-36 h-6 bg-gradient-to-b from-[#5c3a23] to-[#452917] rounded-t-xl border-t border-x border-[#8f5831]/70 flex items-center justify-center shadow-md">
               <span className="text-[10px] font-sans font-medium text-amber-200/90 uppercase tracking-wider font-medium">
-                DOSSIER-02 // HONORS
+                Awards
               </span>
             </div>
             {/* Brass eyelet accent */}
@@ -434,7 +410,7 @@ export default function TactileFolderSection() {
                     e.stopPropagation();
                     setSelectedRecord(item);
                   }}
-                  className="absolute left-0 right-0 p-3.5 rounded-xl bg-neutral-900/95 border border-white/20 shadow-2xl backdrop-blur-md flex items-center justify-between gap-3 cursor-pointer group/card transition-colors hover:bg-neutral-800/95"
+                  className="absolute left-0 right-0 p-3.5 rounded-xl bg-neutral-900/95 border border-white/20 shadow-2xl flex items-center justify-between gap-3 cursor-pointer group/card transition-colors hover:bg-neutral-800/95"
                 >
                   <div className="flex items-center gap-3 overflow-hidden">
                     <div className="p-2 rounded-lg bg-white/5 border border-white/10 flex-shrink-0 group-hover/card:border-coral/50 transition-colors">
@@ -464,18 +440,18 @@ export default function TactileFolderSection() {
           <div className="absolute bottom-0 w-[340px] sm:w-[410px] lg:w-[440px] h-44 sm:h-48 bg-gradient-to-t from-[#201108] via-[#351e11] to-[#4a2b18] rounded-b-2xl rounded-t-xl border-b border-x border-[#734425]/70 border-t border-[#a16439]/50 shadow-[0_-6px_22px_rgba(0,0,0,0.65),inset_0_1px_1px_rgba(255,210,170,0.2)] flex flex-col justify-between p-6 z-30">
             <div className="flex justify-between items-center">
               <span className="text-[10px] font-sans font-medium tracking-widest text-amber-300/80 uppercase font-semibold">
-                ACCREDITATIONS &amp; WINS
+                Certifications
               </span>
               <span className="text-[10px] font-sans font-medium px-2.5 py-0.5 rounded-full bg-[#1b0d06]/80 border border-amber-600/30 text-amber-200">
-                {certificationData.length} Verified Records
+                {certificationData.length} records
               </span>
             </div>
             <div className="space-y-1">
               <h3 className="text-lg font-medium text-amber-50 tracking-tight">
-                Certifications &amp; Hackathons
+                Certifications and awards
               </h3>
               <p className="text-xs font-sans font-medium text-amber-200/70 flex items-center gap-1.5">
-                <span>Click any record to inspect full dossier</span>
+                <span>Click a card for details</span>
                 <span className="text-coral">→</span>
               </p>
             </div>
@@ -495,7 +471,7 @@ export default function TactileFolderSection() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setSelectedRecord(null)}
-              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+              className="absolute inset-0 bg-black/80 "
             />
 
             {/* Modal Card */}
@@ -519,7 +495,7 @@ export default function TactileFolderSection() {
                 <button
                   onClick={() => setSelectedRecord(null)}
                   className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-neutral-400 hover:text-white transition-colors border border-white/10"
-                  aria-label="Close dossier modal"
+                  aria-label="Close details"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -555,7 +531,7 @@ export default function TactileFolderSection() {
                   </div>
                   <div>
                     <div className="text-[10px] font-sans font-medium uppercase text-neutral-400">
-                      Timeline / Year
+                      Year
                     </div>
                     <div className="text-sm sm:text-base font-sans font-medium text-white mt-1 flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5 text-neutral-400" />
@@ -564,7 +540,7 @@ export default function TactileFolderSection() {
                   </div>
                   <div>
                     <div className="text-[10px] font-sans font-medium uppercase text-neutral-400">
-                      Jurisdiction / Location
+                      Location
                     </div>
                     <div className="text-sm font-sans font-medium text-neutral-300 mt-1 flex items-center gap-1.5 truncate">
                       <MapPin className="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" />
@@ -576,7 +552,7 @@ export default function TactileFolderSection() {
                 {/* Narrative Summary */}
                 <div className="space-y-2">
                   <h4 className="text-xs font-sans font-medium uppercase tracking-widest text-neutral-400">
-                    Dossier Summary
+                    Summary
                   </h4>
                   <p className="text-sm text-neutral-300 leading-relaxed font-light">
                     {selectedRecord.summary}
@@ -586,7 +562,7 @@ export default function TactileFolderSection() {
                 {/* Verified Highlights */}
                 <div className="space-y-2.5">
                   <h4 className="text-xs font-sans font-medium uppercase tracking-widest text-neutral-400">
-                    Key Milestones &amp; Highlights
+                    Details
                   </h4>
                   <ul className="space-y-2">
                     {selectedRecord.highlights.map((h, i) => (
@@ -601,7 +577,7 @@ export default function TactileFolderSection() {
                 {/* Acquired Competencies / Skills */}
                 <div className="space-y-2.5 pt-2 border-t border-white/10">
                   <h4 className="text-xs font-sans font-medium uppercase tracking-widest text-neutral-400">
-                    Verified Competencies &amp; Technologies
+                    Related skills
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedRecord.skills.map((skill, i) => (
@@ -621,7 +597,7 @@ export default function TactileFolderSection() {
               <div className="px-6 py-4 bg-neutral-900/90 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-sans font-medium text-neutral-400">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span className="text-neutral-300">Verified Portfolio Credential — Munigonda Kiran</span>
+                  <span className="text-neutral-300">Munigonda Kiran · Education and certifications</span>
                 </div>
                 <div className="text-[11px] text-neutral-500">
                   Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-neutral-300">ESC</kbd> or click outside to dismiss

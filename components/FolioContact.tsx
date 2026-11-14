@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { ArrowUpRight, ArrowUp, Check, Copy } from "lucide-react";
 
+const CONTACT_EMAIL = "kirankushal2211@gmail.com";
+
 export default function ArchitecturalFooter() {
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState("");
@@ -28,20 +30,28 @@ export default function ArchitecturalFooter() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleCopy = (text: string, key: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedField(key);
-    setTimeout(() => setCopiedField(null), 2000);
+  const handleCopy = async (text: string, key: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedField(key);
+      setTimeout(() => setCopiedField(null), 2000);
+    } catch {
+      // Clipboard unavailable (insecure context / permission denied) — don't claim success.
+    }
   };
 
+  // No backend: open the visitor's mail client with the message pre-filled.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.email) return;
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const message = formData.message.trim();
+    if (!name || !email || !message) return;
+    const subject = `Portfolio enquiry from ${name}`;
+    const body = `${message}\n\n— ${name} (${email})`;
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", email: "", message: "" });
-    }, 4000);
+    setTimeout(() => setSubmitted(false), 6000);
   };
 
   const scrollToTop = () => {
@@ -56,13 +66,13 @@ export default function ArchitecturalFooter() {
         <div className="space-y-6">
           <div className="flex items-center gap-3">
             <span className="text-[11px] font-sans font-medium tracking-widest text-neutral-400 uppercase">
-              OPEN FOR AI ARCHITECTURE &amp; FULL-STACK ROLES // 2026
+              Open to AI engineering roles
             </span>
           </div>
 
           <h2 className="text-5xl sm:text-7xl lg:text-8xl font-normal tracking-tighter text-white uppercase leading-[0.95]">
-            Let&apos;s engineer <br />
-            what&apos;s next.
+            Let&apos;s talk <br />
+            about work.
           </h2>
         </div>
 
@@ -72,13 +82,13 @@ export default function ArchitecturalFooter() {
           {/* Column 1: Direct Access Links (lg:col-span-4) */}
           <div className="lg:col-span-4 space-y-8">
             <span className="text-[11px] font-sans font-medium tracking-widest text-neutral-400 uppercase block">
-              01 // DIRECT CHANNELS
+              01 · Email and phone
             </span>
 
             <div className="space-y-6">
               {/* Email */}
               <div className="space-y-1">
-                <p className="text-[11px] font-sans font-medium text-neutral-400 uppercase">Direct Email</p>
+                <p className="text-[11px] font-sans font-medium text-neutral-400 uppercase">Email</p>
                 <div className="flex items-center gap-3">
                   <a
                     href="mailto:kirankushal2211@gmail.com"
@@ -98,7 +108,7 @@ export default function ArchitecturalFooter() {
 
               {/* Phone */}
               <div className="space-y-1">
-                <p className="text-[11px] font-sans font-medium text-neutral-400 uppercase">Telephone</p>
+                <p className="text-[11px] font-sans font-medium text-neutral-400 uppercase">Phone</p>
                 <div className="flex items-center gap-3">
                   <a
                     href="tel:+919010300676"
@@ -117,7 +127,7 @@ export default function ArchitecturalFooter() {
               </div>
 
               <p className="text-xs text-neutral-400 leading-relaxed max-w-sm pt-2">
-                Specialized in multi-agent orchestration, offline-first health telemetry (HithOS), and distributed backend architectures.
+                I build multi-agent and RAG products end to end, from the Postgres schema to the prompt. Currently building Arcwell.
               </p>
             </div>
           </div>
@@ -125,23 +135,23 @@ export default function ArchitecturalFooter() {
           {/* Column 2: System Telemetry & Coordinates (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-8">
             <span className="text-[11px] font-sans font-medium tracking-widest text-neutral-400 uppercase block">
-              02 // TELEMETRY &amp; SOCIAL
+              02 · Elsewhere
             </span>
 
             <div className="space-y-6 text-xs font-sans font-medium">
               <div className="space-y-1">
                 <p className="text-neutral-400 uppercase">Location</p>
                 <p className="text-white">Hyderabad, Telangana</p>
-                <p className="text-neutral-400">17.4435° N, 78.4482° E</p>
+                <p className="text-neutral-400">India</p>
               </div>
 
               <div className="space-y-1">
                 <p className="text-neutral-400 uppercase">Local Time</p>
-                <p className="text-white tabular-nums">{currentTime || "02:45:00"} IST (UTC+5:30)</p>
+                <p className="text-white tabular-nums">{currentTime || "--:--:--"} IST (UTC+5:30)</p>
               </div>
 
               <div className="space-y-2 pt-2">
-                <p className="text-neutral-400 uppercase">Networks</p>
+                <p className="text-neutral-400 uppercase">Links</p>
                 <div className="flex flex-col space-y-2">
                   <a
                     href="https://linkedin.com/in/MunigondaKiran"
@@ -169,16 +179,18 @@ export default function ArchitecturalFooter() {
           {/* Column 3: Unboxed Dispatch Portal (lg:col-span-5) */}
           <div className="lg:col-span-5 space-y-8">
             <span className="text-[11px] font-sans font-medium tracking-widest text-neutral-400 uppercase block">
-              03 // TRANSMISSION DISPATCH
+              03 · Send a message
             </span>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-1">
-                <label className="text-[10px] font-sans font-medium text-neutral-400 uppercase">Your Name</label>
+                <label htmlFor="contact-name" className="text-[10px] font-sans font-medium text-neutral-400 uppercase">Your Name</label>
                 <input
+                  id="contact-name"
                   type="text"
                   required
-                  placeholder="e.g. David Vance"
+                  maxLength={100}
+                  placeholder="Your name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="w-full bg-transparent border-b border-neutral-800 focus:border-white py-2 text-sm text-white placeholder-neutral-700 outline-none transition-colors"
@@ -186,10 +198,12 @@ export default function ArchitecturalFooter() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-sans font-medium text-neutral-400 uppercase">Email Address</label>
+                <label htmlFor="contact-email" className="text-[10px] font-sans font-medium text-neutral-400 uppercase">Email Address</label>
                 <input
+                  id="contact-email"
                   type="email"
                   required
+                  maxLength={200}
                   placeholder="name@company.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -198,11 +212,13 @@ export default function ArchitecturalFooter() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-sans font-medium text-neutral-400 uppercase">Project Scope / Message</label>
+                <label htmlFor="contact-message" className="text-[10px] font-sans font-medium text-neutral-400 uppercase">Message</label>
                 <textarea
+                  id="contact-message"
                   rows={2}
                   required
-                  placeholder="System requirements, timeline, or consultation scope..."
+                  maxLength={2000}
+                  placeholder="What would you like to talk about?"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full bg-transparent border-b border-neutral-800 focus:border-white py-2 text-sm text-white placeholder-neutral-700 outline-none transition-colors resize-none"
@@ -216,15 +232,20 @@ export default function ArchitecturalFooter() {
                 {submitted ? (
                   <>
                     <Check className="w-4 h-4 text-emerald-400 stroke-[2.5]" />
-                    <span className="text-white">TRANSMISSION RECORDED</span>
+                    <span className="text-white">Opening your email app…</span>
                   </>
                 ) : (
                   <>
-                    <span className="text-neutral-200">SEND TRANSMISSION</span>
+                    <span className="text-neutral-200">Send message</span>
                     <ArrowUpRight className="w-4 h-4 text-neutral-300 stroke-[2.5]" />
                   </>
                 )}
               </button>
+              <p className="text-[11px] text-neutral-500" aria-live="polite">
+                {submitted
+                  ? `Didn't open? Email me directly at ${CONTACT_EMAIL}.`
+                  : "Opens your email app with this message pre-filled."}
+              </p>
             </form>
           </div>
 
@@ -233,11 +254,11 @@ export default function ArchitecturalFooter() {
         {/* Minimal Swiss Legal Rail */}
         <div className="pt-12 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans font-medium text-neutral-400">
           <div>
-            <span className="text-white font-medium">Munigonda Kiran</span> — Applied AI Systems &amp; Full-Stack Engineering
+            <span className="text-white font-medium">Munigonda Kiran</span> — Full-stack engineer building AI systems
           </div>
 
           <div className="flex items-center gap-6">
-            <span>RELEASE 2026.09</span>
+            <span>Hyderabad, India</span>
             <button
               onClick={scrollToTop}
               className="flex items-center gap-1.5 text-neutral-300 hover:text-white transition-colors"

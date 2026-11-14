@@ -17,9 +17,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Munigonda Kiran — Full Stack Engineer & Applied AI Systems",
+  title: "Munigonda Kiran — Full-stack engineer building AI systems",
   description:
-    "Munigonda Kiran's Portfolio. Full Stack Engineer specializing in modern web & mobile architectures (React, Python, Node.js, PostgreSQL), autonomous multi-agent systems, and cloud orchestration (AWS, Docker, K8s).",
+    "Full-stack engineer moving into AI engineering. I build multi-agent and RAG products end to end, from Postgres to the prompt. Currently building Arcwell.",
   keywords: [
     "Munigonda Kiran",
     "Full Stack Engineer",
@@ -28,17 +28,17 @@ export const metadata: Metadata = {
     "AWS",
     "Docker",
     "PostgreSQL",
-    "Kubernetes",
-    "Applied AI",
+    "LangChain",
+    "AI engineering",
     "Next.js",
   ],
   authors: [{ name: "Munigonda Kiran" }],
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Munigonda Kiran — Full Stack Engineer & Applied AI Systems",
-    description: "Full Stack Engineer specializing in modern web & mobile architectures, autonomous AI agents, and cloud infrastructure.",
-    siteName: "Munigonda Kiran Portfolio",
+    title: "Munigonda Kiran — Full-stack engineer building AI systems",
+    description: "Full-stack engineer moving into AI engineering. I build multi-agent and RAG products end to end.",
+    siteName: "Munigonda Kiran",
   },
 };
 

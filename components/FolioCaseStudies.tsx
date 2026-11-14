@@ -5,123 +5,128 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/Icons";
 import GenerativeArchitectureMesh from "@/components/GenerativeArchitectureMesh";
+import ArcwellCaseStudy from "@/components/ArcwellCaseStudy";
 
 export default function FolioCaseStudies() {
-  const caseStudies = [
+  // Add `demoUrl: "https://..."` to an entry to show its Live Demo button.
+  const caseStudies: Array<{ id: string; index: string; title: string; period: string; category: string; tagline: string; image: string; imageAlt: string; stack: string[]; highlights: string[]; metrics: { label: string; value: string }[]; repoUrl?: string; demoUrl?: string }> = [
     {
-      id: "hlthos",
+      id: "healthos",
       index: "01",
-      title: "HlthOS: AI-Powered Biological Operating System",
-      period: "March 2026 – Present",
-      category: "Autonomous AI & Biological Intelligence",
-      tagline: "Offline-First Telemetry & Clinical Hybrid-RAG",
-      image: "/images/project_serum.jpg",
+      title: "HealthOS",
+      period: "Mar 2026",
+      category: "AI system · Prototype",
+      tagline: "An offline-first health app prototype covering nutrition, training, recovery and an AI coach backed by research papers.",
+      image: "/images/healthos.png",
+      imageAlt: "HealthOS onboarding screen for connecting Apple Health, Health Connect and other providers",
       stack: [
         "React Native",
+        "Expo",
         "Node.js",
         "PostgreSQL",
-        "Python",
-        "PyTorch",
         "LangChain",
         "LlamaIndex",
         "Pinecone",
+        "PyTorch",
+        "PEFT",
         "vLLM",
         "Claude API",
       ],
       highlights: [
-        "Engineered an offline-first biological operating system managing 4 core pillars (Nutrition, Training, Recovery, AI Coaching) maintaining strict 60-FPS telemetry visualization.",
-        "Architected a relational PostgreSQL database schema ingesting 16-point onboarding diagnostics and real-time biometrics with sub-200ms latency.",
-        "Built a Hybrid-RAG architecture over peer-reviewed clinical documents, driving a 100% reduction in hallucinations for neuromuscular advice via Claude API.",
-        "Fine-tuned domain LLMs via PyTorch & PEFT, deployed with vLLM to boost inference throughput by 40% for regional dietary analysis.",
-        "Deployed a parallel deterministic mathematical fallback engine enforcing strict computational guardrails with 100% caloric and macronutrient bounding accuracy.",
+        "A React Native app with a Node.js and PostgreSQL backend. It works offline and syncs when it can.",
+        "A 16-question onboarding drives each person's daily targets.",
+        "Hybrid retrieval (LangChain, LlamaIndex, Pinecone) over research papers, so the coach's training and recovery answers come from sources rather than the model's memory.",
+        "Experiments fine-tuning a smaller model with PyTorch and PEFT for regional food analysis, served with vLLM.",
+        "A deterministic calculator runs beside the AI and keeps calorie and macro targets inside safe bounds, whatever the model says.",
       ],
       metrics: [
-        { label: "Rendering Rate", value: "60-FPS Lock" },
-        { label: "Biometric Latency", value: "< 200ms" },
-        { label: "Hallucination Drop", value: "100%" },
-        { label: "Inference Boost", value: "+40% vLLM" },
+        { label: "Onboarding", value: "16 questions" },
+        { label: "App areas", value: "4" },
+        { label: "Retrieval", value: "Pinecone" },
+        { label: "Serving", value: "vLLM" },
       ],
       repoUrl: "https://github.com/kirankushal22",
-      demoUrl: "https://portfolio-kiran-one.vercel.app",
     },
     {
       id: "ai-news",
       index: "02",
-      title: "End-to-End Agentic AI News Aggregator",
+      title: "AI News Aggregator",
       period: "Dec 2025 – Feb 2026",
-      category: "Autonomous Multi-Agent Ingestion",
-      tagline: "Webshare Proxies, Docling & Multi-Modal Synthesis",
-      image: "/images/project_headphones.jpg",
+      category: "AI system · Data pipeline",
+      tagline: "Scrapes AI news from blogs, feeds and YouTube transcripts and turns it into ranked daily summaries.",
+      image: "/images/ai_news_aggregator.png",
+      imageAlt: "The AI news feed: article cards in columns with a sidebar of sources",
       stack: [
-        "PostgreSQL",
-        "Webshare Proxies",
+        "Python",
         "UV",
         "Docker",
-        "Docling",
+        "PostgreSQL",
         "LangChain",
-        "Python",
         "GPT-4o",
+        "Docling",
+        "Webshare",
       ],
       highlights: [
-        "Engineered an automated ingestion pipeline utilizing Webshare rotating proxies and Docling to scrape and parse 100+ technical sources without rate limits.",
-        "Developed a multi-modal extraction engine storing 5,000+ weekly datapoints across YouTube transcripts, engineering blogs, and developer RSS feeds in PostgreSQL.",
-        "Designed a Dockerized multi-agent LangChain + GPT-4o workflow autonomously synthesizing high-fidelity briefings, reducing user reading time by 80%.",
-        "Integrated dynamic vector scoring to cross-reference daily articles against user profiles, achieving a 90%+ content relevance match.",
+        "Scrapers pull from company blogs, RSS feeds and YouTube transcripts, through rotating Webshare proxies to avoid rate limits.",
+        "Docling turns messy pages and documents into clean text, stored in PostgreSQL with its source and date.",
+        "A LangChain workflow with GPT-4o writes a short summary per item.",
+        "Each item is scored against a user profile and the feed is sorted by that score. Runs in Docker, with dependencies pinned by UV.",
       ],
       metrics: [
-        { label: "Weekly Datapoints", value: "5,000+" },
-        { label: "Reading Time Saved", value: "80%" },
-        { label: "Sources Parsed", value: "100+ Live" },
-        { label: "Relevance Match", value: "90%+" },
+        { label: "Sources", value: "Blogs, RSS, YouTube" },
+        { label: "Parsing", value: "Docling" },
+        { label: "Storage", value: "PostgreSQL" },
+        { label: "Summaries", value: "GPT-4o" },
       ],
-      repoUrl: "https://github.com/kirankushal22/ai-news-aggregator",
-      demoUrl: "https://portfolio-kiran-one.vercel.app",
+      repoUrl: "https://github.com/kirankushal22",
     },
     {
       id: "ai-tools",
       index: "03",
-      title: "Curated AI Ecosystem Discovery Platform",
-      period: "2025 – Present",
-      category: "Full-Stack Web Architecture & Ecosystem Taxonomy",
-      tagline: "Categorical Filtering & Real-Time Discovery",
+      title: "AI Tools Discovery",
+      period: "Jun – Aug 2025",
+      category: "Web app",
+      tagline: "A directory for finding AI tools by domain, task and pricing, with search and filters.",
       image: "/images/ai_tools_discovery_ui.jpg",
-      stack: ["React.js", "Tailwind CSS", "JavaScript (ES6+)", "Context API", "Responsive UI/UX"],
+      imageAlt: "Design of the AI tools directory: a grid of tool cards with category filters",
+      stack: ["React", "Node.js", "Tailwind CSS", "Context API", "Docker", "GitHub Actions"],
       highlights: [
-        "Built a curated directory platform aggregating AI tools with dynamic categorical filtering (Generative Video, Voice, Coding, Marketing).",
-        "Developed an intuitive UI inspired by Medium, emphasising readability and user engagement.",
-        "Implemented Context API for efficient state management across components and responsive layouts using Tailwind CSS.",
+        "Lists AI tools by domain, what they do and whether they're free or paid. Search and filters narrow the list.",
+        "A reading-first interface inspired by Medium.",
+        "Shared state through React Context and responsive layouts in Tailwind.",
+        "Docker images and a GitHub Actions pipeline for builds.",
       ],
       metrics: [
-        { label: "Tool Taxonomy", value: "Multi-domain" },
-        { label: "State Engine", value: "Context API" },
-        { label: "CI/CD", value: "Docker & GitHub" },
-        { label: "UX Inspiration", value: "Medium Editorial" },
+        { label: "Filters", value: "Domain, task, price" },
+        { label: "State", value: "Context API" },
+        { label: "CI", value: "GitHub Actions" },
+        { label: "UI", value: "Medium-inspired" },
       ],
-      repoUrl: "https://github.com/kirankushal22/ai-tools-discovery",
-      demoUrl: "https://portfolio-kiran-one.vercel.app",
+      repoUrl: "https://github.com/kirankushal22",
     },
     {
-      id: "logistics-qr",
+      id: "topicpilot",
       index: "04",
-      title: "QR-Based Municipal Logistics System & Client Products",
-      period: "2024 – 2025",
-      category: "Hardware & Distributed Logistics",
-      tagline: "Traceable Waste Routing & Production Dashboards",
-      image: "/images/project_jacket.jpg",
-      stack: ["Java", "QML", "FastAPI", "Next.js", "PostgreSQL"],
+      title: "TopicPilot",
+      period: "2025",
+      category: "AI system · Multi-agent",
+      tagline: "A multi-agent research assistant that plans, searches, checks its sources and writes a cited brief.",
+      image: "/images/multi_agent_research.png",
+      imageAlt: "TopicPilot's start screen with a topic field and a Generate Summary button",
+      stack: ["Python", "FastAPI", "LangChain", "ChromaDB", "OpenAI", "Next.js", "SSE"],
       highlights: [
-        "Engineered a hardware-integrated logistics platform for traceable municipal waste routing with encrypted geo-stamped QR verification at collection nodes.",
-        "Built administrative dispatch control dashboards with real-time route optimization, driver verification, and municipal civic accountability reports.",
-        "Shipped high-performance client workflow builds including automated data scrapers, research portals, and reactive front-end applications.",
+        "Planner: splits the question into sub-questions that can be researched in parallel.",
+        "Searcher: pulls documents from web and academic sources and stores chunks in a temporary ChromaDB index.",
+        "Critic: checks each claim against its retrieved source and drops what it can't support. Writer: writes a structured brief with citations.",
+        "A FastAPI backend streams each agent's steps to the Next.js front end over Server-Sent Events, so long runs never look frozen.",
       ],
       metrics: [
-        { label: "Checkpoint Accuracy", value: "100% Geo-QR" },
-        { label: "Latency", value: "< 150ms" },
-        { label: "Uptime", value: "99.9%" },
-        { label: "Route Efficiency", value: "+35%" },
+        { label: "Agents", value: "4" },
+        { label: "Backend", value: "FastAPI + SSE" },
+        { label: "Vector store", value: "ChromaDB" },
+        { label: "Front end", value: "Next.js" },
       ],
-      repoUrl: "https://github.com/kirankushal22/garbage-logistics-qr",
-      demoUrl: "https://portfolio-kiran-one.vercel.app",
+      repoUrl: "https://github.com/kirankushal22",
     },
   ];
 
@@ -135,36 +140,37 @@ export default function FolioCaseStudies() {
         <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/[0.08] pb-8 gap-4">
           <div className="space-y-2">
             <span className="text-neutral-400 text-xs sm:text-sm font-mono font-medium tracking-widest uppercase block">
-              SECTION 04 // FLAGSHIP CASE STUDIES
+              Case studies
             </span>
             <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
-              High-Impact Engineering Architectures
+              Selected projects
             </h2>
           </div>
           <p className="text-[#A0A0A0] text-sm max-w-md font-sans text-left md:text-right">
-            Featuring AI Tools Discovery Platform, autonomous agent pipelines, clinical Hybrid-RAG, and production systems.
+            What each project does, how it is built, and the stack behind it.
           </p>
         </div>
 
         {/* High-Contrast Edge-to-Edge Cards */}
         <div className="space-y-12">
+          <ArcwellCaseStudy />
           {caseStudies.map((cs) => (
             <div
               key={cs.id}
-              className="group bg-[#141518]/90 backdrop-blur-xl rounded-[32px] border border-white/[0.08] hover:border-white/20 transition-all duration-300 overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-0"
+              className="group bg-[#141518]/90 rounded-[32px] border border-white/[0.08] hover:border-white/20 transition-all duration-300 overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-0"
             >
               {/* Media Column (Left on Large screens) */}
               <div className="lg:col-span-5 relative min-h-[300px] sm:min-h-[380px] lg:min-h-full overflow-hidden bg-black/40">
                 <Image
                   src={cs.image}
-                  alt={cs.title}
+                  alt={cs.imageAlt}
                   fill
                   className="object-cover object-center grayscale contrast-125 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#141518] via-[#141518]/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#141518]" />
 
                 {/* Index Pill */}
-                <div className="absolute top-6 left-6 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-xs font-mono font-medium text-white">
+                <div className="absolute top-6 left-6 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-black/80 border border-white/10 text-xs font-mono font-medium text-white">
                   <span className="text-white font-bold">{cs.index}</span>
                   <span className="text-white/40">/</span>
                   <span className="text-white/80">{cs.period}</span>
@@ -236,10 +242,10 @@ export default function FolioCaseStudies() {
                         target="_blank"
                         rel="noreferrer"
                         className="btn-liquid-glass px-4 py-1.5 text-xs flex items-center gap-2 no-underline text-white cursor-pointer"
-                        title="Inspect Source Code"
+                        title="GitHub profile"
                       >
                         <GithubIcon className="w-3.5 h-3.5 text-neutral-300" />
-                        <span>Source Code</span>
+                        <span>GitHub</span>
                       </a>
                     )}
                     {cs.demoUrl && (
@@ -247,7 +253,7 @@ export default function FolioCaseStudies() {
                         href={cs.demoUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="btn-liquid-glass px-4 py-1.5 text-xs flex items-center gap-2 cursor-pointer font-medium text-white shadow-md hover:scale-105 transition-all"
+                        className="btn-liquid-glass px-4 py-1.5 text-xs flex items-center gap-2 cursor-pointer font-medium text-white shadow-md transition-colors"
                         title="Launch Live Demo"
                       >
                         <span>Live Demo</span>

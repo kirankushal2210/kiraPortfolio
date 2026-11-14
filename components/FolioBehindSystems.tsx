@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useCallback } from "react";
+import { useModalDismiss } from "@/lib/useModalDismiss";
 import { 
   motion, 
   useMotionValue, 
@@ -30,7 +31,7 @@ interface TelemetryMetric {
   value: string;
   subtext: string;
   detail: string;
-  pct: number;
+  pct?: number;
 }
 
 interface WorkExperienceItem {
@@ -58,49 +59,46 @@ const EXPERIENCES: WorkExperienceItem[] = [
   {
     id: "independent-ai",
     index: "01",
-    role: "Independent AI & Web Developer",
-    company: "Applied Systems & Research",
-    period: "2025 — PRESENT",
-    tag: "AUTONOMOUS AI & WEB",
+    role: "Independent engineer",
+    company: "Self-employed · Hyderabad, India",
+    period: "2025 — NOW",
+    tag: "AI PRODUCTS & CLIENT SITES",
     summary:
-      "Architecting end-to-end multi-agent consensus pipelines, offline-first health operating systems (HlthOS) rendering at strict 60 FPS, domain LLM fine-tuning, and full-stack web applications.",
-    highlightTitle: "Deterministic Fallback Engine",
+      "Building AI products (Arcwell, TopicPilot, the AI news aggregator) and client websites end to end.",
+    highlightTitle: "Rules beside the model",
     highlightText:
-      "Engineered parallel mathematical fallback systems enforcing 100% computational guardrails on dynamic nutrition and biometric protocols.",
+      "In HealthOS, a plain calculator runs next to the AI coach and keeps calorie and macro targets inside safe bounds, whatever the model says.",
     architectureType: "neural",
-    systemBadge: "MULTI-AGENT CONSENSUS // HlthOS",
+    systemBadge: "AI PRODUCTS · CLIENT SITES",
     metrics: [
-      { 
-        label: "INGESTION", 
-        value: "< 200ms", 
-        subtext: "16-pt intake",
-        detail: "Parallel stream intake across 16 biometric and nutrition sensor vectors with zero queue starvation.",
-        pct: 94
+      {
+        label: "ROLE",
+        value: "Solo",
+        subtext: "Self-employed",
+        detail: "I plan, build and ship each project myself, using Claude Code and Codex as coding agents.",
       },
-      { 
-        label: "ACCURACY", 
-        value: "0.0% RAG", 
-        subtext: "Clinical grounding",
-        detail: "Deterministic AST validation completely prevents LLM hallucination in clinical advisory loops.",
-        pct: 100
+      {
+        label: "SINCE",
+        value: "2025",
+        subtext: "Full time",
+        detail: "Left Tech Mahindra in 2025 to build my own products full time.",
       },
-      { 
-        label: "vLLM GAIN", 
-        value: "+40%", 
-        subtext: "PEFT / LoRA boost",
-        detail: "Custom quantized LoRA adapters running high-throughput inference on isolated GPU worker pools.",
-        pct: 88
+      {
+        label: "WORK",
+        value: "AI + web",
+        subtext: "Products and sites",
+        detail: "Multi-agent and RAG products, plus websites for clients (real estate, church and NGO, a design studio).",
       },
     ],
-    stack: ["Python", "Next.js", "React", "vLLM", "LangChain", "PostgreSQL"],
+    stack: ["Python", "Next.js", "React Native", "LangChain", "PostgreSQL", "Supabase"],
     deepDive: {
-      systemArchitecture: "Decoupled Autonomous Agent Swarm (Planner + Critic + Mathematical Fallback Solver)",
+      systemArchitecture: "Building my own AI products and client websites, from the database schema to the prompt.",
       runtimeTelemetry: [
-        "Offline SQLite WASM local database syncing with zero dropped packets",
-        "Deterministic heuristic validator guarding 100% of LLM diet & metabolic proposals",
-        "Sub-16ms React canvas re-renders adhering strictly to mobile 60 FPS thermal limits"
+        "Arcwell: a training, nutrition and recovery app for athletes and coaches, on Expo and Supabase",
+        "TopicPilot: a multi-agent research assistant (Planner, Searcher, Critic, Writer) with cited briefs",
+        "AI news aggregator: scrapes blogs, feeds and YouTube transcripts into ranked daily summaries"
       ],
-      benchmarkQuote: "Zero hallucination drift across 10,000+ simulated clinical intake scenarios."
+      benchmarkQuote: "Also built client sites: a real estate site, a church and NGO platform, and a design studio portfolio."
     }
   },
   {
@@ -109,46 +107,43 @@ const EXPERIENCES: WorkExperienceItem[] = [
     role: "Technical Associate",
     company: "Tech Mahindra",
     period: "OCT 2024 — APR 2025",
-    tag: "ENTERPRISE INFRASTRUCTURE",
+    tag: "TECHNICAL SUPPORT",
     summary:
-      "Provided high-stakes enterprise operational continuity for US retail chains, standardizing structured fault-isolation trees across POS hardware, cabling, and systems under strict enterprise SLAs.",
-    highlightTitle: "Structured Fault Isolation",
+      "Technical support for a large US retail client: diagnosed hardware, software and network faults and worked with other teams on recurring issues.",
+    highlightTitle: "Diagnosing faults",
     highlightText:
-      "Isolated network bottlenecks, resolved physical cabling anomalies, and sustained a 99.98% operational uptime across high-volume retail store nodes.",
+      "Worked through store issues step by step to find whether the cause was hardware, software or the network, then fixed it or passed it to the right team.",
     architectureType: "infrastructure",
-    systemBadge: "HIGH-AVAILABILITY CLUSTER // SLA 99.98%",
+    systemBadge: "RETAIL SUPPORT · US CLIENT",
     metrics: [
-      { 
-        label: "STORE SLA", 
-        value: "99.98%", 
-        subtext: "Uptime lock",
-        detail: "24/7 mission-critical node availability across distributed US retail store terminals.",
-        pct: 99
+      {
+        label: "CLIENT",
+        value: "US retail",
+        subtext: "Large retailer",
+        detail: "Supported store systems for a large US retail client.",
       },
-      { 
-        label: "VELOCITY", 
-        value: "-65% MTTR", 
-        subtext: "Triage trees",
-        detail: "Standardized algorithmic decision trees reducing Mean Time To Resolution from 45m to under 15m.",
-        pct: 85
+      {
+        label: "FAULTS",
+        value: "HW / SW",
+        subtext: "Plus network",
+        detail: "Diagnosed hardware, software and network faults in store systems.",
       },
-      { 
-        label: "CONTINUITY", 
-        value: "100%", 
-        subtext: "Zero cabling drops",
-        detail: "Structured hardware cabling integrity checks with zero physical disconnects reported.",
-        pct: 100
+      {
+        label: "TEAMS",
+        value: "Cross-team",
+        subtext: "Recurring issues",
+        detail: "Worked with other teams to track down issues that kept coming back.",
       },
     ],
-    stack: ["Enterprise Systems", "Network Continuity", "Hardware Cabling", "Linux"],
+    stack: ["Hardware support", "Networking", "Troubleshooting", "Linux"],
     deepDive: {
-      systemArchitecture: "Distributed POS Terminal Mesh with Multi-Homed Network Routing & Fallback Switches",
+      systemArchitecture: "Technical support for the store systems of a large US retail client.",
       runtimeTelemetry: [
-        "Autonomous heartbeat monitoring across active transaction processing lines",
-        "Deterministic physical cable trace maps minimizing field engineer dispatch latency",
-        "Hardened Linux terminal baseline images with rapid recovery snapshot protocols"
+        "Diagnosed hardware, software and network faults reported by stores",
+        "Worked with other teams on issues that kept recurring",
+        "Fixed cabling faults on site using structured troubleshooting"
       ],
-      benchmarkQuote: "Protected multi-million dollar holiday transaction cycles with zero SLA penalties."
+      benchmarkQuote: "Left in 2025 to build my own products full time."
     }
   },
   {
@@ -157,46 +152,43 @@ const EXPERIENCES: WorkExperienceItem[] = [
     role: "Web Developer Intern",
     company: "Suvidha Foundation",
     period: "MAY 2023 — JUN 2023",
-    tag: "FRONTEND ARCHITECTURE",
+    tag: "FRONT-END INTERNSHIP",
     summary:
-      "Engineered dynamic React frontend workflows for an academic PhD research repository featuring real-time project search, listing, and multi-part upload pipelines with zero layout drift.",
-    highlightTitle: "Zero Layout Shift UI",
+      "Built the React front end of a research-project portal where researchers upload, list and search projects.",
+    highlightTitle: "Uploads, listings and search",
     highlightText:
-      "Constructed modular component libraries using Tailwind CSS, achieving zero cumulative layout shift and sub-100ms interaction latency.",
+      "Built faceted filters and multi-part file uploads in React and Tailwind CSS, wired to the backend team's API.",
     architectureType: "component-stack",
-    systemBadge: "60-FPS COMPONENT PIPELINE // ZERO-CLS",
+    systemBadge: "REACT FRONT END · RESEARCH PORTAL",
     metrics: [
-      { 
-        label: "QUERY SPEED", 
-        value: "sub-100ms", 
-        subtext: "Search caching",
-        detail: "Debounced in-memory index queries updating academic dissertation lists instantaneously.",
-        pct: 92
+      {
+        label: "PART",
+        value: "Front end",
+        subtext: "React",
+        detail: "I built the front end; the backend team owned the API.",
       },
-      { 
-        label: "LAYOUT SHIFT", 
-        value: "0.00 CLS", 
-        subtext: "Tailwind engine",
-        detail: "Strict container aspect ratios and reserved skeleton viewports eliminating layout reflow.",
-        pct: 100
+      {
+        label: "FEATURES",
+        value: "Uploads",
+        subtext: "Listings, search",
+        detail: "Researchers upload projects, browse listings and search by domain.",
       },
-      { 
-        label: "PIPELINE", 
-        value: "100%", 
-        subtext: "Multipart intake",
-        detail: "Resilient chunked multi-part research document uploads with client-side checksum verification.",
-        pct: 96
+      {
+        label: "LENGTH",
+        value: "2 months",
+        subtext: "Internship",
+        detail: "A May to June 2023 internship during my B.Tech.",
       },
     ],
-    stack: ["React.js", "Tailwind CSS", "TypeScript", "RESTful APIs"],
+    stack: ["React", "Tailwind CSS", "JavaScript", "REST APIs"],
     deepDive: {
-      systemArchitecture: "Modular Atomic React Component Tree with Pre-Computed Tailwind Layout Tokens",
+      systemArchitecture: "The React front end of a portal where researchers upload, list and search research projects.",
       runtimeTelemetry: [
-        "Chunked binary upload handler featuring client-side SHA256 integrity validation",
-        "Virtual scrolling matrix supporting 5,000+ research publication records seamlessly",
-        "Accessible WCAG 2.1 AA keyboard navigation and screen-reader compliant focus rings"
+        "Project listings with faceted filters and search by domain",
+        "Multi-part file uploads for research projects",
+        "Tailwind CSS styling, wired to the backend team's REST API"
       ],
-      benchmarkQuote: "Achieved a verified 98+ Google Lighthouse Performance and Accessibility rating."
+      benchmarkQuote: "My first web development role, during my B.Tech at Malla Reddy University."
     }
   },
 ];
@@ -243,29 +235,29 @@ function Neural3DStage({ isHovered }: { isHovered: boolean }) {
           <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
           <ellipse cx="20" cy="20" rx="18" ry="7" stroke="rgba(255,255,255,0.4)" strokeWidth="1" />
           <ellipse cx="20" cy="20" rx="7" ry="18" stroke="rgba(255,87,34,0.6)" strokeWidth="1" />
-          <circle cx="20" cy="20" r="3" fill="#FF5722" className="animate-ping" />
+          <circle cx="20" cy="20" r="3" fill="#FF5722" className="" />
         </svg>
         <Cpu className="absolute w-4 h-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
       </div>
 
       {/* Orbiting Agent Nodes in 3D Space */}
       <div className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}>
-        <div className="absolute -translate-x-12 -translate-y-6 flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/80 border border-coral/40 text-[9px] font-mono text-coral shadow-md animate-pulse">
-          <span className="w-1.5 h-1.5 rounded-full bg-coral animate-ping" />
+        <div className="absolute -translate-x-12 -translate-y-6 flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/80 border border-coral/40 text-[9px] font-mono text-coral shadow-md ">
+          <span className="w-1.5 h-1.5 rounded-full bg-coral " />
           <span>PLANNER</span>
         </div>
         <div className="absolute translate-x-12 translate-y-6 flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/80 border border-cyan-400/40 text-[9px] font-mono text-cyan-300 shadow-md">
           <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-          <span>SOLVER</span>
+          <span>WRITER</span>
         </div>
       </div>
 
       {/* Telemetry HUD Badge */}
       <div className="absolute bottom-2 inset-x-3 flex items-center justify-between text-[9px] font-mono text-neutral-400 border-t border-neutral-800/80 pt-1.5">
         <span className="text-coral flex items-center gap-1">
-          <Radio className="w-2.5 h-2.5 animate-pulse" /> 60 FPS SYNC
+          <Radio className="w-2.5 h-2.5 " /> AGENTS
         </span>
-        <span className="text-neutral-300">0.0% RAG DRIFT</span>
+        <span className="text-neutral-300">RAG + LLMS</span>
       </div>
     </div>
   );
@@ -307,12 +299,12 @@ function Infrastructure3DStage({ isHovered }: { isHovered: boolean }) {
             {/* Pulsing Status LEDs */}
             <div className="flex items-center gap-1.5">
               <span className={`w-1.5 h-1.5 rounded-full ${
-                slot === 0 ? "bg-emerald-400 animate-pulse shadow-[0_0_6px_#34d399]" :
-                slot === 1 ? "bg-cyan-400 animate-pulse shadow-[0_0_6px_#22d3ee]" :
+                slot === 0 ? "bg-emerald-400 shadow-[0_0_6px_#34d399]" :
+                slot === 1 ? "bg-cyan-400 shadow-[0_0_6px_#22d3ee]" :
                 "bg-amber-400"
               }`} />
               <span className="text-[8px] font-mono text-neutral-400">
-                NODE_0{slot + 1}
+                {["HARDWARE", "SOFTWARE", "NETWORK"][slot]}
               </span>
             </div>
           </div>
@@ -325,9 +317,9 @@ function Infrastructure3DStage({ isHovered }: { isHovered: boolean }) {
       {/* Telemetry HUD Footer */}
       <div className="absolute bottom-2 inset-x-3 flex items-center justify-between text-[9px] font-mono text-neutral-400 border-t border-neutral-800/80 pt-1.5">
         <span className="text-emerald-400 flex items-center gap-1">
-          <ShieldCheck className="w-2.5 h-2.5" /> 99.98% SLA LOCK
+          <ShieldCheck className="w-2.5 h-2.5" /> RETAIL SUPPORT
         </span>
-        <span className="text-neutral-300">0 HARDWARE DROPS</span>
+        <span className="text-neutral-300">FAULT DIAGNOSIS</span>
       </div>
     </div>
   );
@@ -350,10 +342,10 @@ function ComponentStack3DStage({ isHovered }: { isHovered: boolean }) {
         isHovered ? "scale-115 [transform:rotateX(55deg)_rotateZ(-25deg)_translateZ(25px)]" : "[transform:rotateX(50deg)_rotateZ(-20deg)]"
       }`}>
         {/* Layer 3: UI Viewport */}
-        <div className={`w-36 h-9 rounded-lg bg-blue-500/20 border border-blue-400/80 backdrop-blur-md flex items-center justify-between px-3 shadow-lg -mb-3 transition-transform duration-500 ${
+        <div className={`w-36 h-9 rounded-lg bg-blue-500/20 border border-blue-400/80 flex items-center justify-between px-3 shadow-lg -mb-3 transition-transform duration-500 ${
           isHovered ? "-translate-y-4 shadow-[0_10px_20px_rgba(59,130,246,0.3)] bg-blue-500/30" : ""
         }`}>
-          <span className="text-[9px] font-mono text-blue-200 font-bold">0.00 CLS UI</span>
+          <span className="text-[9px] font-mono text-blue-200 font-bold">REACT UI</span>
           <Layers className="w-3 h-3 text-blue-300" />
         </div>
 
@@ -361,23 +353,23 @@ function ComponentStack3DStage({ isHovered }: { isHovered: boolean }) {
         <div className={`w-36 h-9 rounded-lg bg-neutral-900/90 border border-neutral-700 flex items-center justify-between px-3 shadow-md -mb-3 transition-transform duration-500 ${
           isHovered ? "-translate-y-1.5 border-coral/60" : ""
         }`}>
-          <span className="text-[9px] font-mono text-neutral-300">REACT VDOM</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-coral animate-ping" />
+          <span className="text-[9px] font-mono text-neutral-300">TAILWIND CSS</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-coral " />
         </div>
 
         {/* Layer 1: Data Intake & Multi-Part API */}
         <div className="w-36 h-9 rounded-lg bg-neutral-950 border border-neutral-800 flex items-center justify-between px-3 shadow-sm">
-          <span className="text-[9px] font-mono text-neutral-400">DISSERTATION API</span>
-          <span className="text-[8px] font-mono text-emerald-400">&lt;100ms</span>
+          <span className="text-[9px] font-mono text-neutral-400">RESEARCH API</span>
+          <span className="text-[8px] font-mono text-emerald-400">REST</span>
         </div>
       </div>
 
       {/* Telemetry HUD Footer */}
       <div className="absolute bottom-2 inset-x-3 flex items-center justify-between text-[9px] font-mono text-neutral-400 border-t border-neutral-800/80 pt-1.5">
         <span className="text-blue-400 flex items-center gap-1">
-          <Zap className="w-2.5 h-2.5" /> SUB-100MS CACHE
+          <Zap className="w-2.5 h-2.5" /> UPLOADS + SEARCH
         </span>
-        <span className="text-neutral-300">100% MULTIPART</span>
+        <span className="text-neutral-300">LISTINGS</span>
       </div>
     </div>
   );
@@ -472,16 +464,16 @@ function ExperienceCard3D({ exp, onOpenDeepDive }: ExperienceCard3DProps) {
         style={{ transform: "translateZ(35px)" }}
         className="my-3 relative cursor-pointer"
         onClick={() => onOpenDeepDive(exp)}
-        title="Click to expand architecture telemetry blueprint"
+        title="Click for details"
       >
         {exp.architectureType === "neural" && <Neural3DStage isHovered={isHovered} />}
         {exp.architectureType === "infrastructure" && <Infrastructure3DStage isHovered={isHovered} />}
         {exp.architectureType === "component-stack" && <ComponentStack3DStage isHovered={isHovered} />}
 
         {/* Hover Blueprint Quick-Trigger Pill */}
-        <div className="absolute top-2 right-2 flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[9px] font-mono text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute top-2 right-2 flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/70 border border-white/20 text-[9px] font-mono text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <Maximize2 className="w-2.5 h-2.5 text-coral" />
-          <span>BLUEPRINT</span>
+          <span>DETAILS</span>
         </div>
       </div>
 
@@ -553,14 +545,14 @@ function ExperienceCard3D({ exp, onOpenDeepDive }: ExperienceCard3DProps) {
                 animate={{ opacity: 1, y: -4, scale: 1 }}
                 exit={{ opacity: 0, y: 6, scale: 0.95 }}
                 transition={{ duration: 0.18 }}
-                className="absolute -top-16 inset-x-2 z-40 bg-neutral-900/95 backdrop-blur-md text-white p-2.5 rounded-xl border border-neutral-700 shadow-2xl pointer-events-none"
+                className="absolute -top-16 inset-x-2 z-40 bg-neutral-900/95 text-white p-2.5 rounded-xl border border-neutral-700 shadow-2xl pointer-events-none"
               >
                 <div className="flex items-center justify-between text-[10px] font-mono text-coral mb-1">
                   <span className="font-bold uppercase tracking-wider flex items-center gap-1">
-                    <Activity className="w-2.5 h-2.5 animate-pulse" />
+                    <Activity className="w-2.5 h-2.5 " />
                     {activeMetricHover.label}: {activeMetricHover.value}
                   </span>
-                  <span className="text-neutral-400">{activeMetricHover.pct}% VERIFIED</span>
+                  <span className="text-neutral-400">{activeMetricHover.subtext}</span>
                 </div>
                 <p className="text-[10px] text-neutral-300 leading-snug">
                   {activeMetricHover.detail}
@@ -596,7 +588,7 @@ function ExperienceCard3D({ exp, onOpenDeepDive }: ExperienceCard3DProps) {
         <button
           onClick={() => onOpenDeepDive(exp)}
           className="text-neutral-400 hover:text-coral transition-colors p-1"
-          title="Inspect Telemetry Blueprint"
+          title="See details"
         >
           <ArrowUpRight className="w-4 h-4" />
         </button>
@@ -616,12 +608,16 @@ function ExperienceDeepDiveModal({
   exp: WorkExperienceItem;
   onClose: () => void;
 }) {
+  useModalDismiss(true, onClose);
   return (
     <motion.div
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${exp.role} at ${exp.company}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-md select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/70 select-none"
       onClick={onClose}
     >
       <motion.div
@@ -640,7 +636,7 @@ function ExperienceDeepDiveModal({
         <div className="flex items-start justify-between border-b border-white/10 pb-4">
           <div>
             <span className="text-[10px] font-mono text-coral font-bold tracking-widest uppercase block">
-              3D TELEMETRY BLUEPRINT // [{exp.index}]
+              Experience · {exp.index}
             </span>
             <h3 className="text-2xl font-bold tracking-tight text-white mt-1">
               {exp.role}
@@ -651,6 +647,7 @@ function ExperienceDeepDiveModal({
           </div>
           <button
             onClick={onClose}
+            aria-label="Close"
             className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
@@ -668,7 +665,7 @@ function ExperienceDeepDiveModal({
         <div className="space-y-4 text-xs">
           <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 space-y-1">
             <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">
-              SYSTEM ARCHITECTURE SPECIFICATION
+              The role
             </span>
             <p className="text-neutral-200 font-medium leading-relaxed">
               {exp.deepDive.systemArchitecture}
@@ -678,7 +675,7 @@ function ExperienceDeepDiveModal({
           {/* Operational Telemetry Points */}
           <div className="space-y-2">
             <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">
-              VERIFIED RUNTIME TELEMETRY
+              What I did
             </span>
             <div className="space-y-1.5">
               {exp.deepDive.runtimeTelemetry.map((telemetry, idx) => (
@@ -725,14 +722,14 @@ export default function FolioBehindSystems() {
       <div className="w-full max-w-6xl mb-14 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-black/10 pb-6">
         <div>
           <span className="text-[11px] font-sans font-bold tracking-widest text-coral uppercase block">
-            SECTION 05 // CAREER &amp; WORK EXPERIENCE
+            Section 05 · Work experience
           </span>
           <h2 className="text-3xl md:text-5xl font-black tracking-tight mt-1 text-[#121212]">
             Work Experience.
           </h2>
         </div>
         <p className="text-xs font-sans font-medium text-neutral-500 max-w-xs tracking-wide">
-          Tactile 3D spatial artifact system. Hover over cards and telemetry metrics to initialize live operational animations.
+          Hover over a card to tilt it. Click a card for more detail.
         </p>
       </div>
 
