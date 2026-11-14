@@ -96,9 +96,9 @@ export default function TechnicalArsenalCoverflow() {
                 opacity: opacity,
                 zIndex: 30 - Math.abs(offset) * 5,
               }}
-              transition={{ type: "spring", stiffness: 260, damping: 28 }}
+              transition={{ type: "tween", duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               style={{ transformStyle: "preserve-3d" }}
-              className="absolute w-[86vw] max-w-[540px] aspect-[16/10] rounded-2xl md:rounded-3xl cursor-pointer p-8 flex flex-col justify-between border border-white/10 shadow-2xl overflow-hidden select-none"
+              className="absolute will-change-transform w-[86vw] max-w-[540px] aspect-[16/10] rounded-2xl md:rounded-3xl cursor-pointer p-8 flex flex-col justify-between border border-white/10 shadow-2xl overflow-hidden select-none"
             >
               {/* Mesh Layer */}
               <div className={`absolute inset-0 bg-gradient-to-tr ${stack.gradient} opacity-90`} />
@@ -128,7 +128,7 @@ export default function TechnicalArsenalCoverflow() {
                   <motion.div 
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 }}
+                    transition={{ duration: 0.2 }}
                     className="flex flex-wrap gap-1.5 pt-3"
                   >
                     {stack.skills.slice(0, 5).map((skill) => (

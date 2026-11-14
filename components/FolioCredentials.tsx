@@ -251,7 +251,7 @@ export default function TactileFolderSection() {
           className="relative flex flex-col items-center group cursor-pointer"
           onMouseEnter={() => setHoveredFolder("edu")}
           onMouseLeave={() => setHoveredFolder(null)}
-          onClick={() => setHoveredFolder(hoveredFolder === "edu" ? null : "edu")}
+          onClick={() => setHoveredFolder("edu")}
         >
           {/* Back Flap / Folder Body Back (Rich Archival Brown Leather / Kraft Paper) */}
           <div className="relative w-[340px] sm:w-[410px] lg:w-[440px] h-64 sm:h-72 bg-gradient-to-b from-[#4d2f1b] via-[#3c2314] to-[#2a170d] rounded-2xl border border-[#7d4e2d]/60 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,200,150,0.15)] flex items-start justify-between p-5">
@@ -289,11 +289,10 @@ export default function TactileFolderSection() {
                     opacity: isHovered ? 1 : 0,
                     zIndex: target.z,
                   }}
-                  transition={{ type: "spring", stiffness: 260, damping: 22, delay: idx * 0.04 }}
+                  transition={{ type: "tween", duration: 0.28, ease: [0.22, 1, 0.36, 1], delay: isHovered ? idx * 0.02 : 0 }}
                   whileHover={{ 
                     scale: 1.03, 
                     borderColor: "rgba(255, 170, 80, 0.7)",
-                    boxShadow: "0 14px 35px -5px rgba(255, 110, 30, 0.35)",
                     zIndex: 40 
                   }}
                   onClick={(e) => {
@@ -358,7 +357,7 @@ export default function TactileFolderSection() {
           className="relative flex flex-col items-center group cursor-pointer"
           onMouseEnter={() => setHoveredFolder("cert")}
           onMouseLeave={() => setHoveredFolder(null)}
-          onClick={() => setHoveredFolder(hoveredFolder === "cert" ? null : "cert")}
+          onClick={() => setHoveredFolder("cert")}
         >
           {/* Back Flap / Folder Body Back (Rich Archival Brown Leather / Kraft Paper) */}
           <div className="relative w-[340px] sm:w-[410px] lg:w-[440px] h-64 sm:h-72 bg-gradient-to-b from-[#4d2f1b] via-[#3c2314] to-[#2a170d] rounded-2xl border border-[#7d4e2d]/60 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,200,150,0.15)] flex items-start justify-between p-5">
@@ -399,11 +398,10 @@ export default function TactileFolderSection() {
                     opacity: isHovered ? 1 : 0,
                     zIndex: target.z,
                   }}
-                  transition={{ type: "spring", stiffness: 260, damping: 22, delay: idx * 0.03 }}
+                  transition={{ type: "tween", duration: 0.28, ease: [0.22, 1, 0.36, 1], delay: isHovered ? idx * 0.015 : 0 }}
                   whileHover={{ 
                     scale: 1.03, 
                     borderColor: "rgba(255, 170, 80, 0.7)",
-                    boxShadow: "0 14px 35px -5px rgba(255, 110, 30, 0.35)",
                     zIndex: 40 
                   }}
                   onClick={(e) => {
@@ -469,7 +467,7 @@ export default function TactileFolderSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.12 }}
               onClick={() => setSelectedRecord(null)}
               className="absolute inset-0 bg-black/80 "
             />
@@ -479,7 +477,7 @@ export default function TactileFolderSection() {
               initial={{ opacity: 0, scale: 0.94, y: 16 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 16 }}
-              transition={{ type: "spring", damping: 26, stiffness: 320 }}
+              transition={{ type: "tween", duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
               className="relative w-full max-w-2xl bg-[#111114] border border-white/20 rounded-2xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden z-10 flex flex-col max-h-[90vh]"
             >
               {/* Top Archival Header Bar */}

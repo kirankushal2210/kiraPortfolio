@@ -282,9 +282,8 @@ export default function FolioResumeProjects() {
                   rotateY: cfg.rotateY,
                   opacity: cfg.opacity,
                   zIndex: cfg.zIndex,
-                  filter: cfg.blur,
                 }}
-                transition={{ type: "spring", stiffness: 240, damping: 26 }}
+                transition={{ type: "tween", duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   transformStyle: "preserve-3d",
                   boxShadow: cfg.shadow,
@@ -293,8 +292,8 @@ export default function FolioResumeProjects() {
                   e.stopPropagation();
                   if (!isActive) setActive(idx);
                 }}
-                className={`absolute w-[92%] max-w-[480px] sm:max-w-[520px] rounded-[36px] transition-all duration-300 ${
-                  isActive ? "cursor-default" : "cursor-pointer hover:opacity-80"
+                className={`absolute w-[92%] max-w-[480px] sm:max-w-[520px] rounded-[36px] will-change-transform ${
+                  isActive ? "cursor-default" : "cursor-pointer"
                 }`}
               >
                 {/* ----------------------------------------------------------------- */}
