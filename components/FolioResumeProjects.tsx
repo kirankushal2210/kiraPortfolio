@@ -58,40 +58,6 @@ export default function FolioResumeProjects() {
 
   const artifacts: ArtifactDetail[] = [
     {
-      id: "hithos",
-      category: "AI system · 2026",
-      title: "HealthOS",
-      codename: "Project 01 · AI system",
-      period: "Mar 2026",
-      deck: "An offline-first health app prototype covering nutrition, training, recovery and an AI coach backed by research papers.",
-      specs: [
-        { label: "Onboarding", value: "16 questions" },
-        { label: "Retrieval", value: "LlamaIndex + Pinecone" },
-        { label: "Fine-tuning", value: "PyTorch + PEFT" },
-        { label: "Serving", value: "vLLM" },
-      ],
-      stack: [
-        "React Native",
-        "Expo",
-        "Node.js",
-        "PostgreSQL",
-        "LangChain",
-        "LlamaIndex",
-        "Pinecone",
-        "PyTorch",
-        "PEFT",
-        "vLLM",
-        "Claude API",
-      ],
-      bullets: [
-        "A React Native app with a Node.js and PostgreSQL backend. A 16-question onboarding drives each person's daily targets.",
-        "A hybrid retrieval setup (LangChain, LlamaIndex, Pinecone) over research papers, so the coach's training and recovery answers come from sources rather than the model's memory.",
-        "Experiments fine-tuning a smaller model with PyTorch and PEFT for regional food analysis, served with vLLM.",
-        "A deterministic calculator that runs beside the AI and keeps calorie and macro targets inside safe bounds, whatever the model says.",
-      ],
-      repoUrl: "https://github.com/kirankushal2210",
-    },
-    {
       id: "agentic-news",
       category: "AI system · 2025–26",
       title: "AI News Aggregator",
@@ -302,7 +268,8 @@ export default function FolioResumeProjects() {
               },
             ];
 
-            const cfg = configs[offset];
+            // With three cards, the third sits angled left instead of hidden at the back.
+            const cfg = configs[artifacts.length === 3 && offset === 2 ? 3 : offset];
             const isActive = offset === 0;
 
             return (
@@ -330,118 +297,6 @@ export default function FolioResumeProjects() {
                   isActive ? "cursor-default" : "cursor-pointer hover:opacity-80"
                 }`}
               >
-                {/* ----------------------------------------------------------------- */}
-                {/* CARD 01: HithOS (Distinct Warm Cream Paper #F5F1E8)              */}
-                {/* ----------------------------------------------------------------- */}
-                {artifact.id === "hithos" && (
-                  <div className="relative bg-[#F5F1E8] text-[#121316] rounded-[36px] p-7 sm:p-9 border border-[#121316]/15 flex flex-col justify-between overflow-visible">
-                    {/* Top Identity */}
-                    <div className="flex items-center justify-between font-sans font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#63615A] border-b border-[#121316]/10 pb-3.5">
-                      <span className="font-bold text-[#121316] flex items-center gap-2">
-                        AI system · 2026
-                      </span>
-                      <span className="flex items-center gap-1.5 font-semibold text-emerald-800 bg-[#E8E2D5] px-2 py-0.5 rounded-full text-[9px]">
-                        <span>Prototype</span>
-                      </span>
-                    </div>
-
-                    {/* Title & Deck */}
-                    <div className="space-y-2 pt-4 pb-3">
-                      <div className="flex items-baseline gap-2.5">
-                        <h3 className="text-4xl sm:text-5xl font-serif font-bold text-[#121316] tracking-tight">
-                          HealthOS.
-                        </h3>
-                        <span className="font-sans font-medium text-[10px] text-[#7A7870] uppercase">Mar 2026</span>
-                      </div>
-                      <p className="text-xs sm:text-sm text-[#3D3C38] leading-relaxed">
-                        An offline-first health app prototype covering nutrition, training, recovery and an AI coach backed by research papers.
-                      </p>
-                    </div>
-
-                    {/* Hero Visual: Biometric Waveform & Metabolic Rings */}
-                    <div className="my-3 p-4 sm:p-5 rounded-2xl bg-[#EBE5D8] border border-[#121316]/12 relative overflow-hidden">
-                      <div className="flex items-center justify-between font-sans font-medium text-[9px] text-[#63615A] uppercase tracking-wider pb-2 border-b border-[#121316]/10">
-                        <span className="flex items-center gap-1.5 font-bold text-[#121316]">
-                          <Activity className="w-3 h-3 text-coral" />
-                          Four areas
-                        </span>
-                        <span className="text-emerald-800 font-bold bg-emerald-100/70 px-1.5 py-0.5 rounded">
-                          Offline-first
-                        </span>
-                      </div>
-
-                      <div className="relative h-24 sm:h-28 w-full flex items-center justify-center my-1">
-                        <svg viewBox="0 0 500 110" className="w-full h-full stroke-[#121316] fill-none relative z-10">
-                          <path
-                            d="M 0 55 L 70 55 L 85 45 L 100 70 L 115 15 L 130 95 L 145 45 L 160 55 L 240 55 L 255 42 L 270 72 L 285 20 L 300 88 L 315 48 L 330 55 L 410 55 L 425 40 L 440 75 L 455 18 L 470 90 L 500 55"
-                            strokeWidth="2.4"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="opacity-95"
-                          />
-                          <line x1="0" y1="55" x2="500" y2="55" stroke="#121316" strokeWidth="0.6" strokeDasharray="4 4" className="opacity-25" />
-                        </svg>
-
-                        {/* Floating Metabolic Status Nodes */}
-                        <div className="absolute inset-0 flex items-center justify-between px-1 pointer-events-none font-sans font-medium text-[8px] font-bold text-[#121316]">
-                          <span className="bg-[#FAF6F0] px-1.5 py-0.5 rounded shadow border border-[#121316]/10">NUTRITION</span>
-                          <span className="bg-[#FAF6F0] px-1.5 py-0.5 rounded shadow border border-[#121316]/10">TRAINING</span>
-                          <span className="bg-[#FAF6F0] px-1.5 py-0.5 rounded shadow border border-[#121316]/10">RECOVERY</span>
-                          <span className="bg-[#FAF6F0] px-1.5 py-0.5 rounded shadow border border-[#121316]/10">AI COACH</span>
-                        </div>
-                      </div>
-
-                      <div className="pt-1.5 flex items-center justify-between font-sans font-medium text-[9px] text-[#63615A]">
-                        <span>16-question onboarding</span>
-                        <span className="font-bold text-[#121316]">Rule-checked targets</span>
-                      </div>
-                    </div>
-
-                    {/* Tactile Specs Grid */}
-                    <div className="grid grid-cols-2 gap-3 py-3 border-t border-[#121316]/15 font-sans font-medium text-xs">
-                      <div>
-                        <span className="text-[9px] text-[#63615A] uppercase tracking-wider block">Onboarding</span>
-                        <span className="font-bold text-[#121316] text-xs sm:text-sm">16 questions</span>
-                      </div>
-                      <div>
-                        <span className="text-[9px] text-[#63615A] uppercase tracking-wider block">Retrieval</span>
-                        <span className="font-bold text-[#121316] text-xs sm:text-sm">LlamaIndex + Pinecone</span>
-                      </div>
-                      <div>
-                        <span className="text-[9px] text-[#63615A] uppercase tracking-wider block">Fine-tuning</span>
-                        <span className="font-bold text-[#121316] text-xs sm:text-sm">PyTorch + PEFT</span>
-                      </div>
-                      <div>
-                        <span className="text-[9px] text-[#63615A] uppercase tracking-wider block">Serving</span>
-                        <span className="font-bold text-[#121316] text-xs sm:text-sm">vLLM</span>
-                      </div>
-                    </div>
-
-                    {/* Bottom Actions */}
-                    <div className="pt-2 flex items-center justify-between">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setActiveInspector(artifact);
-                        }}
-                        className="font-sans font-medium text-xs text-[#121316] font-bold uppercase tracking-wider underline underline-offset-4 hover:text-coral transition-colors cursor-pointer flex items-center gap-1.5"
-                      >
-                        <span>View details</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-coral" />
-                      </button>
-                    </div>
-
-                    {/* Floating HUD Widget (Overlapping Bottom Corner) */}
-                    <div className="absolute -bottom-3 -right-2 sm:-bottom-4 sm:-right-3 bg-[#121316] text-[#EDEDED] px-3.5 py-2.5 rounded-2xl shadow-xl border border-white/10 flex items-center gap-2.5 z-30 font-sans font-medium text-[11px]">
-                      <span className="w-2 h-2 rounded-full bg-coral " />
-                      <div>
-                        <span className="text-white font-bold block text-[10px]">AI coach: Claude API</span>
-                        <span className="text-white/60 text-[9px]">Fine-tune experiments on vLLM</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
                 {/* ----------------------------------------------------------------- */}
                 {/* CARD 02: Autonomous Synthesis (Cyber Violet & Neon Cyan)           */}
                 {/* ----------------------------------------------------------------- */}

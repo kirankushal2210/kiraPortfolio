@@ -34,23 +34,6 @@ interface DemoItem {
 
 const DEMO_ITEMS: DemoItem[] = [
   {
-    id: "healthos",
-    title: "HealthOS",
-    client: "Personal project",
-    category: "React Native + Expo prototype",
-    description:
-      "An offline-first health app prototype covering nutrition, training, recovery and an AI coach that answers from research papers.",
-    videoSrc: "/videos/healthos.mp4",
-    posterSrc: "/images/posters/healthos.jpg",
-    tech: ["React Native", "Expo", "Node.js", "PostgreSQL", "LangChain", "Pinecone"],
-    deliverables: [
-      "A 16-question onboarding that sets each person's daily targets",
-      "Hybrid retrieval over research papers for the coach's answers",
-      "A rules-based calculator that keeps calorie and macro targets in safe bounds"
-    ],
-    clientOutcome: "Built the prototype end to end; its rules-first AI approach carried into Arcwell."
-  },
-  {
     id: "topicpilot",
     title: "TopicPilot",
     client: "Personal project",
@@ -469,7 +452,7 @@ export default function ProjectDemosShowcase() {
         </div>
 
         <div
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3"
           onMouseLeave={() => setIsHovered(false)}
         >
           {DEMO_ITEMS.map((item, idx) => (

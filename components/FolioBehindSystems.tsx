@@ -67,7 +67,7 @@ const EXPERIENCES: WorkExperienceItem[] = [
       "Building AI products (Arcwell, TopicPilot, the AI news aggregator) and client websites end to end.",
     highlightTitle: "Rules beside the model",
     highlightText:
-      "In HealthOS, a plain calculator runs next to the AI coach and keeps calorie and macro targets inside safe bounds, whatever the model says.",
+      "In Arcwell, who may use AI and how often is checked in Postgres before any model is called, and the output is validated before the app sees it.",
     architectureType: "neural",
     systemBadge: "AI PRODUCTS · CLIENT SITES",
     metrics: [

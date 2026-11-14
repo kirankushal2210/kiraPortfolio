@@ -115,24 +115,6 @@ export const RESUME_DATA = {
       repoUrl: "https://github.com/kirankushal2210/ai-news-app",
     },
     {
-      id: "healthos",
-      title: "HealthOS",
-      codename: "AI system",
-      period: "Mar 2026",
-      category: "AI system",
-      status: "Prototype",
-      stack: ["React Native", "Expo", "Node.js", "PostgreSQL", "LangChain", "LlamaIndex", "Pinecone", "PyTorch", "PEFT", "vLLM", "Claude API"],
-      summary:
-        "An offline-first health app prototype covering nutrition, training, recovery and an AI coach backed by research papers.",
-      bullets: [
-        "A React Native app with a Node.js and PostgreSQL backend; a 16-question onboarding drives each person's daily targets.",
-        "Hybrid retrieval (LangChain, LlamaIndex, Pinecone) over research papers, so the coach's answers come from sources.",
-        "Experiments fine-tuning a smaller model with PyTorch and PEFT for regional food analysis, served with vLLM.",
-        "A deterministic calculator runs beside the AI and keeps calorie and macro targets inside safe bounds.",
-      ],
-      metrics: [],
-    },
-    {
       id: "ai-tools-discovery",
       title: "AI Tools Discovery",
       codename: "Web app",
